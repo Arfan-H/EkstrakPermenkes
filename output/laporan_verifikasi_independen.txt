@@ -1,0 +1,329 @@
+== MASALAH (0) ==
+
+
+== CATATAN ==
+hal 41: no baris atas diambil dari hal 40: 7
+hal 41: sps baris atas diambil dari hal 40: DD-11-II
+hal 41: desk baris atas diambil dari hal 40: Human Albumin for Burn
+hal 41: ina baris atas diambil dari hal 40: S-4-16-I
+hal 41: no baris atas diambil dari hal 40: 7
+hal 41: sps baris atas diambil dari hal 40: DD-11-II
+hal 41: desk baris atas diambil dari hal 40: Human Albumin for Burn
+hal 41: no baris atas diambil dari hal 40: 7
+hal 41: sps baris atas diambil dari hal 40: DD-11-II
+hal 41: desk baris atas diambil dari hal 40: Human Albumin for Burn
+hal 41: no baris atas diambil dari hal 40: 7
+hal 41: sps baris atas diambil dari hal 40: DD-11-II
+hal 41: desk baris atas diambil dari hal 40: Human Albumin for Burn
+hal 41: no baris atas diambil dari hal 40: 7
+hal 41: sps baris atas diambil dari hal 40: DD-11-II
+hal 41: desk baris atas diambil dari hal 40: Human Albumin for Burn
+hal 41: no baris atas diambil dari hal 40: 7
+hal 41: sps baris atas diambil dari hal 40: DD-11-II
+hal 41: desk baris atas diambil dari hal 40: Human Albumin for Burn
+hal 41: no baris atas diambil dari hal 40: 7
+hal 41: sps baris atas diambil dari hal 40: DD-11-II
+hal 41: desk baris atas diambil dari hal 40: Human Albumin for Burn
+hal 42: no baris atas diambil dari hal 41: 13
+hal 42: sps baris atas diambil dari hal 41: YY-01-II
+hal 42: desk baris atas diambil dari hal 41: Hip Replacement/Knee Replacement
+hal 42: no baris atas diambil dari hal 41: 13
+hal 42: sps baris atas diambil dari hal 41: YY-01-II
+hal 42: desk baris atas diambil dari hal 41: Hip Replacement/Knee Replacement
+hal 42: no baris atas diambil dari hal 41: 13
+hal 42: sps baris atas diambil dari hal 41: YY-01-II
+hal 42: desk baris atas diambil dari hal 41: Hip Replacement/Knee Replacement
+hal 42: no baris bawah diambil dari hal 43: 21
+hal 42: sps baris bawah diambil dari hal 43: YY-09-III
+hal 42: desk baris bawah diambil dari hal 43: Vitrectomy
+hal 42: ina baris bawah diambil dari hal 43: H-1-30-I
+hal 44: ina baris bawah diambil dari hal 45: S-4-16-II
+hal 45: no baris atas diambil dari hal 44: 7
+hal 45: sps baris atas diambil dari hal 44: DD-11-II
+hal 45: desk baris atas diambil dari hal 44: Human Albumin for Burn
+hal 45: no baris atas diambil dari hal 44: 7
+hal 45: sps baris atas diambil dari hal 44: DD-11-II
+hal 45: desk baris atas diambil dari hal 44: Human Albumin for Burn
+hal 45: no baris atas diambil dari hal 44: 7
+hal 45: sps baris atas diambil dari hal 44: DD-11-II
+hal 45: desk baris atas diambil dari hal 44: Human Albumin for Burn
+hal 45: no baris atas diambil dari hal 44: 7
+hal 45: sps baris atas diambil dari hal 44: DD-11-II
+hal 45: desk baris atas diambil dari hal 44: Human Albumin for Burn
+hal 45: no baris atas diambil dari hal 44: 7
+hal 45: sps baris atas diambil dari hal 44: DD-11-II
+hal 45: desk baris atas diambil dari hal 44: Human Albumin for Burn
+hal 46: no baris atas diambil dari hal 45: 13
+hal 46: sps baris atas diambil dari hal 45: YY-01-II
+hal 46: desk baris atas diambil dari hal 45: Hip Replacement/Knee Replacement
+hal 46: ina baris atas diambil dari hal 45: M-1-04-III
+hal 46: no baris bawah diambil dari hal 47: 21
+hal 46: sps baris bawah diambil dari hal 47: YY-09-III
+hal 46: desk baris bawah diambil dari hal 47: Vitrectomy
+hal 46: no baris bawah diambil dari hal 47: 21
+hal 46: sps baris bawah diambil dari hal 47: YY-09-III
+hal 46: desk baris bawah diambil dari hal 47: Vitrectomy
+hal 46: no baris bawah diambil dari hal 47: 21
+hal 46: sps baris bawah diambil dari hal 47: YY-09-III
+hal 46: desk baris bawah diambil dari hal 47: Vitrectomy
+hal 48: ina baris bawah diambil dari hal 49: S-4-16-II
+hal 49: no baris atas diambil dari hal 48: 7
+hal 49: sps baris atas diambil dari hal 48: DD-11-II
+hal 49: desk baris atas diambil dari hal 48: Human Albumin for Burn
+hal 49: no baris atas diambil dari hal 48: 7
+hal 49: sps baris atas diambil dari hal 48: DD-11-II
+hal 49: desk baris atas diambil dari hal 48: Human Albumin for Burn
+hal 49: no baris atas diambil dari hal 48: 7
+hal 49: sps baris atas diambil dari hal 48: DD-11-II
+hal 49: desk baris atas diambil dari hal 48: Human Albumin for Burn
+hal 49: no baris atas diambil dari hal 48: 7
+hal 49: sps baris atas diambil dari hal 48: DD-11-II
+hal 49: desk baris atas diambil dari hal 48: Human Albumin for Burn
+hal 49: no baris atas diambil dari hal 48: 7
+hal 49: sps baris atas diambil dari hal 48: DD-11-II
+hal 49: desk baris atas diambil dari hal 48: Human Albumin for Burn
+hal 50: no baris atas diambil dari hal 49: 13
+hal 50: sps baris atas diambil dari hal 49: YY-01-II
+hal 50: desk baris atas diambil dari hal 49: Hip Replacement/Knee Replacement
+hal 50: ina baris atas diambil dari hal 49: M-1-04-III
+hal 50: no baris bawah diambil dari hal 51: 21
+hal 50: sps baris bawah diambil dari hal 51: YY-09-III
+hal 50: desk baris bawah diambil dari hal 51: Vitrectomy
+hal 50: no baris bawah diambil dari hal 51: 21
+hal 50: sps baris bawah diambil dari hal 51: YY-09-III
+hal 50: desk baris bawah diambil dari hal 51: Vitrectomy
+hal 50: no baris bawah diambil dari hal 51: 21
+hal 50: sps baris bawah diambil dari hal 51: YY-09-III
+hal 50: desk baris bawah diambil dari hal 51: Vitrectomy
+hal 52: ina baris bawah diambil dari hal 53: S-4-16-II
+hal 53: no baris atas diambil dari hal 52: 7
+hal 53: sps baris atas diambil dari hal 52: DD-11-II
+hal 53: desk baris atas diambil dari hal 52: Human Albumin for Burn
+hal 53: no baris atas diambil dari hal 52: 7
+hal 53: sps baris atas diambil dari hal 52: DD-11-II
+hal 53: desk baris atas diambil dari hal 52: Human Albumin for Burn
+hal 53: no baris atas diambil dari hal 52: 7
+hal 53: sps baris atas diambil dari hal 52: DD-11-II
+hal 53: desk baris atas diambil dari hal 52: Human Albumin for Burn
+hal 53: no baris atas diambil dari hal 52: 7
+hal 53: sps baris atas diambil dari hal 52: DD-11-II
+hal 53: desk baris atas diambil dari hal 52: Human Albumin for Burn
+hal 53: no baris atas diambil dari hal 52: 7
+hal 53: sps baris atas diambil dari hal 52: DD-11-II
+hal 53: desk baris atas diambil dari hal 52: Human Albumin for Burn
+hal 54: no baris atas diambil dari hal 53: 13
+hal 54: sps baris atas diambil dari hal 53: YY-01-II
+hal 54: desk baris atas diambil dari hal 53: Hip Replacement/Knee Replacement
+hal 54: ina baris atas diambil dari hal 53: M-1-04-III
+hal 54: no baris bawah diambil dari hal 55: 21
+hal 54: sps baris bawah diambil dari hal 55: YY-09-III
+hal 54: desk baris bawah diambil dari hal 55: Vitrectomy
+hal 54: no baris bawah diambil dari hal 55: 21
+hal 54: sps baris bawah diambil dari hal 55: YY-09-III
+hal 54: desk baris bawah diambil dari hal 55: Vitrectomy
+hal 54: no baris bawah diambil dari hal 55: 21
+hal 54: sps baris bawah diambil dari hal 55: YY-09-III
+hal 54: desk baris bawah diambil dari hal 55: Vitrectomy
+hal 56: ina baris bawah diambil dari hal 57: S-4-16-II
+hal 57: no baris atas diambil dari hal 56: 7
+hal 57: sps baris atas diambil dari hal 56: DD-11-II
+hal 57: desk baris atas diambil dari hal 56: Human Albumin for Burn
+hal 57: no baris atas diambil dari hal 56: 7
+hal 57: sps baris atas diambil dari hal 56: DD-11-II
+hal 57: desk baris atas diambil dari hal 56: Human Albumin for Burn
+hal 57: no baris atas diambil dari hal 56: 7
+hal 57: sps baris atas diambil dari hal 56: DD-11-II
+hal 57: desk baris atas diambil dari hal 56: Human Albumin for Burn
+hal 57: no baris atas diambil dari hal 56: 7
+hal 57: sps baris atas diambil dari hal 56: DD-11-II
+hal 57: desk baris atas diambil dari hal 56: Human Albumin for Burn
+hal 57: no baris atas diambil dari hal 56: 7
+hal 57: sps baris atas diambil dari hal 56: DD-11-II
+hal 57: desk baris atas diambil dari hal 56: Human Albumin for Burn
+hal 58: no baris atas diambil dari hal 57: 13
+hal 58: sps baris atas diambil dari hal 57: YY-01-II
+hal 58: desk baris atas diambil dari hal 57: Hip Replacement/Knee Replacement
+hal 58: ina baris atas diambil dari hal 57: M-1-04-III
+hal 58: no baris bawah diambil dari hal 59: 21
+hal 58: sps baris bawah diambil dari hal 59: YY-09-III
+hal 58: desk baris bawah diambil dari hal 59: Vitrectomy
+hal 58: no baris bawah diambil dari hal 59: 21
+hal 58: sps baris bawah diambil dari hal 59: YY-09-III
+hal 58: desk baris bawah diambil dari hal 59: Vitrectomy
+hal 58: no baris bawah diambil dari hal 59: 21
+hal 58: sps baris bawah diambil dari hal 59: YY-09-III
+hal 58: desk baris bawah diambil dari hal 59: Vitrectomy
+hal 60: ina baris bawah diambil dari hal 61: S-4-16-II
+hal 61: no baris atas diambil dari hal 60: 7
+hal 61: sps baris atas diambil dari hal 60: DD-11-II
+hal 61: desk baris atas diambil dari hal 60: Human Albumin for Burn
+hal 61: no baris atas diambil dari hal 60: 7
+hal 61: sps baris atas diambil dari hal 60: DD-11-II
+hal 61: desk baris atas diambil dari hal 60: Human Albumin for Burn
+hal 61: no baris atas diambil dari hal 60: 7
+hal 61: sps baris atas diambil dari hal 60: DD-11-II
+hal 61: desk baris atas diambil dari hal 60: Human Albumin for Burn
+hal 61: no baris atas diambil dari hal 60: 7
+hal 61: sps baris atas diambil dari hal 60: DD-11-II
+hal 61: desk baris atas diambil dari hal 60: Human Albumin for Burn
+hal 61: no baris atas diambil dari hal 60: 7
+hal 61: sps baris atas diambil dari hal 60: DD-11-II
+hal 61: desk baris atas diambil dari hal 60: Human Albumin for Burn
+hal 62: no baris atas diambil dari hal 61: 13
+hal 62: sps baris atas diambil dari hal 61: YY-01-II
+hal 62: desk baris atas diambil dari hal 61: Hip Replacement/Knee Replacement
+hal 62: ina baris atas diambil dari hal 61: M-1-04-III
+hal 62: no baris bawah diambil dari hal 63: 21
+hal 62: sps baris bawah diambil dari hal 63: YY-09-III
+hal 62: desk baris bawah diambil dari hal 63: Vitrectomy
+hal 62: no baris bawah diambil dari hal 63: 21
+hal 62: sps baris bawah diambil dari hal 63: YY-09-III
+hal 62: desk baris bawah diambil dari hal 63: Vitrectomy
+hal 62: no baris bawah diambil dari hal 63: 21
+hal 62: sps baris bawah diambil dari hal 63: YY-09-III
+hal 62: desk baris bawah diambil dari hal 63: Vitrectomy
+hal 64: ina baris bawah diambil dari hal 65: S-4-16-II
+hal 65: no baris atas diambil dari hal 64: 7
+hal 65: sps baris atas diambil dari hal 64: DD-11-II
+hal 65: desk baris atas diambil dari hal 64: Human Albumin for Burn
+hal 65: no baris atas diambil dari hal 64: 7
+hal 65: sps baris atas diambil dari hal 64: DD-11-II
+hal 65: desk baris atas diambil dari hal 64: Human Albumin for Burn
+hal 65: no baris atas diambil dari hal 64: 7
+hal 65: sps baris atas diambil dari hal 64: DD-11-II
+hal 65: desk baris atas diambil dari hal 64: Human Albumin for Burn
+hal 65: no baris atas diambil dari hal 64: 7
+hal 65: sps baris atas diambil dari hal 64: DD-11-II
+hal 65: desk baris atas diambil dari hal 64: Human Albumin for Burn
+hal 65: no baris atas diambil dari hal 64: 7
+hal 65: sps baris atas diambil dari hal 64: DD-11-II
+hal 65: desk baris atas diambil dari hal 64: Human Albumin for Burn
+hal 66: no baris atas diambil dari hal 65: 13
+hal 66: sps baris atas diambil dari hal 65: YY-01-II
+hal 66: desk baris atas diambil dari hal 65: Hip Replacement/Knee Replacement
+hal 66: ina baris atas diambil dari hal 65: M-1-04-III
+hal 66: no baris bawah diambil dari hal 67: 21
+hal 66: sps baris bawah diambil dari hal 67: YY-09-III
+hal 66: desk baris bawah diambil dari hal 67: Vitrectomy
+hal 66: no baris bawah diambil dari hal 67: 21
+hal 66: sps baris bawah diambil dari hal 67: YY-09-III
+hal 66: desk baris bawah diambil dari hal 67: Vitrectomy
+hal 66: no baris bawah diambil dari hal 67: 21
+hal 66: sps baris bawah diambil dari hal 67: YY-09-III
+hal 66: desk baris bawah diambil dari hal 67: Vitrectomy
+hal 68: ina baris bawah diambil dari hal 69: S-4-16-II
+hal 69: no baris atas diambil dari hal 68: 7
+hal 69: sps baris atas diambil dari hal 68: DD-11-II
+hal 69: desk baris atas diambil dari hal 68: Human Albumin for Burn
+hal 69: no baris atas diambil dari hal 68: 7
+hal 69: sps baris atas diambil dari hal 68: DD-11-II
+hal 69: desk baris atas diambil dari hal 68: Human Albumin for Burn
+hal 69: no baris atas diambil dari hal 68: 7
+hal 69: sps baris atas diambil dari hal 68: DD-11-II
+hal 69: desk baris atas diambil dari hal 68: Human Albumin for Burn
+hal 69: no baris atas diambil dari hal 68: 7
+hal 69: sps baris atas diambil dari hal 68: DD-11-II
+hal 69: desk baris atas diambil dari hal 68: Human Albumin for Burn
+hal 69: no baris atas diambil dari hal 68: 7
+hal 69: sps baris atas diambil dari hal 68: DD-11-II
+hal 69: desk baris atas diambil dari hal 68: Human Albumin for Burn
+hal 70: no baris atas diambil dari hal 69: 13
+hal 70: sps baris atas diambil dari hal 69: YY-01-II
+hal 70: desk baris atas diambil dari hal 69: Hip Replacement/Knee Replacement
+hal 70: ina baris atas diambil dari hal 69: M-1-04-III
+hal 70: no baris bawah diambil dari hal 71: 21
+hal 70: sps baris bawah diambil dari hal 71: YY-09-III
+hal 70: desk baris bawah diambil dari hal 71: Vitrectomy
+hal 70: no baris bawah diambil dari hal 71: 21
+hal 70: sps baris bawah diambil dari hal 71: YY-09-III
+hal 70: desk baris bawah diambil dari hal 71: Vitrectomy
+hal 70: no baris bawah diambil dari hal 71: 21
+hal 70: sps baris bawah diambil dari hal 71: YY-09-III
+hal 70: desk baris bawah diambil dari hal 71: Vitrectomy
+hal 72: ina baris bawah diambil dari hal 73: S-4-16-II
+hal 73: no baris atas diambil dari hal 72: 7
+hal 73: sps baris atas diambil dari hal 72: DD-11-II
+hal 73: desk baris atas diambil dari hal 72: Human Albumin for Burn
+hal 73: no baris atas diambil dari hal 72: 7
+hal 73: sps baris atas diambil dari hal 72: DD-11-II
+hal 73: desk baris atas diambil dari hal 72: Human Albumin for Burn
+hal 73: no baris atas diambil dari hal 72: 7
+hal 73: sps baris atas diambil dari hal 72: DD-11-II
+hal 73: desk baris atas diambil dari hal 72: Human Albumin for Burn
+hal 73: no baris atas diambil dari hal 72: 7
+hal 73: sps baris atas diambil dari hal 72: DD-11-II
+hal 73: desk baris atas diambil dari hal 72: Human Albumin for Burn
+hal 73: no baris atas diambil dari hal 72: 7
+hal 73: sps baris atas diambil dari hal 72: DD-11-II
+hal 73: desk baris atas diambil dari hal 72: Human Albumin for Burn
+hal 74: no baris atas diambil dari hal 73: 13
+hal 74: sps baris atas diambil dari hal 73: YY-01-II
+hal 74: desk baris atas diambil dari hal 73: Hip Replacement/Knee Replacement
+hal 74: ina baris atas diambil dari hal 73: M-1-04-III
+hal 74: no baris bawah diambil dari hal 75: 21
+hal 74: sps baris bawah diambil dari hal 75: YY-09-III
+hal 74: desk baris bawah diambil dari hal 75: Vitrectomy
+hal 74: no baris bawah diambil dari hal 75: 21
+hal 74: sps baris bawah diambil dari hal 75: YY-09-III
+hal 74: desk baris bawah diambil dari hal 75: Vitrectomy
+hal 74: no baris bawah diambil dari hal 75: 21
+hal 74: sps baris bawah diambil dari hal 75: YY-09-III
+hal 74: desk baris bawah diambil dari hal 75: Vitrectomy
+hal 76: ina baris bawah diambil dari hal 77: S-4-16-II
+hal 77: no baris atas diambil dari hal 76: 7
+hal 77: sps baris atas diambil dari hal 76: DD-11-II
+hal 77: desk baris atas diambil dari hal 76: Human Albumin for Burn
+hal 77: no baris atas diambil dari hal 76: 7
+hal 77: sps baris atas diambil dari hal 76: DD-11-II
+hal 77: desk baris atas diambil dari hal 76: Human Albumin for Burn
+hal 77: no baris atas diambil dari hal 76: 7
+hal 77: sps baris atas diambil dari hal 76: DD-11-II
+hal 77: desk baris atas diambil dari hal 76: Human Albumin for Burn
+hal 77: no baris atas diambil dari hal 76: 7
+hal 77: sps baris atas diambil dari hal 76: DD-11-II
+hal 77: desk baris atas diambil dari hal 76: Human Albumin for Burn
+hal 77: no baris atas diambil dari hal 76: 7
+hal 77: sps baris atas diambil dari hal 76: DD-11-II
+hal 77: desk baris atas diambil dari hal 76: Human Albumin for Burn
+hal 78: no baris atas diambil dari hal 77: 13
+hal 78: sps baris atas diambil dari hal 77: YY-01-II
+hal 78: desk baris atas diambil dari hal 77: Hip Replacement/Knee Replacement
+hal 78: ina baris atas diambil dari hal 77: M-1-04-III
+hal 78: no baris bawah diambil dari hal 79: 21
+hal 78: sps baris bawah diambil dari hal 79: YY-09-III
+hal 78: desk baris bawah diambil dari hal 79: Vitrectomy
+hal 78: no baris bawah diambil dari hal 79: 21
+hal 78: sps baris bawah diambil dari hal 79: YY-09-III
+hal 78: desk baris bawah diambil dari hal 79: Vitrectomy
+hal 78: no baris bawah diambil dari hal 79: 21
+hal 78: sps baris bawah diambil dari hal 79: YY-09-III
+hal 78: desk baris bawah diambil dari hal 79: Vitrectomy
+hal 80: no baris bawah diambil dari hal 81: 8
+hal 80: sps baris bawah diambil dari hal 81: RR-01-II
+hal 80: desk baris bawah diambil dari hal 81: Subdural Grid Electrode
+hal 80: no baris bawah diambil dari hal 81: 8
+hal 80: sps baris bawah diambil dari hal 81: RR-01-II
+hal 80: desk baris bawah diambil dari hal 81: Subdural Grid Electrode
+hal 80: no baris bawah diambil dari hal 81: 8
+hal 80: sps baris bawah diambil dari hal 81: RR-01-II
+hal 80: desk baris bawah diambil dari hal 81: Subdural Grid Electrode
+hal 80: no baris bawah diambil dari hal 81: 8
+hal 80: sps baris bawah diambil dari hal 81: RR-01-II
+hal 80: desk baris bawah diambil dari hal 81: Subdural Grid Electrode
+hal 80: ina baris bawah diambil dari hal 81: G-1-10-II
+hal 82: no baris atas diambil dari hal 81: 15
+hal 82: sps baris atas diambil dari hal 81: YY-03-III
+hal 82: desk baris atas diambil dari hal 81: Keratoplasty
+hal 82: ina baris atas diambil dari hal 81: H-1-30-III
+hal 82: no baris bawah diambil dari hal 83: 24
+hal 82: sps baris bawah diambil dari hal 83: YY-15-III
+hal 82: desk baris bawah diambil dari hal 83: Percutaneous Endoscopy Gastrostomy
+hal 82: no baris bawah diambil dari hal 83: 24
+hal 82: sps baris bawah diambil dari hal 83: YY-15-III
+hal 82: desk baris bawah diambil dari hal 83: Percutaneous Endoscopy Gastrostomy
+hal 82: no baris bawah diambil dari hal 83: 24
+hal 82: sps baris bawah diambil dari hal 83: YY-15-III
+hal 82: desk baris bawah diambil dari hal 83: Percutaneous Endoscopy Gastrostomy
+Top Up: 11070 baris x 13 kolom dibandingkan, sel beda = 0 {}
+Tarif INA-CBG: 119115 baris x 12 kolom dibandingkan, sel beda = 0 {}
+Gabungan: 130185 baris = Top Up + Tarif INA-CBG (identik)
