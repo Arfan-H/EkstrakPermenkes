@@ -9,6 +9,7 @@ import sys
 from collections import Counter, defaultdict
 
 import pandas as pd
+from openpyxl.styles import Alignment
 
 KOLOM = ["halaman", "judul", "regional", "jenis_tabel", "jenis_rawat", "no",
          "kode_spesial", "deskripsi_spesial_cmg", "kode_ina_cbg",
@@ -25,6 +26,7 @@ JENIS_RS_VALID = ({f"{k} {s}" for k in "ABCD" for s in ("PEMERINTAH", "SWASTA")}
                   | set(RS_KHUSUS.values()))
 RE_KODE_INA = re.compile(r"^[A-Z]-\d-\d{2}-(?:I{1,3}|0)$")
 RE_KODE_SPS = re.compile(r"^[A-Z]{2}-\d{2}-I{1,3}$")
+LANJUT = "<<LANJUT_HAL_BERIKUTNYA>>"  # penanda dari ekstrak_raw.py
 RE_ANGKA = re.compile(r"^\d{1,3}(?:\.\d{3})*$")
 
 laporan = []
@@ -51,8 +53,15 @@ def judul_dari(lines, halaman):
     """Ambil judul, regional, jenis_tabel, jenis_rawat dari baris di atas tabel."""
     j = {"judul": None, "regional": None, "jenis_tabel": None, "jenis_rawat": None}
     lain = []
+    pecah = []
     for l in lines:
         l = bersih(l)
+        # teks tersembunyi kadang menempel di baris judul "TOP UP SPESIAL CMG"
+        if l.endswith("TOP UP SPESIAL CMG") and l != "TOP UP SPESIAL CMG":
+            pecah += [l[: -len("TOP UP SPESIAL CMG")].strip(), "TOP UP SPESIAL CMG"]
+        else:
+            pecah.append(l)
+    for l in pecah:
         if l == "TARIF INA-CBG":
             j["judul"] = l
         elif re.fullmatch(r"REGIONAL \d", l):
@@ -77,75 +86,102 @@ def jenis_rs_dari_tabel(jenis_tabel):
 
 # ---------------------------------------------------------------- Top Up
 def proses_topup(pages):
-    rec = []
-    carry = None  # nilai kolom 0-3 terakhir dari halaman sebelumnya
+    """Normalisasi tabel Top Up. Sel merge (None) diisi nilai di atasnya.
+    Batas halaman:
+      - sel kosong ('') di baris pertama halaman  -> lanjutan item dari halaman sebelumnya
+      - penanda LANJUT di bawah halaman           -> isinya tertulis di halaman berikutnya
+    """
+    logis = []  # baris logis: dict(h, j, jenis_rs, vals, kelas, tarif_raw)
+    carry = None
+    pending = []  # baris dengan penanda LANJUT yang menunggu halaman berikutnya
     for pg in pages:
         h = pg["halaman"]
         j, lain = judul_dari(pg["judul_lines"], h)
         lain = [l for l in lain if not l.startswith("B. Besaran")]
         rows = pg["rows"]
-        header = [bersih(c) for c in rows[0]]
-        n = len(header)
-        if n not in (9, 10):
-            peringatan.append(f"hal {h}: jumlah kolom Top Up tak terduga {n}")
-        # Nama jenis RS dari header kolom tarif (ambil 1-2 kata terakhir)
         jenis_rs = []
         for c in rows[0][5:]:
-            parts = [p.strip() for p in c.split("\n") if p.strip()]
-            nama = " ".join(parts)
+            nama = " ".join(p.strip() for p in c.split("\n") if p.strip())
             if nama not in JENIS_RS_VALID:
                 peringatan.append(f"hal {h}: header jenis RS tak dikenal {nama!r}")
             jenis_rs.append(nama)
-        cur = [None, None, None, None]
-        first = True
-        for r in rows[1:]:
+        if len(rows[0]) not in (9, 10):
+            peringatan.append(f"hal {h}: jumlah kolom Top Up tak terduga {len(rows[0])}")
+        cur = [None] * 4
+        for idx, r in enumerate(rows[1:]):
+            first = idx == 0
             vals = list(r[:4])
             for i in range(4):
                 v = vals[i]
-                if v is None:  # bagian dari sel merge -> nilai di atasnya
+                if v is None:
                     vals[i] = cur[i]
+                elif v == LANJUT:
+                    vals[i] = LANJUT
                 elif v.strip() == "":
                     if first and carry is not None:
-                        vals[i] = carry[i]  # baris lanjutan dari halaman sebelumnya
-                    elif i == 3 and cur[3] is not None and first is False:
-                        peringatan.append(f"hal {h}: sel kode INA-CBG kosong di tengah tabel")
-                        vals[i] = cur[i]
+                        vals[i] = carry[i]
+                        if carry[i] == LANJUT:
+                            peringatan.append(f"hal {h}: kolom {i} kosong di kedua sisi batas halaman")
                     else:
                         peringatan.append(f"hal {h}: sel kolom {i} kosong {r}")
                         vals[i] = cur[i]
                 else:
                     vals[i] = bersih(v)
-                # kode INA-CBG baru tanpa NO baru: tetap ikut NO di atas
-            if first and r[0] is not None and r[0].strip() == "" and carry is not None:
-                laporan.append(
-                    f"hal {h}: baris lanjutan -> NO {vals[0]} {vals[1]} '{vals[2]}' "
-                    f"{vals[3]} kelas {bersih(r[4])} (diambil dari hal {h-1}); "
-                    f"teks tersembunyi di header: {lain or rows[0][0]!r}")
-                # cek silang dengan teks tersembunyi
-                hid_no = (rows[0][0] or "").split("\n")[0]
-                hid_ina = (rows[0][3] or "").replace("\n", "").replace("KODE INA-", "")
-                if hid_no.strip() and hid_no.strip() != vals[0]:
-                    peringatan.append(f"hal {h}: NO lanjutan {vals[0]} != teks tersembunyi {hid_no}")
-                if hid_ina and sorted(hid_ina) != sorted(vals[3] + "CBG"):
-                    peringatan.append(f"hal {h}: kode INA lanjutan {vals[3]} vs tersembunyi {hid_ina!r}")
-            first = False
+            if first:
+                # selesaikan penanda LANJUT dari halaman sebelumnya
+                for row in pending:
+                    for i in range(4):
+                        if row["vals"][i] == LANJUT:
+                            row["vals"][i] = vals[i]
+                    laporan.append(
+                        f"hal {row['h']}: baris terakhir (kelas {row['kelas']}) isinya tertulis di hal {h} -> "
+                        f"NO {row['vals'][0]} {row['vals'][1]} '{row['vals'][2]}' {row['vals'][3]}")
+                pending = []
+                if r[0] is not None and r[0].strip() == "" and carry is not None:
+                    laporan.append(
+                        f"hal {h}: baris pertama lanjutan dari hal {h-1} -> NO {vals[0]} {vals[1]} "
+                        f"'{vals[2]}' {vals[3]} kelas {bersih(r[4])}")
+                    hid = [l for l in lain if re.match(r"^\d+ [A-Z]{2}-\d{2}-I+ ", l)]
+                    if hid:
+                        hn, hk, hd = hid[0].split(" ", 2)
+                        if (hn, hk, hd.replace(" ", "")) != (vals[0], vals[1], vals[2].replace(" ", "")):
+                            peringatan.append(f"hal {h}: baris lanjutan {vals[:3]} != teks tersembunyi {hid[0]!r}")
+                        else:
+                            laporan.append(f"hal {h}:   cocok dengan teks tersembunyi {hid[0]!r}")
+                    hid_ina = (rows[0][3] or "").replace("\n", "").replace("KODE INA-", "")
+                    if len(hid_ina) > 3:
+                        if sorted(hid_ina) != sorted(vals[3] + "CBG"):
+                            peringatan.append(f"hal {h}: kode INA lanjutan {vals[3]} vs tersembunyi {hid_ina!r}")
+                        else:
+                            laporan.append(f"hal {h}:   kode INA {vals[3]} cocok dengan teks tersembunyi {hid_ina!r}")
             cur = vals
             kelas = bersih(r[4]) or ""
             if kelas not in ("", "1", "2", "3"):
                 peringatan.append(f"hal {h}: kelas rawat tak terduga {kelas!r}")
-            if not RE_KODE_SPS.match(vals[1] or ""):
-                peringatan.append(f"hal {h}: kode spesial aneh {vals[1]!r}")
-            if not RE_KODE_INA.match(vals[3] or ""):
-                peringatan.append(f"hal {h}: kode INA-CBG aneh {vals[3]!r}")
-            for k, nama in enumerate(jenis_rs):
-                rec.append({
-                    "halaman": h, **j, "no": int(vals[0]), "kode_spesial": vals[1],
-                    "deskripsi_spesial_cmg": vals[2], "kode_ina_cbg": vals[3],
-                    "deskripsi_kode_ina_cbg": None, "jenis_rs": nama,
-                    "kelas_harga": kelas or None,
-                    "tarif": tarif(r[5 + k], f"hal {h} NO {vals[0]}"),
-                })
+            row = {"h": h, "j": j, "jenis_rs": jenis_rs, "vals": list(vals),
+                   "kelas": kelas, "tarif_raw": r[5:]}
+            logis.append(row)
+            if LANJUT in vals:
+                pending.append(row)
         carry = cur
+    if pending:
+        peringatan.append(f"penanda LANJUT tak terselesaikan di akhir: {len(pending)}")
+
+    rec = []
+    for row in logis:
+        vals, h = row["vals"], row["h"]
+        if not RE_KODE_SPS.match(vals[1] or ""):
+            peringatan.append(f"hal {h}: kode spesial aneh {vals[1]!r}")
+        if not RE_KODE_INA.match(vals[3] or ""):
+            peringatan.append(f"hal {h}: kode INA-CBG aneh {vals[3]!r}")
+        for k, nama in enumerate(row["jenis_rs"]):
+            rec.append({
+                "halaman": h, **row["j"], "no": int(vals[0]), "kode_spesial": vals[1],
+                "deskripsi_spesial_cmg": vals[2], "kode_ina_cbg": vals[3],
+                "deskripsi_kode_ina_cbg": None, "jenis_rs": nama,
+                "kelas_harga": row["kelas"] or None,
+                "tarif": tarif(row["tarif_raw"][k], f"hal {h} NO {vals[0]}"),
+            })
     return rec
 
 
@@ -218,29 +254,30 @@ def validasi(top, uta):
     laporan.append(f"Tarif utama: {len(blok)} blok, {len(uta)} baris")
 
     # Top Up: tiap kombinasi (no, kode spesial, deskripsi, kode INA) kelasnya 1,2,3 atau kosong
+    def sektor(rs):
+        return "PEMERINTAH" if "PEMERINTAH" in rs else "SWASTA" if "SWASTA" in rs else "RS KHUSUS"
     blok = defaultdict(list)
     for x in top:
-        blok[(x["regional"], x["halaman"] >= 80)].append(x)
+        blok[(x["regional"], sektor(x["jenis_rs"]), x["jenis_rs"])].append(x)
     struktur = {}
     for key, xs in blok.items():
         grup = defaultdict(list)
-        rs = sorted({x["jenis_rs"] for x in xs})
         for x in xs:
-            if x["jenis_rs"] == rs[0]:
-                grup[(x["no"], x["kode_spesial"], x["deskripsi_spesial_cmg"], x["kode_ina_cbg"])].append(x["kelas_harga"])
+            grup[(x["no"], x["kode_spesial"], x["deskripsi_spesial_cmg"], x["kode_ina_cbg"])].append(x["kelas_harga"])
         for g, kl in grup.items():
             if kl not in (["1", "2", "3"], [None]):
                 peringatan.append(f"Top Up {key} {g}: urutan kelas rawat {kl}")
         nos = sorted({g[0] for g in grup})
         if nos != list(range(1, 37)):
             peringatan.append(f"Top Up {key}: NO tidak lengkap {nos}")
-        struktur[key] = [(g[0], g[1], g[3], tuple(kl)) for g, kl in grup.items()]
-    ref = struktur[("REGIONAL 1", False)]
-    for key, s in struktur.items():
-        if s != ref:
-            beda = [(a, b) for a, b in zip(ref, s) if a != b][:5]
-            laporan.append(f"Top Up {key}: struktur berbeda dari Regional 1 Pemerintah/Swasta, contoh: {beda} (len {len(s)} vs {len(ref)})")
-    laporan.append(f"Top Up: {len(blok)} blok, {len(top)} baris")
+        struktur[key] = [(g, tuple(kl)) for g, kl in grup.items()]
+    ref = next(iter(struktur.values()))
+    for key, s_ in struktur.items():
+        if s_ != ref:
+            beda = [(a, b) for a, b in zip(ref, s_) if a != b][:3]
+            laporan.append(f"Top Up {key}: struktur berbeda dari blok pertama, contoh {beda}")
+    laporan.append(f"Top Up: {len({k[:2] for k in blok})} blok x jenis RS = {len(blok)} kolom, {len(top)} baris; "
+                   f"{len(ref)} kombinasi item/kode INA-CBG per kolom")
 
 
 def tulis_excel(df_top, df_uta, out):
@@ -259,11 +296,14 @@ def tulis_excel(df_top, df_uta, out):
                 if isinstance(cell.value, int):
                     cell.number_format = "#,##0"
                 else:
-                    cell.alignment = cell.alignment.copy(horizontal="right")
+                    cell.alignment = Alignment(horizontal="right")
 
 
 def main():
     pages = pickle.load(open(sys.argv[1], "rb"))
+    for extra in sys.argv[4:]:  # pickle tambahan menimpa halaman yang sama
+        baru = {p["halaman"]: p for p in pickle.load(open(extra, "rb"))}
+        pages = [baru.get(p["halaman"], p) for p in pages]
     pages.sort(key=lambda p: p["halaman"])
     top_pages = [p for p in pages if 40 <= p["halaman"] <= 83]
     uta_pages = [p for p in pages if p["halaman"] >= 92]
