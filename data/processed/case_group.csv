@@ -1,0 +1,11 @@
+case_group,deskripsi,sumber_halaman
+1,Prosedur Rawat Inap,12
+2,Prosedur Besar Rawat Jalan,12
+3,Prosedur Signifikan Rawat Jalan,12
+4,Rawat Inap Bukan Prosedur,12
+5,Rawat Jalan Bukan Prosedur,12
+6,Rawat Inap Kebidanan,12
+7,Rawat Jalan kebidanan,12
+8,Rawat Inap Neonatal,12
+9,Rawat Jalan Neonatal,12
+0,Error,12
