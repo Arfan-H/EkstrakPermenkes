@@ -32,6 +32,12 @@ Belum tersedia: estimasi ICD → kode CBG (grouper resmi bersifat tertutup) dan 
 
 `web/index.html` adalah kalkulator yang sama dalam bentuk halaman HTML. Datanya diambil dari `web/data/kalkulator.json`, yang dibuat dengan `python3 scripts/bangun_data_web.py`. Halaman ini butuh server HTTP karena datanya dimuat dengan `fetch` (contoh: `cd web && python3 -m http.server`). Logika hitungnya diuji identik dengan engine Python pada 600 kasus acak (`tests/test_web_engine.py`).
 
+### Online (GitHub Pages)
+
+Workflow `.github/workflows/pages.yml` men-deploy kalkulator ke `https://arfan-h.github.io/EkstrakPermenkes/` setiap kali ada push ke `main` yang mengubah `web/`. Workflow ini menjalankan `scripts/bangun_situs.py`, yang membungkus `web/index.html` menjadi dokumen HTML lengkap.
+
+Pengaturan awal cukup dilakukan sekali: buka **Settings → Pages → Build and deployment → Source**, lalu pilih **GitHub Actions**.
+
 ## Data
 
 | File | Isi |
