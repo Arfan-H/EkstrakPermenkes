@@ -2,254 +2,347 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&amp;family=Hanken+Grotesk:wght@400;500;600&amp;display=swap">
 <style>
-/* Layout: formulir isian di kiri, "lembar rincian klaim" (seperti kuitansi) menempel di kanan; satu kolom di ponsel. */
+/* Hallmark · shape: app screen · genre: modern-minimal · theme: Coral (deal 1/3, seed kalkulator-tarif-klaim-ina-cbg-3fca·15f70604·2026-11-24·r0) · redesign: full
+ * nav: top bar, the wordmark and its one line, no links · signature: the claim statement on cotton stock, ruled like an invoice, with estimasi pressed into it in coral once it is calculated · states: loading, empty, error, stale, full
+ * axes: light/grotesk-sans/warm · posture: restrained · contrast: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V3 · weakest: V, a form beside a result is the category's own shape; kept it because coders know it, and moved the identity into the statement sheet and the pressed estimasi mark */
+/* Hallmark · dismissed F4 · the cotton card buttons are Coral's letterpress secondary control on paper stock; the ink board Hitung is the one filled primary */
+/* Hallmark · fonts: General Sans loads from Fontshare where the host allows it; Hanken Grotesk (Google Fonts) is the same-build fallback for hosts that only admit Google Fonts */
+
+/* tokens.css (Coral, app scale) */
 :root {
-  --bg: #f3f5f4;
-  --panel: #ffffff;
-  --ink: #17221f;
-  --muted: #5b6b66;
-  --line: #d6dfdb;
-  --accent: #0d6b5e;
-  --accent-soft: #e2f0ec;
-  --warn: #9a5b00;
-  --warn-soft: #fbf0dc;
-  --bad: #a3352b;
-  --bad-soft: #f8e4e1;
-  --paper: #fbfcf9;
-  --f-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
-  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.2rem; --text-xl: 1.44rem; --text-2xl: 1.728rem; --text-3xl: 2.074rem;
+  --text-display-s: 1.44rem; --text-display: 1.728rem; --text-section: 1.2rem; --text-title: 1rem; --text-lead: 1rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
+  --container: 1360px; --gutter: 64px; --gap-columns: 32px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+  --color-paper: oklch(97% 0.006 55); --color-paper-2: oklch(94.5% 0.007 55); --color-paper-3: oklch(91.5% 0.009 55);
+  --color-ink: oklch(21% 0.012 38); --color-ink-2: oklch(29% 0.013 40); --color-muted: oklch(47% 0.013 45);
+  --color-rule: oklch(87% 0.009 55); --color-rule-2: oklch(81% 0.011 55);
+  --color-accent: oklch(74% 0.125 30); --color-accent-ink: oklch(21% 0.012 38); --color-accent-2: oklch(54% 0.165 29); --color-focus: oklch(54% 0.17 30);
+  --color-cotton: oklch(98.8% 0.0045 80); --color-desk: oklch(94.3% 0.008 64); --color-print: oklch(23% 0.012 38);
+  --color-board: oklch(22% 0.011 40); --color-board-type: oklch(96.5% 0.006 70); --color-paid: oklch(55.5% 0.15 33);
+  --tex-cotton: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.011' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.36 0 0 0 0 0.3 0 0 0 0.05 0'/%3E%3C/filter%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.34 0 0 0 0 0.28 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='360' height='360' filter='url(%23c)'/%3E%3Crect width='360' height='360' filter='url(%23g)'/%3E%3C/svg%3E");
+  --tex-desk: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.018' numOctaves='3' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.33 0 0 0 0 0.27 0 0 0 0.07 0'/%3E%3C/filter%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.38 0 0 0 0 0.32 0 0 0 0 0.26 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='360' height='360' filter='url(%23f)'/%3E%3Crect width='360' height='360' filter='url(%23g)'/%3E%3C/svg%3E");
+  --shade: 32% 0.03 50; --lit: 100% 0.005 80; --deep: 7% 0.01 40;
+  --font-display: "General Sans", "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif; --font-body: var(--font-display);
+  --font-outlier: "Geist Mono", ui-monospace, monospace;
+  --radius-card: 8px; --radius-input: 6px; --radius-pill: 999px; --radius-stock: 8px; --radius-groove: 12px; --rule-hair: 1px;
+  --shadow-card: 0 1px 2px oklch(20% 0.01 35 / 0.05);
+  --edge-stock: inset 0 1px 0 oklch(var(--lit) / 0.9), inset 0 -1px 0 oklch(var(--shade) / 0.07), 0 0 0 0.5px oklch(var(--shade) / 0.22), 0 1px 0 oklch(var(--shade) / 0.12);
+  --cast-stock: 6px 5px 10px -6px oklch(var(--shade) / 0.3); --cast-stock-lift: 12px 10px 18px -8px oklch(var(--shade) / 0.3);
+  --press-groove: inset 1px 1.5px 2px oklch(var(--shade) / 0.16), inset -1px -1px 0 oklch(var(--lit) / 0.9), 0 0 0 0.5px oklch(var(--shade) / 0.2);
+  --tracking-display: -0.03em; --display-weight: 600;
+  --control: 40px;
+  --press-text: 0.6px 0.8px 0 oklch(var(--shade) / 0.25), -0.4px -0.5px 0 oklch(var(--lit) / 0.8);
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0f1614; --panel: #16201d; --ink: #e3ebe8; --muted: #93a6a0; --line: #2a3a35;
-    --accent: #4fc2ae; --accent-soft: #163a33; --warn: #e3a64a; --warn-soft: #3a2b12;
-    --bad: #ef8a7f; --bad-soft: #3d1d19; --paper: #121b18; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0f1614; --panel: #16201d; --ink: #e3ebe8; --muted: #93a6a0; --line: #2a3a35;
-  --accent: #4fc2ae; --accent-soft: #163a33; --warn: #e3a64a; --warn-soft: #3a2b12;
-  --bad: #ef8a7f; --bad-soft: #3d1d19; --paper: #121b18; color-scheme: dark;
-}
-* { box-sizing: border-box; }
+
+/* base.css */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+html { scrollbar-color: var(--color-muted) var(--color-paper); scroll-padding-top: var(--space-lg); }
+body { margin: 0; background-color: var(--color-desk); background-image: radial-gradient(90% 120% at 0% 20%, var(--color-cotton), transparent 62%), var(--tex-desk); color: var(--color-ink); font-family: var(--font-body); font-size: var(--text-md); line-height: 1.55; -webkit-font-smoothing: antialiased; caret-color: var(--color-accent-2); }
+::selection { background: color-mix(in oklab, var(--color-accent) 22%, transparent); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
+a:hover { text-decoration-color: var(--color-accent-2); }
+h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: var(--display-weight); font-synthesis: none; letter-spacing: var(--tracking-display); line-height: 1.08; overflow-wrap: break-word; min-width: 0; text-wrap: balance; }
+h1 { max-width: 20ch; font-size: var(--text-display); } h2 { max-width: 30ch; font-size: var(--text-section); } h3 { max-width: 40ch; font-size: var(--text-title); line-height: 1.2; letter-spacing: -0.01em; }
+p { margin: 0; text-wrap: pretty; }
+p:not([class]) { max-width: 65ch; }
 [hidden] { display: none !important; }
-body { background: var(--bg); color: var(--ink); font: 15px/1.5 var(--f-body); }
-.wrap {
-  max-width: 1180px; margin: 0 auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 20px 48px;
-}
-header.top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; padding-bottom: 16px; border-bottom: 2px solid var(--ink); margin-bottom: 20px; }
-h1 { font: 700 clamp(1.6rem, 3vw, 2.1rem)/1.1 var(--f-display); margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
-h1 span { color: var(--accent); }
-.top p { margin: 0; color: var(--muted); font-size: 0.9rem; }
-.grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 20px; align-items: start; }
-@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+button, input, select, textarea { font: inherit; }
+.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 60rem) { :root { --gutter: 24px; } }
+@media (max-width: 40rem) { :root { --gutter: 16px; --gap-columns: 16px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
 
-form { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-fieldset { margin: 0; border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 14px 16px 16px; display: grid; gap: 12px; min-width: 0; }
-legend { font: 600 0.78rem/1 var(--f-display); text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); padding: 0 6px; }
-.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px 12px; }
-label { display: grid; gap: 4px; font-size: 0.82rem; color: var(--muted); font-weight: 500; min-width: 0; }
-label.check { display: flex; align-items: center; gap: 8px; color: var(--ink); font-size: 0.88rem; font-weight: 400; }
-input[type=text], input[type=number], select {
-  font: 400 0.95rem var(--f-body); color: var(--ink); background: var(--paper);
-  border: 1px solid var(--line); border-radius: 4px; padding: 7px 9px; width: 100%; min-width: 0;
-}
-input.code { font-family: var(--f-mono); font-weight: 500; letter-spacing: 0.02em; }
-input:focus-visible, select:focus-visible, button:focus-visible, input[type=checkbox]:focus-visible, input[type=radio]:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-input:disabled, select:disabled { opacity: 0.5; }
-.hint { font-size: 0.78rem; color: var(--muted); margin: 0; }
-.seg { display: flex; flex-wrap: wrap; gap: 6px; }
-.seg label { display: flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 4px; padding: 6px 10px; cursor: pointer; color: var(--ink); font-size: 0.86rem; background: var(--paper); }
-.seg label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
-.seg input { margin: 0; accent-color: var(--accent); }
-.cbg-info { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; font-size: 0.88rem; min-height: 1.4em; }
-.chip { font: 600 0.7rem/1 var(--f-display); letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 7px; border-radius: 3px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
-.chip.warn { background: var(--warn-soft); color: var(--warn); }
-.sps-list { display: grid; gap: 6px; }
-.sps { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; align-items: start; font-size: 0.86rem; padding: 7px 9px; border: 1px solid var(--line); border-radius: 4px; background: var(--paper); }
-.sps input[type=checkbox] { margin-top: 3px; accent-color: var(--accent); }
-.sps .k { font-family: var(--f-mono); font-weight: 600; margin-right: 6px; }
-.sps .sub { grid-column: 2; color: var(--muted); font-size: 0.78rem; }
-.sps .var { grid-column: 2; display: flex; gap: 12px; flex-wrap: wrap; }
-.sps .var label { display: flex; gap: 5px; align-items: center; color: var(--ink); font-size: 0.82rem; }
-button { font: 500 0.85rem var(--f-body); border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 4px; padding: 6px 12px; cursor: pointer; }
-button:hover { border-color: var(--accent); color: var(--accent); }
-.actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+/* the screen */
+.bar { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2xs) var(--space-lg); padding-block: var(--space-lg) var(--space-md); }
+.bar p { color: var(--color-muted); font-size: var(--text-sm); }
+.work { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap-columns); align-items: start; padding-block: var(--space-xs) var(--space-2xl); }
+@media (max-width: 60rem) { .work { grid-template-columns: minmax(0, 1fr); } }
 
-/* lembar rincian klaim */
-.sheet { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); background: var(--paper); border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: 6px; padding: 18px 20px 20px; min-width: 0; }
-@media (max-width: 860px) { .sheet { position: static; } }
-.sheet .eyebrow { font: 600 0.72rem/1 var(--f-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.sheet h2 { font: 600 1.25rem/1.25 var(--f-display); margin: 6px 0 2px; text-wrap: balance; }
-.sheet h2 .code { font-family: var(--f-mono); color: var(--accent); margin-right: 8px; }
-.meta { color: var(--muted); font-size: 0.85rem; margin: 0 0 14px; }
-table.rincian { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-.rincian td { padding: 8px 0; border-bottom: 1px dashed var(--line); vertical-align: top; }
-.rincian td.amt { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 12px; }
-.rincian .lbl { font-weight: 500; }
-.rincian .src { display: block; font-size: 0.75rem; color: var(--muted); font-family: var(--f-mono); }
-.rincian tr.tolak td { color: var(--bad); }
-.rincian tr.tolak .src { color: var(--bad); font-family: var(--f-body); }
-.rincian tr.total td { border-bottom: 0; border-top: 2px solid var(--ink); padding-top: 12px; font-weight: 600; font-size: 1.05rem; }
-.rincian tr.total td.amt { font-size: 1.45rem; color: var(--accent); }
-.block { margin-top: 16px; padding: 12px 14px; border-radius: 4px; font-size: 0.86rem; display: grid; gap: 6px; }
-.block h3 { margin: 0; font: 600 0.75rem/1 var(--f-display); text-transform: uppercase; letter-spacing: 0.08em; }
-.block.info { background: var(--accent-soft); }
-.block.info h3 { color: var(--accent); }
-.block.warn { background: var(--warn-soft); }
-.block.warn h3 { color: var(--warn); }
-.block.bad { background: var(--bad-soft); color: var(--bad); }
-.block ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
-.big { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 1.1rem; font-weight: 600; }
-.disclaimer { margin-top: 16px; font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
-.contoh { font-size: 0.78rem; color: var(--warn); }
-@media (prefers-reduced-motion: no-preference) { .sheet { transition: border-color .2s; } }
+.stock { background-color: var(--color-cotton); background-image: linear-gradient(100deg, var(--color-cotton), transparent 45%), var(--tex-cotton); color: var(--color-print); border-radius: var(--radius-stock); box-shadow: var(--edge-stock), var(--cast-stock); min-width: 0; }
+
+/* the form sheet */
+.entry { display: grid; padding: var(--space-xs) var(--space-lg) var(--space-lg); }
+.grp { display: grid; gap: var(--space-sm); padding-block: var(--space-lg); border-top: var(--rule-hair) solid var(--color-rule); }
+.grp:first-of-type { border-top: 0; }
+.grp > h2 { font-size: var(--text-title); letter-spacing: -0.01em; }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--space-sm); }
+.field { display: grid; gap: var(--space-2xs); min-width: 0; }
+.field > span, .label { font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); }
+.help { font-size: var(--text-sm); color: var(--color-muted); min-height: 1lh; }
+.input { width: 100%; min-width: 0; height: var(--control); padding: 0 var(--space-sm); border: 1px solid var(--color-muted); border-radius: var(--radius-input); background-color: var(--color-paper); color: var(--color-ink); font-size: var(--text-md); outline: 2px solid transparent; outline-offset: -3px; transition: background-color var(--dur-micro) var(--ease-out); }
+.input.code, .fig { font-family: var(--font-outlier); font-variant-numeric: tabular-nums; }
+.input::placeholder { color: var(--color-muted); }
+.input:focus-visible { outline-color: var(--color-focus); border-color: var(--color-ink-2); }
+.input:disabled { opacity: 0.55; cursor: not-allowed; background-color: var(--color-paper-2); }
+.input[aria-invalid="true"] { border-color: var(--color-error); }
+@media (hover: hover) { .input:not(:disabled):hover { background-color: var(--color-paper-2); } }
+.cbg-info { display: grid; gap: var(--space-3xs); min-height: 1lh; font-size: var(--text-sm); }
+.cbg-info strong { font-weight: 500; color: var(--color-ink); }
+.cbg-info .err { color: var(--color-error); }
+
+/* a choice between a few: a groove with a card riding in it */
+.choice { display: grid; gap: var(--space-2xs); min-width: 0; margin: 0; padding: 0; border: 0; }
+.choice legend { padding: 0; margin-bottom: var(--space-2xs); font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); }
+.seg { display: inline-flex; flex-wrap: wrap; justify-self: start; gap: var(--space-3xs); padding: var(--space-2xs); border-radius: var(--radius-groove); background-color: var(--color-paper-2); box-shadow: var(--press-groove); max-width: 100%; }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.seg label { display: inline-flex; align-items: center; min-height: 36px; padding: 0 var(--space-md); border-radius: var(--radius-input); color: var(--color-ink-2); font-size: var(--text-sm); font-weight: 500; cursor: pointer; white-space: nowrap; transition: background-color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out); }
+.seg input:checked + label { background-color: var(--color-cotton); color: var(--color-print); box-shadow: var(--edge-stock), var(--cast-stock); }
+.seg input:focus-visible + label { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.seg input:disabled + label { opacity: 0.55; cursor: not-allowed; }
+.seg label:active { transform: translateY(1px); }
+@media (hover: hover) { .seg input:not(:checked):not(:disabled) + label:hover { color: var(--color-print); background-color: var(--color-paper-3); } }
+.seg-wrap { display: grid; gap: var(--space-2xs); }
+
+.check { display: flex; align-items: center; gap: var(--space-xs); min-height: var(--control); font-size: var(--text-sm); color: var(--color-ink); cursor: pointer; }
+.check input { width: 18px; height: 18px; margin: 0; accent-color: var(--color-ink); flex-shrink: 0; cursor: pointer; }
+.check input:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* special CMG list: rows on hairlines */
+.sps-list { display: grid; }
+.sps { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-3xs) var(--space-sm); align-items: start; padding-block: var(--space-sm); border-top: var(--rule-hair) solid var(--color-rule); cursor: pointer; }
+.sps:last-child { border-bottom: var(--rule-hair) solid var(--color-rule); }
+.sps > input { width: 18px; height: 18px; margin: var(--space-3xs) 0 0; accent-color: var(--color-ink); cursor: pointer; }
+.sps .name { font-size: var(--text-md); font-weight: 500; }
+.sps .name .fig { font-size: var(--text-sm); margin-right: var(--space-xs); }
+.sps .note { grid-column: 2; font-size: var(--text-sm); color: var(--color-muted); }
+.sps .var { grid-column: 2; display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-md); }
+.sps .var label { display: inline-flex; align-items: center; gap: var(--space-2xs); min-height: 32px; font-size: var(--text-sm); cursor: pointer; }
+.sps .var input { accent-color: var(--color-ink); margin: 0; }
+.empty-line { font-size: var(--text-sm); color: var(--color-muted); padding-block: var(--space-xs); }
+
+/* controls, all eight states */
+.btn { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: var(--control); padding: 0 var(--space-md); border: 0; border-radius: var(--radius-stock); font-size: var(--text-sm); font-weight: 500; white-space: nowrap; cursor: pointer; transition: transform var(--dur-micro) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
+.btn::before { content: ""; position: absolute; inset: -2px 0; }
+.btn--ink { min-height: 48px; padding: 0 var(--space-lg); background-color: var(--color-board); color: var(--color-board-type); font-size: var(--text-md); text-shadow: 0 -0.75px 0 var(--color-ink); box-shadow: var(--cast-stock); }
+.btn--card { background-color: var(--color-cotton); background-image: var(--tex-cotton); color: var(--color-print); text-shadow: 0.5px 0.75px 0 var(--color-cotton); box-shadow: var(--edge-stock), var(--cast-stock); }
+.btn--quiet { background-color: transparent; color: var(--color-ink-2); text-decoration: underline; text-decoration-color: var(--color-rule-2); text-underline-offset: 0.2em; }
+@media (hover: hover) {
+  .btn--ink:hover, .btn--card:hover { transform: translateY(-1px); box-shadow: var(--edge-stock), var(--cast-stock-lift); }
+  .btn--quiet:hover { text-decoration-color: var(--color-accent-2); color: var(--color-print); }
+}
+.btn:active { transform: translateY(1px); box-shadow: var(--edge-stock); }
+.btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; transform: none; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-md); padding-top: var(--space-lg); border-top: var(--rule-hair) solid var(--color-rule); }
+.actions .more { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+
+/* the claim statement */
+.statement { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--space-md)); display: grid; gap: var(--space-lg); padding: var(--space-xl) var(--space-xl) var(--space-lg); }
+@media (max-width: 60rem) { .statement { position: static; padding: var(--space-lg); } }
+.st-head { display: flex; justify-content: space-between; align-items: start; gap: var(--space-md); }
+.st-head h2 { font-size: var(--text-xl); }
+.st-head .code { display: block; margin-bottom: var(--space-2xs); font-family: var(--font-outlier); font-size: var(--text-md); font-weight: 500; letter-spacing: 0; color: var(--color-muted); }
+.pressed { flex-shrink: 0; padding-top: var(--space-2xs); color: var(--color-paid); font-size: var(--text-xl); font-weight: 600; letter-spacing: -0.01em; transform: rotate(-6deg); text-shadow: var(--press-text); filter: url(#press); }
+.meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-sm) var(--space-md); margin: 0; padding-block: var(--space-md); border-block: var(--rule-hair) solid var(--color-rule); font-size: var(--text-sm); }
+.meta dt { color: var(--color-muted); }
+.meta dd { margin: 0; font-weight: 500; overflow-wrap: break-word; }
+@media (max-width: 40rem) { .meta { grid-template-columns: minmax(0, 1fr); } }
+.items { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+.items th { text-align: left; font-weight: 500; color: var(--color-muted); padding-bottom: var(--space-xs); border-bottom: 1.5px solid var(--color-print); white-space: nowrap; }
+.items th.amt, .items td.amt { text-align: right; }
+.items td { padding-block: var(--space-sm); border-bottom: var(--rule-hair) solid var(--color-rule); vertical-align: top; }
+.items td.amt { padding-left: var(--space-md); white-space: nowrap; font-family: var(--font-outlier); font-variant-numeric: tabular-nums; font-size: var(--text-md); }
+.items .what { font-size: var(--text-md); font-weight: 500; }
+.items .what .fig { font-size: var(--text-sm); margin-right: var(--space-xs); }
+.items .src { display: block; margin-top: var(--space-3xs); color: var(--color-muted); }
+.items tr.no td { color: var(--color-error); }
+.items tr.no .src { color: var(--color-error); }
+.items tfoot td { border-bottom: 0; border-top: 1.5px solid var(--color-print); padding-top: var(--space-md); font-size: var(--text-md); font-weight: 600; }
+.items tfoot td.amt { font-size: var(--text-2xl); font-weight: 500; letter-spacing: -0.02em; }
+.part { display: grid; gap: var(--space-xs); padding-top: var(--space-md); border-top: var(--rule-hair) solid var(--color-rule); font-size: var(--text-sm); }
+.part ul { margin: 0; padding-left: var(--space-md); display: grid; gap: var(--space-2xs); }
+.part .big { font-family: var(--font-outlier); font-variant-numeric: tabular-nums; font-size: var(--text-lg); font-weight: 500; color: var(--color-print); }
+.part p { color: var(--color-ink-2); }
+.part .basis { color: var(--color-muted); }
+.part.bad p, .part.bad h3 { color: var(--color-error); }
+.stale { padding: var(--space-sm) var(--space-md); border-radius: var(--radius-input); background-color: var(--color-paper-2); color: var(--color-ink); font-size: var(--text-sm); }
+.statement[data-state="stale"] .items, .statement[data-state="stale"] .meta { opacity: 0.55; }
+.statement[data-state="stale"] .pressed { opacity: 0; }
+.fine { font-size: var(--text-xs); color: var(--color-muted); line-height: 1.5; }
+.skel { display: grid; gap: var(--space-sm); }
+.skel i { display: block; height: 14px; border-radius: var(--radius-input); background-color: var(--color-paper-3); }
+.skel i:nth-child(2) { width: 70%; } .skel i:nth-child(3) { width: 85%; } .skel i:nth-child(4) { width: 55%; }
+.empty { display: grid; gap: var(--space-xs); padding-block: var(--space-md); }
+.empty p { color: var(--color-ink-2); }
+.fig { white-space: nowrap; }
+@media (max-width: 40rem) {
+  .statement { padding: var(--space-lg) var(--space-md); }
+  .st-head { flex-wrap: wrap; }
+  .items td.amt { padding-left: var(--space-xs); font-size: var(--text-sm); }
+  .items tfoot td.amt { font-size: var(--text-lg); }
+}
+@media (max-width: 24rem) {
+  .items, .items tbody, .items tfoot, .items tr, .items td { display: block; }
+  .items thead { display: none; }
+  .items td:first-child { border-bottom: 0; padding-bottom: var(--space-2xs); }
+  .items td.amt { text-align: left; padding-left: 0; padding-top: 0; }
+  .items tfoot td:first-child { padding-bottom: 0; }
+  .items tfoot td.amt { border-top: 0; padding-top: var(--space-2xs); }
+}
 </style>
 
-<div class="wrap">
-  <header class="top">
-    <h1>Kalkulator <span>INA-CBG</span></h1>
-    <p>Tarif klaim JKN di FKRTL menurut Permenkes No. 3 Tahun 2023 &middot; estimasi</p>
-  </header>
+<svg width="0" height="0" aria-hidden="true" focusable="false" class="visually-hidden">
+  <filter id="press"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.4 1.3" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>
+</svg>
 
-  <div class="grid">
-    <form id="f" autocomplete="off">
-      <fieldset>
-        <legend>Kode CBG</legend>
-        <label>Kode atau kata kunci diagnosis/prosedur
-          <input type="text" id="kode" class="code" list="daftar-cbg" placeholder="mis. I-1-40-I atau &quot;kardiovaskular&quot;">
-        </label>
-        <datalist id="daftar-cbg"></datalist>
-        <div class="cbg-info" id="cbg-info"></div>
-      </fieldset>
+<header class="bar container">
+  <h1>Kalkulator INA-CBG</h1>
+  <p>Tarif klaim JKN di FKRTL menurut Permenkes No. 3 Tahun 2023, sebagai estimasi.</p>
+</header>
 
-      <fieldset>
-        <legend>Fasilitas kesehatan</legend>
-        <div class="seg" role="radiogroup" aria-label="Jenis fasilitas">
-          <label><input type="radio" name="faskes" id="fk-rs" value="rs" checked> Rumah sakit</label>
-          <label><input type="radio" name="faskes" id="fk-nas" value="nasional"> RS khusus nasional</label>
-          <label><input type="radio" name="faskes" id="fk-klinik" value="klinik"> Klinik utama</label>
-        </div>
-        <div class="row" id="grp-lokasi">
-          <label>Provinsi
-            <select id="provinsi"></select>
-          </label>
-          <label id="lbl-kelas-rs">Kelas RS
-            <select id="kelas-rs"><option>A</option><option selected>B</option><option>C</option><option>D</option></select>
-          </label>
-          <label>Kepemilikan
-            <select id="kepemilikan"><option value="PEMERINTAH">Pemerintah</option><option value="SWASTA" selected>Swasta</option></select>
-          </label>
-        </div>
-        <div class="row" id="grp-rs">
-          <label>Jenis RS
-            <select id="tipe-rs">
-              <option value="umum">RS umum</option>
-              <option value="khusus_jantung">RS khusus jantung</option>
-              <option value="khusus_lain">RS khusus lainnya</option>
-            </select>
-          </label>
-          <label class="check" style="align-self:end"><input type="checkbox" id="luar-khusus"> Pelayanan di luar kekhususan RS</label>
-        </div>
-        <div class="row" id="grp-nas" hidden>
-          <label>RS khusus nasional
-            <select id="rs-nas">
-              <option value="RSCM">RSUPN Dr. Cipto Mangunkusumo (RSCM)</option>
-              <option value="RSJP-HK">RS Jantung dan Pembuluh Darah Harapan Kita</option>
-              <option value="RSK DHARMAIS">RS Kanker Dharmais</option>
-              <option value="RSAB-HK">RS Anak dan Bunda Harapan Kita</option>
-              <option value="RSPON">RS Pusat Otak Nasional</option>
-            </select>
-          </label>
-        </div>
-        <div class="row" id="grp-klinik" hidden>
-          <label>Persentase tarif rawat inap (70&ndash;100%)
-            <input type="number" id="persen-klinik" min="70" max="100" step="1" value="100">
-          </label>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Pasien dan tindakan</legend>
-        <div class="row">
-          <div>
-            <span class="hint" id="hak-hint">Hak kelas rawat inap</span>
-            <div class="seg" role="radiogroup" aria-label="Hak kelas rawat">
-              <label><input type="radio" name="kelas" id="k1" value="1" checked> Kelas 1</label>
-              <label><input type="radio" name="kelas" id="k2" value="2"> Kelas 2</label>
-              <label><input type="radio" name="kelas" id="k3" value="3"> Kelas 3</label>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <label>Diagnosis ICD-10 (pisahkan koma)
-            <input type="text" id="icd10" class="code" placeholder="mis. I21.0, E11.9">
-          </label>
-          <label>Prosedur ICD-9-CM (pisahkan koma)
-            <input type="text" id="icd9" class="code" placeholder="mis. 36.06">
-          </label>
-        </div>
-        <div>
-          <span class="hint">Top up Special CMG yang berlaku untuk CBG ini</span>
-          <div class="sps-list" id="sps-list"></div>
-        </div>
-        <div class="row">
-          <label>Lama rawat / LOS (hari)
-            <input type="number" id="los" min="1" step="1" placeholder="isi bila &gt; 42 hari">
-          </label>
-          <label>Skor ADL fase sub akut
-            <input type="number" id="adl-sub" min="1" max="60" step="1" placeholder="1&ndash;60">
-          </label>
-          <label>Skor ADL fase kronis
-            <input type="number" id="adl-kro" min="1" max="60" step="1" placeholder="1&ndash;60">
-          </label>
-        </div>
-        <label class="check" id="lbl-hd" hidden><input type="checkbox" id="hd-reuse"> Alat/BMHP hemodialisis dipakai ulang (re-use)</label>
-      </fieldset>
-
-      <fieldset>
-        <legend>Naik kelas / selisih biaya</legend>
-        <div class="row">
-          <label>Naik ke
-            <select id="naik"><option value="">Tidak naik kelas</option><option value="1">Kelas 1</option><option value="VIP">Di atas kelas 1 (VIP)</option></select>
-          </label>
-          <label>Jenis peserta
-            <select id="peserta">
-              <option value="">Peserta lain (PPU, PBPU/BP kelas 1–2)</option>
-              <option value="PBI">PBI Jaminan Kesehatan</option>
-              <option value="PBPU_KELAS_3">PBPU kelas 3</option>
-              <option value="BP_KELAS_3">Bukan Pekerja kelas 3</option>
-              <option value="PEMDA">Didaftarkan Pemerintah Daerah</option>
-              <option value="PPU_PHK">PPU yang mengalami PHK (dan keluarga)</option>
-            </select>
-          </label>
-          <label>Biaya riil RS (opsional, Rp)
-            <input type="number" id="biaya" min="0" step="1000">
-          </label>
-        </div>
-        <label class="check"><input type="checkbox" id="rj-eks"> Rawat jalan eksekutif</label>
-      </fieldset>
-
-      <div class="actions">
-        <button type="button" id="btn-contoh">Isi contoh PCI</button>
-        <button type="button" id="btn-hip">Isi contoh Hip replacement</button>
-        <button type="button" id="btn-kosong">Kosongkan</button>
-      </div>
-    </form>
-
-    <section class="sheet" id="hasil" aria-live="polite">
-      <div class="eyebrow">Rincian klaim</div>
-      <p class="meta">Memuat data tarif&hellip;</p>
+<main class="work container">
+  <form class="stock entry" id="f" autocomplete="off" novalidate aria-label="Data klaim">
+    <section class="grp" aria-labelledby="h-cbg">
+      <h2 id="h-cbg">Kode CBG</h2>
+      <label class="field"><span>Kode, atau kata kunci diagnosis dan prosedur</span>
+        <input type="text" id="kode" class="input code" list="daftar-cbg" placeholder="I-1-40-I" aria-describedby="cbg-info" spellcheck="false">
+      </label>
+      <datalist id="daftar-cbg"></datalist>
+      <div class="cbg-info" id="cbg-info" aria-live="polite"></div>
     </section>
-  </div>
-</div>
 
+    <section class="grp" aria-labelledby="h-faskes">
+      <h2 id="h-faskes">Fasilitas kesehatan</h2>
+      <fieldset class="choice">
+        <legend>Jenis fasilitas</legend>
+        <div class="seg">
+          <input type="radio" name="faskes" id="fk-rs" value="rs" checked><label for="fk-rs">Rumah sakit</label>
+          <input type="radio" name="faskes" id="fk-nas" value="nasional"><label for="fk-nas">RS khusus nasional</label>
+          <input type="radio" name="faskes" id="fk-klinik" value="klinik"><label for="fk-klinik">Klinik utama</label>
+        </div>
+      </fieldset>
+      <div class="row" id="grp-lokasi">
+        <label class="field"><span>Provinsi</span>
+          <select id="provinsi" class="input"></select>
+        </label>
+        <label class="field" id="lbl-kelas-rs"><span>Kelas RS</span>
+          <select id="kelas-rs" class="input"><option>A</option><option selected>B</option><option>C</option><option>D</option></select>
+        </label>
+        <label class="field"><span>Kepemilikan</span>
+          <select id="kepemilikan" class="input"><option value="PEMERINTAH">Pemerintah</option><option value="SWASTA" selected>Swasta</option></select>
+        </label>
+      </div>
+      <div class="row" id="grp-rs">
+        <label class="field"><span>Jenis RS</span>
+          <select id="tipe-rs" class="input">
+            <option value="umum">RS umum</option>
+            <option value="khusus_jantung">RS khusus jantung</option>
+            <option value="khusus_lain">RS khusus lainnya</option>
+          </select>
+        </label>
+        <label class="check"><input type="checkbox" id="luar-khusus"> Pelayanan di luar kekhususan RS</label>
+      </div>
+      <div class="row" id="grp-nas" hidden>
+        <label class="field"><span>RS khusus nasional</span>
+          <select id="rs-nas" class="input">
+            <option value="RSCM">RSUPN Dr. Cipto Mangunkusumo (RSCM)</option>
+            <option value="RSJP-HK">RS Jantung dan Pembuluh Darah Harapan Kita</option>
+            <option value="RSK DHARMAIS">RS Kanker Dharmais</option>
+            <option value="RSAB-HK">RS Anak dan Bunda Harapan Kita</option>
+            <option value="RSPON">RS Pusat Otak Nasional</option>
+          </select>
+        </label>
+      </div>
+      <div class="row" id="grp-klinik" hidden>
+        <label class="field"><span>Persentase tarif rawat inap (70 sampai 100%)</span>
+          <input type="number" id="persen-klinik" class="input fig" min="70" max="100" step="1" value="100" inputmode="numeric">
+        </label>
+      </div>
+    </section>
+
+    <section class="grp" aria-labelledby="h-pasien">
+      <h2 id="h-pasien">Pasien dan tindakan</h2>
+      <fieldset class="choice">
+        <legend id="hak-hint">Hak kelas rawat inap</legend>
+        <div class="seg">
+          <input type="radio" name="kelas" id="k1" value="1" checked><label for="k1">Kelas 1</label>
+          <input type="radio" name="kelas" id="k2" value="2"><label for="k2">Kelas 2</label>
+          <input type="radio" name="kelas" id="k3" value="3"><label for="k3">Kelas 3</label>
+        </div>
+      </fieldset>
+      <div class="row">
+        <label class="field"><span>Diagnosis ICD-10</span>
+          <input type="text" id="icd10" class="input code" placeholder="I21.0, E11.9" spellcheck="false">
+          <span class="help">Pisahkan dengan koma</span>
+        </label>
+        <label class="field"><span>Prosedur ICD-9-CM</span>
+          <input type="text" id="icd9" class="input code" placeholder="36.06" spellcheck="false">
+          <span class="help">Pisahkan dengan koma</span>
+        </label>
+      </div>
+      <div class="field">
+        <span class="label" id="sps-label">Top up Special CMG untuk kode ini</span>
+        <div class="sps-list" id="sps-list" role="group" aria-labelledby="sps-label"></div>
+      </div>
+      <div class="row">
+        <label class="field"><span>Lama rawat (hari)</span>
+          <input type="number" id="los" class="input fig" min="1" step="1" inputmode="numeric" aria-describedby="los-help">
+          <span class="help" id="los-help">Isi bila lebih dari 42 hari</span>
+        </label>
+        <label class="field"><span>Skor ADL fase sub akut</span>
+          <input type="number" id="adl-sub" class="input fig" min="1" max="60" step="1" inputmode="numeric">
+          <span class="help">1 sampai 60</span>
+        </label>
+        <label class="field"><span>Skor ADL fase kronis</span>
+          <input type="number" id="adl-kro" class="input fig" min="1" max="60" step="1" inputmode="numeric">
+          <span class="help">1 sampai 60</span>
+        </label>
+      </div>
+      <label class="check" id="lbl-hd" hidden><input type="checkbox" id="hd-reuse"> Alat dan BMHP hemodialisis dipakai ulang (re-use)</label>
+    </section>
+
+    <section class="grp" aria-labelledby="h-naik">
+      <h2 id="h-naik">Naik kelas dan selisih biaya</h2>
+      <div class="row">
+        <label class="field"><span>Naik ke</span>
+          <select id="naik" class="input"><option value="">Tidak naik kelas</option><option value="1">Kelas 1</option><option value="VIP">Di atas kelas 1 (VIP)</option></select>
+        </label>
+        <label class="field"><span>Jenis peserta</span>
+          <select id="peserta" class="input">
+            <option value="">Peserta lain (PPU, PBPU atau BP kelas 1 dan 2)</option>
+            <option value="PBI">PBI Jaminan Kesehatan</option>
+            <option value="PBPU_KELAS_3">PBPU kelas 3</option>
+            <option value="BP_KELAS_3">Bukan Pekerja kelas 3</option>
+            <option value="PEMDA">Didaftarkan Pemerintah Daerah</option>
+            <option value="PPU_PHK">PPU yang mengalami PHK (dan keluarga)</option>
+          </select>
+        </label>
+        <label class="field"><span>Biaya riil RS, opsional (Rp)</span>
+          <input type="number" id="biaya" class="input fig" min="0" step="1000" inputmode="numeric">
+        </label>
+      </div>
+      <label class="check"><input type="checkbox" id="rj-eks"> Rawat jalan eksekutif</label>
+    </section>
+
+    <div class="actions">
+      <button type="submit" class="btn btn--ink" id="btn-hitung">Hitung</button>
+      <div class="more">
+        <button type="button" class="btn btn--card" id="btn-contoh">Contoh PCI</button>
+        <button type="button" class="btn btn--card" id="btn-hip">Contoh hip replacement</button>
+        <button type="button" class="btn btn--quiet" id="btn-kosong">Kosongkan</button>
+      </div>
+    </div>
+  </form>
+
+  <section class="stock statement" id="hasil" aria-live="polite" aria-labelledby="h-hasil" data-state="loading">
+    <div class="st-head"><h2 id="h-hasil">Rincian klaim</h2></div>
+    <div class="skel" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <p class="fine">Memuat data tarif&hellip;</p>
+  </section>
+</main>
 <script id="engine">
 /* Engine kalkulator INA-CBG (port dari src/inacbg/engine.py). */
 var INACBG = (function () {
@@ -533,17 +626,17 @@ var INACBG = (function () {
 })();
 if (typeof module !== "undefined") module.exports = INACBG;
 </script>
-
 <script>
 (function () {
   var $ = function (id) { return document.getElementById(id); };
-  var eng = null;
+  var eng = null, sudahDihitung = false;
   var rp = function (v) { return v == null ? "-" : "Rp" + Math.round(v).toLocaleString("id-ID"); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var daftar = function (s) { return s.split(/[,;\s]+/).map(function (x) { return x.trim(); }).filter(Boolean); };
   var num = function (id) { var v = $(id).value.trim(); return v === "" ? null : Number(v); };
+  var hasil = $("hasil");
 
-  // provinsi per regional
+  // provinsi, dikelompokkan per regional
   var sel = $("provinsi");
   Object.keys(INACBG.REGIONAL).forEach(function (r) {
     var og = document.createElement("optgroup"); og.label = "Regional " + r;
@@ -553,7 +646,9 @@ if (typeof module !== "undefined") module.exports = INACBG;
   sel.value = "Jawa Barat";
 
   function faskes() { return document.querySelector("input[name=faskes]:checked").value; }
+  function kodeSekarang() { return $("kode").value.trim().toUpperCase().split(" ")[0]; }
 
+  // menyesuaikan isian yang bergantung pada pilihan lain (tidak menghitung)
   function aturForm() {
     var fk = faskes();
     $("grp-lokasi").hidden = fk === "nasional";
@@ -561,48 +656,40 @@ if (typeof module !== "undefined") module.exports = INACBG;
     $("grp-nas").hidden = fk !== "nasional";
     $("grp-klinik").hidden = fk !== "klinik";
     $("lbl-kelas-rs").hidden = fk !== "rs";
-    $("tipe-rs").disabled = fk !== "rs";
-    var kode = $("kode").value.trim().toUpperCase().split(" ")[0];
-    var c = eng && eng.data.cbg[kode];
-    var info = $("cbg-info");
-    if (c) {
-      info.innerHTML = '<span class="chip">' + (c[1] === "RI" ? "Rawat inap" : "Rawat jalan") + "</span><span>" + esc(c[0]) + "</span>";
-    } else if (kode) {
-      info.innerHTML = '<span class="chip warn">Belum dikenal</span><span class="hint">Pilih dari daftar atau ketik kode lengkap, mis. I-1-40-I</span>';
-    } else info.innerHTML = "";
+    var kode = kodeSekarang(), c = eng && eng.data.cbg[kode], info = $("cbg-info");
+    $("kode").removeAttribute("aria-invalid");
+    if (c) info.innerHTML = "<strong>" + esc(c[0]) + "</strong><span>" + (c[1] === "RI" ? "Rawat inap" : "Rawat jalan") + "</span>";
+    else if (kode && eng) info.innerHTML = '<span class="err">Kode belum dikenal. Pilih dari daftar, atau ketik kode lengkap seperti I-1-40-I.</span>';
+    else info.innerHTML = "";
     var ri = !c || c[1] === "RI";
     document.querySelectorAll("input[name=kelas]").forEach(function (x) { x.disabled = !ri; });
     $("hak-hint").textContent = ri ? "Hak kelas rawat inap" : "Hak kelas rawat inap (tidak dipakai untuk rawat jalan)";
     $("lbl-hd").hidden = kode !== "N-3-15-0";
-    // daftar top up
-    var list = $("sps-list"), dipilih = {};
-    list.querySelectorAll("input[type=checkbox]").forEach(function (x) { if (x.checked) dipilih[x.value] = true; });
-    var varianLama = {};
+    var list = $("sps-list");
+    if (list.dataset.kode === kode) return;
+    var dipilih = {}, varianLama = {};
+    list.querySelectorAll("input[type=checkbox]:checked").forEach(function (x) { dipilih[x.value] = true; });
     list.querySelectorAll("input[type=radio]:checked").forEach(function (x) { varianLama[x.name] = x.value; });
-    var tu = c ? eng.topupUntuk(kode) : {};
-    var keys = Object.keys(tu);
-    if (list.dataset.kode !== kode) {
-      list.dataset.kode = kode;
-      list.innerHTML = keys.length ? keys.map(function (k) {
-        var sp = eng.data.special[k], jenis = sp[1];
-        var auto = /^(YY|II)/.test(k);
-        var html = '<label class="sps"><input type="checkbox" id="sps-' + k + '" value="' + k + '"' + (dipilih[k] ? " checked" : "") + '>' +
-          '<span><span class="k">' + k + "</span>" + esc(tu[k].length > 1 ? sp[0] : tu[k][0]) + '</span><span class="sub">' + esc(jenis) +
-          (auto ? " &middot; ditambahkan otomatis bila ICD-9-CM cocok" : " &middot; centang bila obat/alat ini diberikan") + "</span>";
-        if (tu[k].length > 1) {
-          html += '<span class="var">' + tu[k].map(function (v, i) {
-            var nm = "var-" + k, chk = varianLama[nm] ? varianLama[nm] === v : i === 0;
-            return '<label><input type="radio" name="' + nm + '" value="' + esc(v) + '"' + (chk ? " checked" : "") + "> " + esc(v) + "</label>";
-          }).join("") + "</span>";
-        }
-        return html + "</label>";
-      }).join("") : '<p class="hint">' + (c ? "Tidak ada top up Special CMG untuk CBG ini." : "Pilih kode CBG dulu.") + "</p>";
-    }
+    var tu = c ? eng.topupUntuk(kode) : {}, keys = Object.keys(tu);
+    list.dataset.kode = kode;
+    list.innerHTML = keys.length ? keys.map(function (k) {
+      var sp = eng.data.special[k], auto = /^(YY|II)/.test(k);
+      var h = '<label class="sps"><input type="checkbox" id="sps-' + k + '" value="' + k + '"' + (dipilih[k] ? " checked" : "") + ">" +
+        '<span class="name"><span class="fig">' + k + "</span>" + esc(tu[k].length > 1 ? sp[0] : tu[k][0]) + "</span>" +
+        '<span class="note">' + esc(sp[1].charAt(0).toUpperCase() + sp[1].slice(1)) + ". " +
+        (auto ? "Ditambahkan otomatis bila ICD-9-CM cocok." : "Centang bila obat atau alat ini diberikan.") + "</span>";
+      if (tu[k].length > 1) {
+        h += '<span class="var">' + tu[k].map(function (v, i) {
+          var nm = "var-" + k, chk = varianLama[nm] ? varianLama[nm] === v : i === 0;
+          return '<label><input type="radio" name="' + nm + '" value="' + esc(v) + '"' + (chk ? " checked" : "") + "> " + esc(v) + "</label>";
+        }).join("") + "</span>";
+      }
+      return h + "</label>";
+    }).join("") : '<p class="empty-line">' + (c ? "Tidak ada top up Special CMG untuk kode ini." : "Pilih kode CBG dulu.") + "</p>";
   }
 
   function bacaInput() {
-    var fk = faskes(), kode = $("kode").value.trim().toUpperCase().split(" ")[0];
-    var sps = [];
+    var fk = faskes(), kode = kodeSekarang(), sps = [];
     $("sps-list").querySelectorAll("input[type=checkbox]:checked").forEach(function (x) {
       var v = document.querySelector('input[name="var-' + x.value + '"]:checked');
       sps.push(v ? x.value + ":" + v.value : x.value);
@@ -629,55 +716,86 @@ if (typeof module !== "undefined") module.exports = INACBG;
     return inp;
   }
 
-  function render() {
-    aturForm();
-    var out = $("hasil"), inp = bacaInput(), h;
-    if (!inp.kode_cbg) { out.innerHTML = '<div class="eyebrow">Rincian klaim</div><h2>Belum ada kode CBG</h2><p class="meta">Ketik kode CBG atau kata kunci di kolom pertama, lalu pilih dari daftar.</p>'; return; }
-    try { h = eng.hitung(inp); }
-    catch (e) {
-      out.innerHTML = '<div class="eyebrow">Rincian klaim</div><h2>Lengkapi isian</h2><div class="block bad">' + esc(e.message) + "</div>";
+  function kosong() {
+    hasil.dataset.state = "empty";
+    hasil.innerHTML = '<div class="st-head"><h2 id="h-hasil">Rincian klaim</h2></div>' +
+      '<div class="empty"><p>Tarif dasar, top up, dan selisih biaya muncul di sini setelah dihitung.</p>' +
+      '<p>Lengkapi formulir, lalu tekan <strong>Hitung</strong>.</p></div>' +
+      '<p class="fine">' + esc("Hasil ini estimasi/simulasi berdasarkan Permenkes No. 3 Tahun 2023. Angka final klaim ditentukan oleh grouper resmi E-Klaim INA-CBG (Kemenkes) dan verifikasi BPJS Kesehatan.") + "</p>";
+  }
+
+  function tandaiBasi() {
+    if (!sudahDihitung || hasil.dataset.state === "stale") return;
+    hasil.dataset.state = "stale";
+    var n = document.createElement("p");
+    n.className = "stale"; n.setAttribute("role", "status");
+    n.textContent = "Isian berubah sejak dihitung. Tekan Hitung untuk memperbarui rincian.";
+    hasil.insertBefore(n, hasil.children[1] || null);
+  }
+
+  function hitung() {
+    var inp = bacaInput(), h;
+    if (!inp.kode_cbg) {
+      $("kode").setAttribute("aria-invalid", "true"); $("kode").focus();
+      $("cbg-info").innerHTML = '<span class="err">Isi kode CBG dulu.</span>';
       return;
     }
-    var reg = h.regional === "NASIONAL" ? "tarif nasional" : "Regional " + h.regional;
-    var s = '<div class="eyebrow">Rincian klaim ' + (h.jenis_rawat === "RAWAT INAP" ? "rawat inap" : "rawat jalan") + "</div>" +
-      '<h2><span class="code">' + h.kode_cbg + "</span>" + esc(h.deskripsi_cbg) + "</h2>" +
-      '<p class="meta">' + esc(h.kelompok_tarif) + " &middot; " + reg + (h.kelas_rawat ? " &middot; hak kelas " + h.kelas_rawat : "") + "</p>";
+    try { h = eng.hitung(inp); }
+    catch (e) {
+      sudahDihitung = false;
+      hasil.dataset.state = "error";
+      hasil.innerHTML = '<div class="st-head"><h2 id="h-hasil">Rincian klaim</h2></div>' +
+        '<div class="part bad"><h3>Belum bisa dihitung</h3><p>' + esc(e.message) + "</p><p>Perbaiki isian di formulir, lalu tekan Hitung lagi.</p></div>";
+      if (!eng.data.cbg[inp.kode_cbg]) { $("kode").setAttribute("aria-invalid", "true"); $("kode").focus(); }
+      return;
+    }
+    sudahDihitung = true;
+    hasil.dataset.state = "full";
+    var reg = h.regional === "NASIONAL" ? "Tarif nasional" : "Regional " + h.regional;
+    var s = '<div class="st-head"><h2 id="h-hasil"><span class="code">' + h.kode_cbg + "</span>" + esc(h.deskripsi_cbg) + "</h2>" +
+      (h.tarif_dasar_tersedia ? '<span class="pressed">estimasi</span>' : "") + "</div>" +
+      '<dl class="meta"><div><dt>Jenis rawat</dt><dd>' + (h.jenis_rawat === "RAWAT INAP" ? "Rawat inap" + (h.kelas_rawat ? ", hak kelas " + h.kelas_rawat : "") : "Rawat jalan") + "</dd></div>" +
+      "<div><dt>Kelompok tarif</dt><dd>" + esc(h.kelompok_tarif) + "</dd></div>" +
+      "<div><dt>Wilayah tarif</dt><dd>" + reg + "</dd></div></dl>";
     if (!h.tarif_dasar_tersedia) {
-      s += '<div class="block bad"><strong>Tarif tidak tersedia.</strong> Di PDF hal. ' + h.sumber_halaman + " CBG ini bertanda &ldquo;-&rdquo; untuk kelompok RS tersebut, artinya layanan tidak dijamin di kelas RS ini.</div>";
+      s += '<div class="part bad"><h3>Tarif tidak tersedia</h3><p>Di PDF hal. ' + h.sumber_halaman + ", kode ini bertanda &ldquo;-&rdquo; untuk kelompok RS tersebut. Layanan ini tidak dijamin di kelas RS ini.</p></div>";
     } else {
-      s += '<table class="rincian"><tbody>';
-      s += '<tr><td><span class="lbl">Tarif dasar CBG</span><span class="src">Lampiran III &middot; PDF hal. ' + h.sumber_halaman + '</span></td><td class="amt">' + rp(h.tarif_dasar) + "</td></tr>";
+      s += '<table class="items"><thead><tr><th scope="col">Uraian</th><th scope="col" class="amt">Jumlah</th></tr></thead><tbody>';
+      s += '<tr><td><span class="what">Tarif dasar CBG</span><span class="src">Lampiran III, PDF hal. ' + h.sumber_halaman + '</span></td><td class="amt">' + rp(h.tarif_dasar) + "</td></tr>";
       h.topup.forEach(function (t) {
-        if (t.diterima) s += '<tr><td><span class="lbl">Top up ' + t.kode_spesial + "</span> " + esc(t.deskripsi) + '<span class="src">' + (t.sumber === "dipilih" ? "dipilih" : "otomatis dari ICD-9-CM") + " &middot; PDF hal. " + t.sumber_halaman + '</span></td><td class="amt">' + rp(t.nilai) + "</td></tr>";
-        else s += '<tr class="tolak"><td><span class="lbl">Top up ' + t.kode_spesial + "</span> " + esc(t.deskripsi) + '<span class="src">Ditolak: ' + esc(t.alasan) + '</span></td><td class="amt">Rp0</td></tr>';
+        if (t.diterima) s += '<tr><td><span class="what"><span class="fig">' + t.kode_spesial + "</span>" + esc(t.deskripsi) + '</span><span class="src">Top up ' + (t.sumber === "dipilih" ? "dipilih" : "otomatis dari ICD-9-CM") + ", PDF hal. " + t.sumber_halaman + '</span></td><td class="amt">' + rp(t.nilai) + "</td></tr>";
+        else s += '<tr class="no"><td><span class="what"><span class="fig">' + t.kode_spesial + "</span>" + esc(t.deskripsi) + '</span><span class="src">Ditolak: ' + esc(t.alasan) + '</span></td><td class="amt">Rp0</td></tr>';
       });
       var sk = h.topup_subakut_kronis;
       if (sk) {
-        s += '<tr><td><span class="lbl">Top up fase sub akut</span><span class="src">' + sk.los_subakut + " hari &middot; 0,375 &times; ADL/60 &times; Rp879.103 &times; hari &middot; hal. 84</span></td><td class=\"amt\">" + rp(sk.topup_subakut) + "</td></tr>";
-        if (sk.los_kronis) s += '<tr><td><span class="lbl">Top up fase kronis</span><span class="src">' + sk.los_kronis + " hari &middot; 0,25 &times; ADL/60 &times; Rp879.103 &times; hari &middot; hal. 84</span></td><td class=\"amt\">" + rp(sk.topup_kronis) + "</td></tr>";
+        s += '<tr><td><span class="what">Top up fase sub akut</span><span class="src">' + sk.los_subakut + " hari, 0,375 &times; ADL/60 &times; Rp879.103 &times; hari (hal. 84)</span></td><td class=\"amt\">" + rp(sk.topup_subakut) + "</td></tr>";
+        if (sk.los_kronis) s += '<tr><td><span class="what">Top up fase kronis</span><span class="src">' + sk.los_kronis + " hari, 0,25 &times; ADL/60 &times; Rp879.103 &times; hari (hal. 84)</span></td><td class=\"amt\">" + rp(sk.topup_kronis) + "</td></tr>";
       }
-      s += '<tr class="total"><td>Total klaim INA-CBG</td><td class="amt">' + rp(h.total_klaim_inacbg) + "</td></tr></tbody></table>";
-      if (h.rentang_total) s += '<div class="block info"><h3>Rentang klinik utama</h3><div>Pada ' + h.rentang_total.persen[0] + "&ndash;" + h.rentang_total.persen[1] + '% tarif kelas D: <span class="big">' + rp(h.rentang_total.total[0]) + " &ndash; " + rp(h.rentang_total.total[1]) + "</span></div></div>";
+      s += '</tbody><tfoot><tr><td>Total klaim INA-CBG</td><td class="amt">' + rp(h.total_klaim_inacbg) + "</td></tr></tfoot></table>";
+      if (h.rentang_total) s += '<div class="part"><h3>Rentang klinik utama</h3><p>Pada ' + h.rentang_total.persen[0] + " sampai " + h.rentang_total.persen[1] + '% tarif kelas D: <span class="big">' + rp(h.rentang_total.total[0]) + "</span> sampai <span class=\"big\">" + rp(h.rentang_total.total[1]) + "</span></p></div>";
     }
     if (h.kandidat_topup.length) {
-      s += '<div class="block info"><h3>Kandidat top up</h3><div>Pemicu ICD cocok. Centang di formulir bila obat/alat ini benar diberikan:</div><ul>' +
-        h.kandidat_topup.map(function (k) { return "<li><strong>" + k.kode_spesial + "</strong> " + esc(k.deskripsi) + " (" + esc(k.jenis) + ")</li>"; }).join("") + "</ul></div>";
+      s += '<div class="part"><h3>Kandidat top up</h3><p>Pemicu ICD cocok. Centang di formulir bila obat atau alat ini benar diberikan, lalu hitung lagi.</p><ul>' +
+        h.kandidat_topup.map(function (k) { return '<li><span class="fig">' + k.kode_spesial + "</span> " + esc(k.deskripsi) + " (" + esc(k.jenis) + ")</li>"; }).join("") + "</ul></div>";
     }
     var sb = h.selisih_biaya;
     if (sb) {
-      s += '<div class="block ' + (sb.berlaku ? "info" : "warn") + '"><h3>Selisih biaya naik kelas</h3>';
-      if (!sb.berlaku) s += "<div>Tidak berlaku. " + esc(sb.dasar) + "</div>";
+      s += '<div class="part"><h3>Selisih biaya naik kelas</h3>';
+      if (!sb.berlaku) s += "<p>Tidak berlaku. " + esc(sb.dasar) + "</p>";
       else {
-        if (sb.nilai != null) s += '<div>Peserta membayar <span class="big">' + rp(sb.nilai) + "</span></div>";
-        else s += "<div>" + (sb.pasti != null ? "Minimal " + rp(sb.pasti) + ", " : "") + 'paling banyak <span class="big">' + rp(sb.maksimum) + "</span></div>";
-        s += '<div class="hint">' + esc(sb.dasar) + "</div>";
+        if (sb.nilai != null) s += '<p>Peserta membayar <span class="big">' + rp(sb.nilai) + "</span></p>";
+        else s += "<p>" + (sb.pasti != null ? "Minimal " + rp(sb.pasti) + ", " : "") + 'paling banyak <span class="big">' + rp(sb.maksimum) + "</span></p>";
+        s += '<p class="basis">' + esc(sb.dasar) + "</p>";
       }
       s += "</div>";
     }
     var pr = h.peringatan.filter(function (x, i, a) { return a.indexOf(x) === i; });
-    if (pr.length) s += '<div class="block warn"><h3>Perlu dicek</h3><ul>' + pr.map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") + "</ul></div>";
-    s += '<p class="disclaimer">' + esc(h.disclaimer) + "</p>";
-    out.innerHTML = s;
+    if (pr.length) s += '<div class="part"><h3>Perlu dicek</h3><ul>' + pr.map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") + "</ul></div>";
+    s += '<p class="fine">' + esc(h.disclaimer) + "</p>";
+    hasil.innerHTML = s;
+    if (window.matchMedia("(max-width: 60rem)").matches) {
+      hasil.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    }
   }
 
   function isi(o) {
@@ -694,15 +812,18 @@ if (typeof module !== "undefined") module.exports = INACBG;
     $("sps-list").dataset.kode = ""; $("sps-list").innerHTML = "";
     aturForm();
     (o.sps || []).forEach(function (k) { var x = $("sps-" + k); if (x) x.checked = true; });
-    render();
+    sudahDihitung = false;
+    kosong();
   }
 
-  $("f").addEventListener("input", render);
-  $("f").addEventListener("change", render);
-  $("f").addEventListener("submit", function (e) { e.preventDefault(); });
+  var f = $("f");
+  f.addEventListener("input", function () { aturForm(); tandaiBasi(); });
+  f.addEventListener("change", function () { aturForm(); tandaiBasi(); });
+  f.addEventListener("submit", function (e) { e.preventDefault(); if (eng) hitung(); });
   $("btn-contoh").addEventListener("click", function () { isi({ kode: "I-1-40-I", icd9: "36.06" }); });
   $("btn-hip").addEventListener("click", function () { isi({ kode: "M-1-04-I", icd9: "81.51", hak: 2, naik: "VIP", sps: ["RR-04-III"] }); });
-  $("btn-kosong").addEventListener("click", function () { isi({ kode: "" }); });
+  $("btn-kosong").addEventListener("click", function () { isi({ kode: "" }); $("kode").focus(); });
+  $("btn-hitung").disabled = true;
 
   fetch("data/kalkulator.json").then(function (r) {
     if (!r.ok) throw new Error("HTTP " + r.status);
@@ -712,9 +833,11 @@ if (typeof module !== "undefined") module.exports = INACBG;
     $("daftar-cbg").innerHTML = Object.keys(data.cbg).map(function (k) {
       return '<option value="' + k + '">' + esc(data.cbg[k][0]) + "</option>";
     }).join("");
+    $("btn-hitung").disabled = false;
     isi({ kode: "I-1-40-I", icd9: "36.06" });
   }).catch(function (e) {
-    $("hasil").innerHTML = '<div class="eyebrow">Rincian klaim</div><div class="block bad">Data tarif gagal dimuat (' + esc(e.message) + "). Muat ulang halaman.</div>";
+    hasil.dataset.state = "error";
+    hasil.innerHTML = '<div class="st-head"><h2 id="h-hasil">Rincian klaim</h2></div><div class="part bad"><h3>Data tarif gagal dimuat</h3><p>' + esc(e.message) + ". Muat ulang halaman ini.</p></div>";
   });
 })();
 </script>
