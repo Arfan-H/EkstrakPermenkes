@@ -13,6 +13,8 @@ inacbg hitung --kode M-1-04-I --provinsi jabar --kelas-rs B --kepemilikan swasta
     --icd9 81.51 --kode-spesial "RR-04-III:Hip Implant" --naik-kelas VIP
 inacbg hitung --kode A-4-10-I --rs-khusus-nasional RSCM --kelas-rawat 3 --json
 inacbg cari "pacu jantung"
+inacbg tebak --icd10 I21.0 --icd9 36.06 --severity I      # penuntun kode CBG (estimasi)
+inacbg tebak --icd10 J06.9 --rawat RJ
 inacbg provinsi
 ```
 
@@ -26,11 +28,18 @@ Fitur yang tersedia:
 - **Selisih biaya naik kelas** dihitung sesuai Pasal 48, termasuk pengecualian peserta PBI, kelas 3, dan lainnya.
 - **Aturan lain**: regional dari provinsi (38 provinsi), RS khusus yang melayani di luar kekhususannya turun satu tingkat, klinik utama memakai tarif kelas D (rawat inap 70–100%), dan hemodialisis re-use dibayar 85%.
 
-Belum tersedia: estimasi ICD → kode CBG (grouper resmi bersifat tertutup) dan tarif Non INA-CBG.
+- **Penuntun kode CBG (estimasi)** di `src/inacbg/penuntun.py`, perintah `inacbg tebak`, dan panel "Belum tahu kodenya?" di web:
+  - **Case group** (digit 2) mengikuti Tabel 2 PMK 26/2021, ditentukan dari jenis rawat, kategori (umum/kebidanan/neonatal), dan ada tidaknya prosedur.
+  - **CMG** (digit 1) ditebak dari bab ICD-10 diagnosis utama dan blok ICD-9-CM prosedur. Tabel pemetaannya disusun sendiri dari struktur bab ICD dan nama CMG, **bukan tabel resmi**.
+  - Kombinasi diagnosis/prosedur yang tercantum di Lampiran I.A PMK 3/2023 dinaikkan ke urutan teratas sebagai petunjuk kuat.
+  - **Severity** (I/II/III) dipilih pengguna, karena daftar komplikasi/komorbiditas (CC/MCC) grouper tidak dipublikasikan.
+  - Keluarannya daftar grup kandidat yang memang ada di Lampiran III, bukan satu kode pasti. Kode final tetap dari grouper E-Klaim.
+
+Belum tersedia: tarif Non INA-CBG.
 
 ## Versi web
 
-`web/index.html` adalah kalkulator yang sama dalam bentuk halaman HTML. Datanya diambil dari `web/data/kalkulator.json`, yang dibuat dengan `python3 scripts/bangun_data_web.py`. Halaman ini butuh server HTTP karena datanya dimuat dengan `fetch` (contoh: `cd web && python3 -m http.server`). Logika hitungnya diuji identik dengan engine Python pada 600 kasus acak (`tests/test_web_engine.py`).
+`web/index.html` adalah kalkulator yang sama dalam bentuk halaman HTML. Datanya diambil dari `web/data/kalkulator.json`, yang dibuat dengan `python3 scripts/bangun_data_web.py`. Halaman ini butuh server HTTP karena datanya dimuat dengan `fetch` (contoh: `cd web && python3 -m http.server`). Logika hitungnya diuji identik dengan engine Python pada 600 kasus acak, dan penuntun kodenya pada 400 kasus acak (`tests/test_web_engine.py`).
 
 ### Online (GitHub Pages)
 

@@ -256,7 +256,7 @@ Tambahan test:
 
 ## Roadmap
 
-Status (24 Nov 2026): fase 1–4 sudah diimplementasikan di `src/inacbg/` (CLI `python -m inacbg`), test di `tests/`.
+Status (24 Nov 2026): fase 1–5 sudah diimplementasikan di `src/inacbg/` (CLI `python -m inacbg`, web `web/index.html` di GitHub Pages), test di `tests/`. Fase 6 bagian rule-based sudah ada sebagai **penuntun kode** (`src/inacbg/penuntun.py`, `inacbg tebak`, panel web): case group dari Tabel 2 PMK 26/2021, CMG dari pemetaan bab ICD buatan sendiri (bukan resmi), Lampiran I.A sebagai petunjuk kuat, severity dipilih pengguna. Keluaran = daftar grup kandidat berlabel ESTIMASI. Port JS-nya diuji identik dengan Python.
 
 
 1. **Fase 1 — Data bersih + lookup CBG → tarif** (dari xlsx yang ada) + unit test golden values.

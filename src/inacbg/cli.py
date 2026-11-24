@@ -101,6 +101,15 @@ def main(argv=None):
     h.add_argument("--biaya-riil", type=int)
     h.add_argument("--json", action="store_true", help="keluaran JSON")
 
+    t = sub.add_parser("tebak", help="penuntun kode CBG dari diagnosis dan prosedur (ESTIMASI)")
+    t.add_argument("--icd10", help="diagnosis utama, mis. I21.0")
+    t.add_argument("--icd9", help="prosedur, dipisah koma, mis. 36.06")
+    t.add_argument("--rawat", choices=["RI", "RJ", "ri", "rj"], default="RI")
+    t.add_argument("--kategori", choices=["umum", "kebidanan", "neonatal"], default="umum")
+    t.add_argument("--tanpa-prosedur", action="store_true", help="abaikan prosedur untuk case group")
+    t.add_argument("--severity", choices=["I", "II", "III"])
+    t.add_argument("--json", action="store_true")
+
     c = sub.add_parser("cari", help="cari kode CBG berdasarkan kata kunci")
     c.add_argument("kata")
     sub.add_parser("provinsi", help="daftar provinsi per regional")
@@ -111,6 +120,27 @@ def main(argv=None):
             print(f"Regional {r}: {', '.join(ps)}")
         return 0
     eng = INACBGEngine()
+    if a.perintah == "tebak":
+        from . import penuntun as P
+        trig = [{"kode_spesial": d["kode_spesial"], "cbg": d["cbg"], "ICD10": d["ICD10"], "ICD9CM": d["ICD9CM"]}
+                for d in eng.trigger.values()]
+        h = P.tebak(eng.cbg, trig, icd10_utama=a.icd10, icd9=_daftar(a.icd9), jenis_rawat=a.rawat.upper(),
+                    kategori=a.kategori, ada_prosedur=False if a.tanpa_prosedur else None, severity=a.severity)
+        if a.json:
+            print(json.dumps(h, ensure_ascii=False, indent=2))
+            return 0
+        print("\nCase group : " + ", ".join(f"{c['kode']} {c['deskripsi']}" for c in h["case_group"]))
+        print("CMG        : " + "; ".join(f"{c['kode']} ({c['alasan']})" for c in h["cmg"][:5])
+              + (" ..." if len(h["cmg"]) > 5 else ""))
+        print(f"\nKandidat ({h['jumlah_kandidat']}):")
+        for k in h["kandidat"][:25]:
+            kode = k["kode_terpilih"] or k["grup"] + "-?"
+            tanda = f"  [Lampiran I.A: {', '.join(k['lampiran_ia'])}]" if k["lampiran_ia"] else ""
+            print(f"  {kode:<12} {k['deskripsi']}{tanda}")
+        for p in h["peringatan"]:
+            print(f"\n- {p}")
+        print(f"\n{h['disclaimer']}\n")
+        return 0
     if a.perintah == "cari":
         for r in eng.cari_cbg(a.kata):
             print(f"{r['kode_cbg']:<12} {r['jenis_rawat']}  {r['deskripsi']}")
