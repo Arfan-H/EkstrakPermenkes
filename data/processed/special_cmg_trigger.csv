@@ -1,0 +1,547 @@
+kode_spesial,deskripsi_spesial_cmg,sub_kriteria,kode_cbg,tipe_kode,kode,sumber_halaman
+DD-01-I,Streptokinase,1,I-4-10-I,ICD10,I21.0,31
+DD-01-I,Streptokinase,1,I-4-10-I,ICD10,I21.1,31
+DD-01-I,Streptokinase,1,I-4-10-I,ICD10,I21.2,31
+DD-01-I,Streptokinase,1,I-4-10-I,ICD10,I21.3,31
+DD-01-I,Streptokinase,1,I-4-10-I,ICD10,I21.4,31
+DD-01-I,Streptokinase,1,I-4-10-I,ICD10,I21.9,31
+DD-01-I,Streptokinase,1,I-4-10-I,ICD10,I23.3,31
+DD-01-I,Streptokinase,1,I-4-10-II,ICD10,I21.0,31
+DD-01-I,Streptokinase,1,I-4-10-II,ICD10,I21.1,31
+DD-01-I,Streptokinase,1,I-4-10-II,ICD10,I21.2,31
+DD-01-I,Streptokinase,1,I-4-10-II,ICD10,I21.3,31
+DD-01-I,Streptokinase,1,I-4-10-II,ICD10,I21.4,31
+DD-01-I,Streptokinase,1,I-4-10-II,ICD10,I21.9,31
+DD-01-I,Streptokinase,1,I-4-10-II,ICD10,I23.3,31
+DD-01-I,Streptokinase,1,I-4-10-III,ICD10,I21.0,31
+DD-01-I,Streptokinase,1,I-4-10-III,ICD10,I21.1,31
+DD-01-I,Streptokinase,1,I-4-10-III,ICD10,I21.2,31
+DD-01-I,Streptokinase,1,I-4-10-III,ICD10,I21.3,31
+DD-01-I,Streptokinase,1,I-4-10-III,ICD10,I21.4,31
+DD-01-I,Streptokinase,1,I-4-10-III,ICD10,I21.9,31
+DD-01-I,Streptokinase,1,I-4-10-III,ICD10,I23.3,31
+DD-02-II,Deferiprone,1,D-4-13-I,ICD10,D56.1,31
+DD-02-II,Deferiprone,1,D-4-13-II,ICD10,D56.1,31
+DD-02-II,Deferiprone,1,D-4-13-III,ICD10,D56.1,31
+DD-03-II,Deferoksamin,1,D-4-13-I,ICD10,D56.1,31
+DD-03-II,Deferoksamin,1,D-4-13-II,ICD10,D56.1,31
+DD-03-II,Deferoksamin,1,D-4-13-III,ICD10,D56.1,31
+DD-04-II,Deferasirox,1,D-4-13-I,ICD10,D56.1,31
+DD-04-II,Deferasirox,1,D-4-13-II,ICD10,D56.1,31
+DD-04-II,Deferasirox,1,D-4-13-III,ICD10,D56.1,31
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A02.1,31
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A20.7,31
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A22.7,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A39.1,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A39.2,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A39.3,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A39.4,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A39.8,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A39.9,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A40.0,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A40.1,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A40.2,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A40.3,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A40.8,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A40.9,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A41.0,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A41.1,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A41.2,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A41.3,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A41.4,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A41.5,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A41.8,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A41.9,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,A42.7,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,B37.7,33
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-I,ICD10,R57.1,33
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A02.1,31
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A20.7,31
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A22.7,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A39.1,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A39.2,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A39.3,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A39.4,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A39.8,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A39.9,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A40.0,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A40.1,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A40.2,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A40.3,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A40.8,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A40.9,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A41.0,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A41.1,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A41.2,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A41.3,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A41.4,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A41.5,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A41.8,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A41.9,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,A42.7,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,B37.7,33
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-II,ICD10,R57.1,33
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A02.1,31
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A20.7,31
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A22.7,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A39.1,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A39.2,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A39.3,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A39.4,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A39.8,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A39.9,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A40.0,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A40.1,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A40.2,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A40.3,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A40.8,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A40.9,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A41.0,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A41.1,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A41.2,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A41.3,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A41.4,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A41.5,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A41.8,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A41.9,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,A42.7,32
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,B37.7,33
+DD-05-II,Human Albumin for Septicaemia,1,A-4-10-III,ICD10,R57.1,33
+DD-06-II,Anti Hemofilia Factor,1,D-4-11-I,ICD10,D66,33
+DD-06-II,Anti Hemofilia Factor,1,D-4-11-I,ICD10,D67,33
+DD-06-II,Anti Hemofilia Factor,1,D-4-11-II,ICD10,D66,33
+DD-06-II,Anti Hemofilia Factor,1,D-4-11-II,ICD10,D67,33
+DD-06-II,Anti Hemofilia Factor,1,D-4-11-III,ICD10,D66,33
+DD-06-II,Anti Hemofilia Factor,1,D-4-11-III,ICD10,D67,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T20.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T20.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T21.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T21.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T22.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T22.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T23.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T23.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T24.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T24.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T25.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T25.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T29.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T29.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T31.4,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T31.5,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T31.6,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T31.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T31.8,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T31.9,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T32.4,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T32.5,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T32.6,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T32.7,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T32.8,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD10,T32.9,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,85.82,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,85.83,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,85.84,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,85.85,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.60,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.61,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.62,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.63,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.65,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.66,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.67,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.69,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.70,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.71,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.72,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.73,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.74,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.75,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.91,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-I,ICD9CM,86.93,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T20.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T20.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T21.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T21.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T22.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T22.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T23.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T23.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T24.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T24.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T25.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T25.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T29.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T29.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T31.4,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T31.5,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T31.6,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T31.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T31.8,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T31.9,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T32.4,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T32.5,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T32.6,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T32.7,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T32.8,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD10,T32.9,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,85.82,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,85.83,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,85.84,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,85.85,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.60,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.61,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.62,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.63,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.65,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.66,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.67,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.69,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.70,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.71,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.72,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.73,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.74,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.75,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.91,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-II,ICD9CM,86.93,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T20.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T20.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T21.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T21.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T22.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T22.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T23.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T23.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T24.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T24.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T25.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T25.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T29.3,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T29.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T31.4,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T31.5,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T31.6,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T31.7,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T31.8,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T31.9,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T32.4,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T32.5,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T32.6,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T32.7,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T32.8,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD10,T32.9,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,85.82,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,85.83,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,85.84,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,85.85,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.60,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.61,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.62,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.63,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.65,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.66,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.67,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.69,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.70,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.71,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.72,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.73,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.74,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.75,33
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.91,34
+DD-11-II,Human Albumin for Burn,1,L-1-20-III,ICD9CM,86.93,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T20.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T20.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T21.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T21.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T22.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T22.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T23.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T23.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T24.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T24.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T25.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T25.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T29.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T29.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T31.4,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T31.5,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T31.6,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T31.7,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T31.8,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T31.9,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T32.4,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T32.5,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T32.6,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T32.7,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T32.8,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-I,ICD10,T32.9,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T20.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T20.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T21.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T21.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T22.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T22.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T23.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T23.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T24.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T24.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T25.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T25.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T29.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T29.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T31.4,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T31.5,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T31.6,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T31.7,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T31.8,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T31.9,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T32.4,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T32.5,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T32.6,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T32.7,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T32.8,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-II,ICD10,T32.9,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T20.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T20.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T21.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T21.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T22.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T22.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T23.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T23.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T24.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T24.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T25.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T25.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T29.3,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T29.7,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T31.4,34
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T31.5,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T31.6,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T31.7,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T31.8,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T31.9,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T32.4,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T32.5,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T32.6,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T32.7,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T32.8,35
+DD-11-II,Human Albumin for Burn,2,S-4-16-III,ICD10,T32.9,35
+RR-01-II,Subdural Grid Electrode,1,G-1-10-I,ICD9CM,02.93,35
+RR-01-II,Subdural Grid Electrode,1,G-1-10-II,ICD9CM,02.93,35
+RR-01-II,Subdural Grid Electrode,1,G-1-10-III,ICD9CM,02.93,35
+RR-02-II,Contegra,1,I-1-03-I,ICD9CM,35.92,35
+RR-02-II,Contegra,1,I-1-03-II,ICD9CM,35.92,35
+RR-02-II,Contegra,1,I-1-03-III,ICD9CM,35.92,35
+RR-03-III,Temporomandibul ar Joint (TMJ) Prothesis,1,M-1-60-I,ICD9CM,76.5,35
+RR-03-III,Temporomandibul ar Joint (TMJ) Prothesis,1,M-1-60-II,ICD9CM,76.5,35
+RR-03-III,Temporomandibul ar Joint (TMJ) Prothesis,1,M-1-60-III,ICD9CM,76.5,35
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-I,ICD9CM,81.51,35
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-I,ICD9CM,81.52,35
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-I,ICD9CM,81.53,35
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-I,ICD9CM,81.54,36
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-I,ICD9CM,81.55,36
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-II,ICD9CM,81.51,35
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-II,ICD9CM,81.52,35
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-II,ICD9CM,81.53,35
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-II,ICD9CM,81.54,36
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-II,ICD9CM,81.55,36
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-III,ICD9CM,81.51,35
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-III,ICD9CM,81.52,35
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-III,ICD9CM,81.53,35
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-III,ICD9CM,81.54,36
+RR-04-III,Hip Implant/Knee Implant,1,M-1-04-III,ICD9CM,81.55,36
+RR-05-III,Prostesis Evar/Tevar,1,I-1-20-I,ICD9CM,39.71,36
+RR-05-III,Prostesis Evar/Tevar,1,I-1-20-I,ICD9CM,39.73,36
+RR-05-III,Prostesis Evar/Tevar,1,I-1-20-II,ICD9CM,39.71,36
+RR-05-III,Prostesis Evar/Tevar,1,I-1-20-II,ICD9CM,39.73,36
+RR-05-III,Prostesis Evar/Tevar,1,I-1-20-III,ICD9CM,39.71,36
+RR-05-III,Prostesis Evar/Tevar,1,I-1-20-III,ICD9CM,39.73,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-I,ICD9CM,81.51,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-I,ICD9CM,81.52,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-I,ICD9CM,81.53,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-I,ICD9CM,81.54,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-I,ICD9CM,81.55,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-II,ICD9CM,81.51,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-II,ICD9CM,81.52,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-II,ICD9CM,81.53,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-II,ICD9CM,81.54,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-II,ICD9CM,81.55,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-III,ICD9CM,81.51,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-III,ICD9CM,81.52,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-III,ICD9CM,81.53,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-III,ICD9CM,81.54,36
+YY-01-II,Hip Replacement/ Knee Replacement,1,M-1-04-III,ICD9CM,81.55,36
+YY-02-III,Percutaneous Coronary Intervention (PCI),1,I-1-40-I,ICD9CM,36.06,36
+YY-02-III,Percutaneous Coronary Intervention (PCI),1,I-1-40-I,ICD9CM,36.07,36
+YY-02-III,Percutaneous Coronary Intervention (PCI),1,I-1-40-II,ICD9CM,36.06,36
+YY-02-III,Percutaneous Coronary Intervention (PCI),1,I-1-40-II,ICD9CM,36.07,36
+YY-02-III,Percutaneous Coronary Intervention (PCI),1,I-1-40-III,ICD9CM,36.06,36
+YY-02-III,Percutaneous Coronary Intervention (PCI),1,I-1-40-III,ICD9CM,36.07,36
+YY-03-III,Keratoplasty,1,H-1-30-I,ICD9CM,11.60,36
+YY-03-III,Keratoplasty,1,H-1-30-I,ICD9CM,11.61,36
+YY-03-III,Keratoplasty,1,H-1-30-I,ICD9CM,11.62,36
+YY-03-III,Keratoplasty,1,H-1-30-I,ICD9CM,11.63,36
+YY-03-III,Keratoplasty,1,H-1-30-I,ICD9CM,11.64,36
+YY-03-III,Keratoplasty,1,H-1-30-I,ICD9CM,11.69,36
+YY-03-III,Keratoplasty,1,H-1-30-II,ICD9CM,11.60,36
+YY-03-III,Keratoplasty,1,H-1-30-II,ICD9CM,11.61,36
+YY-03-III,Keratoplasty,1,H-1-30-II,ICD9CM,11.62,36
+YY-03-III,Keratoplasty,1,H-1-30-II,ICD9CM,11.63,36
+YY-03-III,Keratoplasty,1,H-1-30-II,ICD9CM,11.64,36
+YY-03-III,Keratoplasty,1,H-1-30-II,ICD9CM,11.69,36
+YY-03-III,Keratoplasty,1,H-1-30-III,ICD9CM,11.60,36
+YY-03-III,Keratoplasty,1,H-1-30-III,ICD9CM,11.61,36
+YY-03-III,Keratoplasty,1,H-1-30-III,ICD9CM,11.62,36
+YY-03-III,Keratoplasty,1,H-1-30-III,ICD9CM,11.63,36
+YY-03-III,Keratoplasty,1,H-1-30-III,ICD9CM,11.64,36
+YY-03-III,Keratoplasty,1,H-1-30-III,ICD9CM,11.69,36
+YY-04-III,Pancreatectomy,1,B-1-10-I,ICD9CM,52.51,36
+YY-04-III,Pancreatectomy,1,B-1-10-I,ICD9CM,52.52,36
+YY-04-III,Pancreatectomy,1,B-1-10-I,ICD9CM,52.53,36
+YY-04-III,Pancreatectomy,1,B-1-10-I,ICD9CM,52.59,37
+YY-04-III,Pancreatectomy,1,B-1-10-I,ICD9CM,52.6,37
+YY-04-III,Pancreatectomy,1,B-1-10-II,ICD9CM,52.51,36
+YY-04-III,Pancreatectomy,1,B-1-10-II,ICD9CM,52.52,36
+YY-04-III,Pancreatectomy,1,B-1-10-II,ICD9CM,52.53,36
+YY-04-III,Pancreatectomy,1,B-1-10-II,ICD9CM,52.59,37
+YY-04-III,Pancreatectomy,1,B-1-10-II,ICD9CM,52.6,37
+YY-04-III,Pancreatectomy,1,B-1-10-III,ICD9CM,52.51,36
+YY-04-III,Pancreatectomy,1,B-1-10-III,ICD9CM,52.52,36
+YY-04-III,Pancreatectomy,1,B-1-10-III,ICD9CM,52.53,36
+YY-04-III,Pancreatectomy,1,B-1-10-III,ICD9CM,52.59,37
+YY-04-III,Pancreatectomy,1,B-1-10-III,ICD9CM,52.6,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-I,ICD9CM,35.50,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-I,ICD9CM,35.51,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-I,ICD9CM,35.52,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-I,ICD9CM,35.53,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-I,ICD9CM,35.55,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-II,ICD9CM,35.50,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-II,ICD9CM,35.51,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-II,ICD9CM,35.52,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-II,ICD9CM,35.53,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-II,ICD9CM,35.55,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-III,ICD9CM,35.50,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-III,ICD9CM,35.51,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-III,ICD9CM,35.52,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-III,ICD9CM,35.53,37
+YY-05-III,Repair of Septal Defect of Heart with Prosthesis,1,I-1-06-III,ICD9CM,35.55,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD10,Z51.0,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.21,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.22,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.23,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.24,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.25,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.26,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.27,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.28,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.29,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.30,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.31,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.32,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.33,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-I,ICD9CM,92.39,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD10,Z51.0,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.21,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.22,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.23,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.24,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.25,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.26,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.27,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.28,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.29,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.30,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.31,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.32,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.33,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-II,ICD9CM,92.39,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD10,Z51.0,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.21,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.22,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.23,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.24,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.25,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.26,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.27,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.28,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.29,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.30,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.31,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.32,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.33,37
+YY-06-III,Stereotactic Surgery & Radiotheraphy,1,C-4-12-III,ICD9CM,92.39,37
+YY-07-III,Torakotomi,1,J-1-30-I,ICD9CM,34.02,37
+YY-07-III,Torakotomi,1,J-1-30-I,ICD9CM,34.03,37
+YY-07-III,Torakotomi,1,J-1-30-II,ICD9CM,34.02,37
+YY-07-III,Torakotomi,1,J-1-30-II,ICD9CM,34.03,37
+YY-07-III,Torakotomi,1,J-1-30-III,ICD9CM,34.02,37
+YY-07-III,Torakotomi,1,J-1-30-III,ICD9CM,34.03,37
+YY-08-III,Lobektomi/Bilobekto mi/Pneumonektomi,1,J-1-10-I,ICD9CM,32.41,38
+YY-08-III,Lobektomi/Bilobekto mi/Pneumonektomi,1,J-1-10-I,ICD9CM,32.49,38
+YY-08-III,Lobektomi/Bilobekto mi/Pneumonektomi,1,J-1-10-I,ICD9CM,32.50,38
+YY-08-III,Lobektomi/Bilobekto mi/Pneumonektomi,1,J-1-10-I,ICD9CM,32.59,38
+YY-08-III,Lobektomi/Bilobekto mi/Pneumonektomi,1,J-1-10-II,ICD9CM,32.41,38
+YY-08-III,Lobektomi/Bilobekto mi/Pneumonektomi,1,J-1-10-II,ICD9CM,32.49,38
+YY-08-III,Lobektomi/Bilobekto mi/Pneumonektomi,1,J-1-10-II,ICD9CM,32.50,38
+YY-08-III,Lobektomi/Bilobekto mi/Pneumonektomi,1,J-1-10-II,ICD9CM,32.59,38
+YY-08-III,Lobektomi/Bilobekto mi/Pneumonektomi,1,J-1-10-III,ICD9CM,32.41,38
+YY-08-III,Lobektomi/Bilobekto mi/Pneumonektomi,1,J-1-10-III,ICD9CM,32.49,38
+YY-08-III,Lobektomi/Bilobekto mi/Pneumonektomi,1,J-1-10-III,ICD9CM,32.50,38
+YY-08-III,Lobektomi/Bilobekto mi/Pneumonektomi,1,J-1-10-III,ICD9CM,32.59,38
+YY-09-III,Vitrectomy,1,H-1-30-I,ICD9CM,14.71,38
+YY-09-III,Vitrectomy,1,H-1-30-I,ICD9CM,14.72,38
+YY-09-III,Vitrectomy,1,H-1-30-I,ICD9CM,14.73,38
+YY-09-III,Vitrectomy,1,H-1-30-I,ICD9CM,14.74,38
+YY-09-III,Vitrectomy,1,H-1-30-II,ICD9CM,14.71,38
+YY-09-III,Vitrectomy,1,H-1-30-II,ICD9CM,14.72,38
+YY-09-III,Vitrectomy,1,H-1-30-II,ICD9CM,14.73,38
+YY-09-III,Vitrectomy,1,H-1-30-II,ICD9CM,14.74,38
+YY-09-III,Vitrectomy,1,H-1-30-III,ICD9CM,14.71,38
+YY-09-III,Vitrectomy,1,H-1-30-III,ICD9CM,14.72,38
+YY-09-III,Vitrectomy,1,H-1-30-III,ICD9CM,14.73,38
+YY-09-III,Vitrectomy,1,H-1-30-III,ICD9CM,14.74,38
+YY-13-III,Coil,1,G-1-12-I,ICD9CM,39.75,38
+YY-13-III,Coil,1,G-1-12-II,ICD9CM,39.75,38
+YY-13-III,Coil,1,G-1-12-III,ICD9CM,39.75,38
+YY-14-III,Trombektomi,1,G-1-12-I,ICD9CM,39.74,38
+YY-14-III,Trombektomi,1,G-1-12-II,ICD9CM,39.74,38
+YY-14-III,Trombektomi,1,G-1-12-III,ICD9CM,39.74,38
+YY-15-III,Percutaneous Endoscopy Gastrostomy,1,E-4-10-I,ICD10,E43,38
+YY-15-III,Percutaneous Endoscopy Gastrostomy,1,E-4-10-I,ICD10,E44.0,38
+YY-15-III,Percutaneous Endoscopy Gastrostomy,1,E-4-10-I,ICD10,E44.1,38
+YY-15-III,Percutaneous Endoscopy Gastrostomy,1,E-4-10-I,ICD9CM,43.11,38
+YY-15-III,Percutaneous Endoscopy Gastrostomy,1,E-4-10-II,ICD10,E43,38
+YY-15-III,Percutaneous Endoscopy Gastrostomy,1,E-4-10-II,ICD10,E44.0,38
+YY-15-III,Percutaneous Endoscopy Gastrostomy,1,E-4-10-II,ICD10,E44.1,38
+YY-15-III,Percutaneous Endoscopy Gastrostomy,1,E-4-10-II,ICD9CM,43.11,38
+YY-15-III,Percutaneous Endoscopy Gastrostomy,1,E-4-10-III,ICD10,E43,38
+YY-15-III,Percutaneous Endoscopy Gastrostomy,1,E-4-10-III,ICD10,E44.0,38
+YY-15-III,Percutaneous Endoscopy Gastrostomy,1,E-4-10-III,ICD10,E44.1,38
+YY-15-III,Percutaneous Endoscopy Gastrostomy,1,E-4-10-III,ICD9CM,43.11,38
+DD-07-II,Deferiprone,1,Q-5-44-0,ICD10,D56.1,38
+DD-08-II,Deferoksamin,1,Q-5-44-0,ICD10,D56.1,38
+DD-09-II,Deferasirox,1,Q-5-44-0,ICD10,D56.1,38
+DD-10-II,Anti Hemofilia Factor,1,Q-5-44-0,ICD10,D66,39
+DD-10-II,Anti Hemofilia Factor,1,Q-5-44-0,ICD10,D67,39
+II-01-III,Nuclear Medicine,1,Z-3-17-0,ICD9CM,92.05,39
+II-01-III,Nuclear Medicine,1,Z-3-17-0,ICD9CM,92.15,39
+II-02-III,Magnetic Resonance Imaging (MRI),1,Z-3-16-0,ICD9CM,88.92,39
+II-02-III,Magnetic Resonance Imaging (MRI),1,Z-3-16-0,ICD9CM,88.93,39
+II-02-III,Magnetic Resonance Imaging (MRI),1,Z-3-16-0,ICD9CM,88.97,39
+II-03-III,Diagnostic and Imaging Procedures of Eye,1,H-3-13-0,ICD9CM,95.12,39
+YY-10-III,Phacoemulsification,1,H-2-36-0,ICD9CM,13.41,39
+YY-11-III,Microlaringoscopy,1,J-3-15-0,ICD9CM,31.41,39
+YY-11-III,Microlaringoscopy,1,J-3-15-0,ICD9CM,31.42,39
+YY-11-III,Microlaringoscopy,1,J-3-15-0,ICD9CM,31.44,39
+YY-12-III,Cholangiograph,1,B-3-11-0,ICD9CM,51.10,39
+YY-12-III,Cholangiograph,1,B-3-11-0,ICD9CM,51.11,39
+YY-12-III,Cholangiograph,1,B-3-11-0,ICD9CM,51.14,39
+YY-12-III,Cholangiograph,1,B-3-11-0,ICD9CM,51.15,39
+YY-12-III,Cholangiograph,1,B-3-11-0,ICD9CM,52.13,39
+YY-16-III,Odontektomi,1,U-3-16-0,ICD9CM,23.19,39
+YY-17-III,Brakiterapi,1,C-3-10-0,ICD10,Z51.0,39
+YY-17-III,Brakiterapi,1,C-3-10-0,ICD9CM,92.20,39
+YY-17-III,Brakiterapi,1,C-3-10-0,ICD9CM,92.27,39

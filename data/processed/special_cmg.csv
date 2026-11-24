@@ -1,0 +1,37 @@
+kode_spesial,deskripsi,varian,jenis_spesial,prefix,nomor,level
+DD-01-I,Streptokinase,,special drug,DD,01,I
+DD-02-II,Deferiprone,,special drug,DD,02,II
+DD-03-II,Deferoksamin,,special drug,DD,03,II
+DD-04-II,Deferasirox,,special drug,DD,04,II
+DD-05-II,Human Albumin for Septicaemia,,special drug,DD,05,II
+DD-06-II,Anti Hemofilia Factor,,special drug,DD,06,II
+DD-07-II,Deferiprone,,special drug,DD,07,II
+DD-08-II,Deferoksamin,,special drug,DD,08,II
+DD-09-II,Deferasirox,,special drug,DD,09,II
+DD-10-II,Anti Hemofilia Factor,,special drug,DD,10,II
+DD-11-II,Human Albumin for Burn,,special drug,DD,11,II
+II-01-III,Nuclear Medicine,,special investigation,II,01,III
+II-02-III,Magnetic Resonance Imaging (MRI),,special investigation,II,02,III
+II-03-III,Diagnostic and Imaging Procedure of Eye,,special investigation,II,03,III
+RR-01-II,Subdural Grid Electrode,,special prosthesis,RR,01,II
+RR-02-II,Contegra,,special prosthesis,RR,02,II
+RR-03-III,Temporomandibular Joint (TMJ) Prothesis,,special prosthesis,RR,03,III
+RR-04-III,Hip Implant / Knee Implant,Hip Implant|Knee Implant,special prosthesis,RR,04,III
+RR-05-III,Prostesis Evar/Tevar,,special prosthesis,RR,05,III
+YY-01-II,Hip Replacement/Knee Replacement,,special procedure,YY,01,II
+YY-02-III,Percutaneous Coronary Intervention (PCI),,special procedure,YY,02,III
+YY-03-III,Keratoplasty,,special procedure,YY,03,III
+YY-04-III,Pancreatectomy,,special procedure,YY,04,III
+YY-05-III,Repair of Septal Defect of Heart With Prosthesis,,special procedure,YY,05,III
+YY-06-III,Stereotactic Surgery & Radiotheraphy,,special procedure,YY,06,III
+YY-07-III,Torakotomi,,special procedure,YY,07,III
+YY-08-III,Lobektomi/Bilobektomi/Pneumonectomi,,special procedure,YY,08,III
+YY-09-III,Vitrectomy,,special procedure,YY,09,III
+YY-10-III,Phacoemulsification,,special procedure,YY,10,III
+YY-11-III,Microlaringoscopy,,special procedure,YY,11,III
+YY-12-III,Cholangiograph,,special procedure,YY,12,III
+YY-13-III,Coil,,special procedure,YY,13,III
+YY-14-III,Trombektomi,,special procedure,YY,14,III
+YY-15-III,Percutaneous Endoscopy Gastrostomy,,special procedure,YY,15,III
+YY-16-III,Odontektomi,,special procedure,YY,16,III
+YY-17-III,Brakiterapi,,special procedure,YY,17,III
