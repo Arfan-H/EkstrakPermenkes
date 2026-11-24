@@ -1,0 +1,466 @@
+tipe,kode,istilah
+ICD10,A01.0,Demam tifoid|tifoid|tifus|tipes|tipus|typhus abdominalis|typhoid
+ICD10,A01.4,Demam paratifoid|paratifoid|paratifus
+ICD10,A00.9,Kolera
+ICD10,A03.9,Disentri basiler|disentri|shigelosis
+ICD10,A06.0,Disentri amuba|amubiasis|amoebiasis
+ICD10,A06.4,Abses hati amuba
+ICD10,A05.9,Keracunan makanan bakteri|keracunan makanan
+ICD10,A09.0,Diare akut infeksi|gastroenteritis infeksi|muntaber|GEA|diare|mencret
+ICD10,A09.9,Gastroenteritis|diare akut|GE|mencret|muntaber
+ICD10,A15.0,TB paru terkonfirmasi BTA|tuberkulosis paru|TBC paru|TB paru|flek paru
+ICD10,A16.2,TB paru tanpa konfirmasi bakteriologis|tuberkulosis paru|TBC paru|TB paru
+ICD10,A17.0,Meningitis TB|meningitis tuberkulosis
+ICD10,A18.0,Spondilitis TB|TB tulang belakang|TB tulang|spondilitis tuberkulosa
+ICD10,A18.2,TB kelenjar|limfadenitis TB|skrofuloderma
+ICD10,A27.9,Leptospirosis|penyakit kencing tikus
+ICD10,A30.9,Kusta|lepra|morbus hansen
+ICD10,A35,Tetanus
+ICD10,A36.9,Difteri
+ICD10,A37.9,Pertusis|batuk rejan|batuk 100 hari
+ICD10,A41.9,Sepsis|septikemia|infeksi darah
+ICD10,A90,Demam dengue|DD|dengue
+ICD10,A91,Demam berdarah dengue|DBD|demam berdarah|DHF|dengue berdarah
+ICD10,A92.0,Chikungunya|cikungunya
+ICD10,B01.9,Cacar air|varisela|varicella
+ICD10,B02.9,Herpes zoster|cacar ular|dompo|cacar api
+ICD10,B05.9,Campak|morbili|measles|tampek
+ICD10,B07,Kutil|veruka
+ICD10,B15.9,Hepatitis A|sakit kuning|liver
+ICD10,B16.9,Hepatitis B akut|liver
+ICD10,B18.1,Hepatitis B kronis
+ICD10,B18.2,Hepatitis C kronis
+ICD10,B24,HIV|AIDS|HIV AIDS
+ICD10,B35.3,Kutu air|tinea pedis
+ICD10,B35.4,Kurap|tinea korporis|tinea corporis
+ICD10,B36.0,Panu|pityriasis versicolor|tinea versicolor
+ICD10,B37.0,Kandidiasis mulut|sariawan jamur|oral thrush
+ICD10,B50.9,Malaria falsiparum|malaria tropika
+ICD10,B51.9,Malaria vivaks|malaria tertiana
+ICD10,B54,Malaria
+ICD10,B82.0,Cacingan|kecacingan|infeksi cacing usus
+ICD10,B86,Skabies|kudis|gudik|budug
+ICD10,C11.9,Kanker nasofaring|KNF|tumor nasofaring
+ICD10,C15.9,Kanker kerongkongan|kanker esofagus
+ICD10,C16.9,Kanker lambung
+ICD10,C18.9,Kanker usus besar|kanker kolon|kanker kolorektal
+ICD10,C20,Kanker rektum|kanker anus|kanker dubur
+ICD10,C22.0,Kanker hati|hepatoma|karsinoma hepatoseluler|HCC
+ICD10,C25.9,Kanker pankreas
+ICD10,C34.9,Kanker paru|tumor paru
+ICD10,C44.9,Kanker kulit
+ICD10,C50.9,Kanker payudara|ca mammae|tumor ganas payudara
+ICD10,C53.9,Kanker serviks|kanker leher rahim|ca cervix
+ICD10,C54.1,Kanker endometrium|kanker rahim
+ICD10,C56,Kanker ovarium|kanker indung telur
+ICD10,C61,Kanker prostat
+ICD10,C64,Kanker ginjal
+ICD10,C67.9,Kanker kandung kemih
+ICD10,C71.9,Kanker otak|tumor otak ganas
+ICD10,C73,Kanker tiroid|kanker gondok
+ICD10,C85.9,Limfoma non Hodgkin|limfoma|kanker kelenjar getah bening
+ICD10,C91.0,Leukemia limfoblastik akut|ALL|kanker darah
+ICD10,C92.0,Leukemia mieloid akut|AML|kanker darah
+ICD10,D17.9,Lipoma|benjolan lemak
+ICD10,D24,Tumor jinak payudara|FAM|fibroadenoma mammae|benjolan payudara jinak
+ICD10,D25.9,Mioma uteri|miom|mioma
+ICD10,D50.9,Anemia defisiensi besi|kurang darah|anemia kurang zat besi
+ICD10,D56.1,Talasemia beta|thalassemia beta
+ICD10,D56.9,Talasemia|thalassemia
+ICD10,D64.9,Anemia|kurang darah
+ICD10,D66,Hemofilia A|hemofilia
+ICD10,D69.3,ITP|purpura trombositopenik idiopatik
+ICD10,D69.6,Trombositopenia|trombosit rendah
+ICD10,E03.9,Hipotiroid|hipotiroidisme
+ICD10,E04.9,Gondok|struma|goiter
+ICD10,E05.9,Hipertiroid|hipertiroidisme|gondok beracun|tirotoksikosis
+ICD10,E10.9,Diabetes melitus tipe 1|DM tipe 1|kencing manis tipe 1
+ICD10,E11.1,Ketoasidosis diabetik|KAD
+ICD10,E11.5,Kaki diabetik|ulkus diabetik|luka diabetes|gangren diabetik
+ICD10,E11.9,Diabetes melitus tipe 2|DM tipe 2|DM|diabetes|kencing manis|gula darah tinggi
+ICD10,E16.2,Hipoglikemia|gula darah rendah
+ICD10,E40,Kwashiorkor
+ICD10,E41,Marasmus
+ICD10,E43,Gizi buruk|malnutrisi berat
+ICD10,E46,Kurang gizi|malnutrisi|gizi kurang
+ICD10,E66.9,Obesitas|kegemukan
+ICD10,E78.0,Hiperkolesterolemia|kolesterol tinggi
+ICD10,E78.5,Dislipidemia|hiperlipidemia|kolesterol tinggi
+ICD10,E79.0,Hiperurisemia|asam urat tinggi
+ICD10,E86,Dehidrasi|kekurangan cairan
+ICD10,E87.1,Hiponatremia|natrium rendah
+ICD10,E87.6,Hipokalemia|kalium rendah
+ICD10,F03,Demensia|pikun
+ICD10,F10.2,Ketergantungan alkohol|alkoholisme
+ICD10,F11.2,Ketergantungan opioid|ketergantungan narkoba
+ICD10,F20.9,Skizofrenia|gangguan jiwa berat
+ICD10,F23.9,Psikosis akut|gangguan psikotik akut
+ICD10,F31.9,Gangguan bipolar|bipolar
+ICD10,F32.9,Depresi|episode depresi
+ICD10,F41.9,Gangguan cemas|kecemasan|ansietas
+ICD10,G00.9,Meningitis bakteri|radang selaput otak
+ICD10,G04.9,Ensefalitis|radang otak
+ICD10,G20,Parkinson|penyakit parkinson
+ICD10,G40.9,Epilepsi|ayan|sawan
+ICD10,G43.9,Migrain|sakit kepala sebelah
+ICD10,G44.2,Sakit kepala tegang|tension headache
+ICD10,G45.9,TIA|stroke ringan sementara|serangan iskemik sesaat
+ICD10,G47.0,Insomnia|susah tidur
+ICD10,G51.0,Bell's palsy|bell palsy|wajah mencong|lumpuh wajah
+ICD10,G56.0,Carpal tunnel syndrome|CTS|kesemutan tangan
+ICD10,G61.0,Guillain Barre|GBS
+ICD10,G80.9,Cerebral palsy|CP|lumpuh otak
+ICD10,G91.9,Hidrosefalus|kepala besar berisi cairan
+ICD10,H00.0,Bintitan|hordeolum
+ICD10,H00.1,Kalazion|chalazion
+ICD10,H10.9,Konjungtivitis|mata merah|belekan
+ICD10,H11.0,Pterigium|selaput mata
+ICD10,H25.9,Katarak senilis|katarak|mata katarak
+ICD10,H26.9,Katarak|katarak lainnya
+ICD10,H33.0,Ablasio retina|lepasnya retina
+ICD10,H36.0,Retinopati diabetik
+ICD10,H40.9,Glaukoma|tekanan bola mata tinggi
+ICD10,H52.1,Miopia|rabun jauh|mata minus
+ICD10,H61.2,Serumen|kotoran telinga|tumpukan kotoran telinga
+ICD10,H66.0,Otitis media akut|OMA|radang telinga tengah
+ICD10,H66.3,Otitis media supuratif kronis|OMSK|congek|telinga berair
+ICD10,H81.1,BPPV|vertigo posisional
+ICD10,H91.9,Tuli|gangguan pendengaran|budek
+ICD10,I09.9,Penyakit jantung rematik|PJR
+ICD10,I10,Hipertensi|darah tinggi|tekanan darah tinggi|HT
+ICD10,I11.9,Penyakit jantung hipertensi|HHD
+ICD10,I20.0,Angina tidak stabil|UAP|unstable angina
+ICD10,I20.9,Angina pektoris|angina|nyeri dada jantung
+ICD10,I21.4,NSTEMI|infark miokard non ST elevasi
+ICD10,I21.9,Serangan jantung|infark miokard akut|AMI|STEMI|jantung koroner akut
+ICD10,I25.1,Penyakit jantung koroner|PJK|CAD|jantung koroner
+ICD10,I26.9,Emboli paru
+ICD10,I42.9,Kardiomiopati
+ICD10,I48,Fibrilasi atrium|AF|atrial fibrilasi|aritmia
+ICD10,I50.0,Gagal jantung kongestif|CHF|gagal jantung|lemah jantung
+ICD10,I60.9,Perdarahan subaraknoid|SAH
+ICD10,I61.9,Stroke hemoragik|stroke perdarahan|perdarahan otak|pecah pembuluh darah otak|ICH
+ICD10,I63.9,Stroke iskemik|stroke infark|stroke non hemoragik|SNH|stroke penyumbatan
+ICD10,I64,Stroke|stroke tidak spesifik
+ICD10,I71.9,Aneurisma aorta
+ICD10,I73.9,Penyakit arteri perifer|PAD
+ICD10,I80.2,Trombosis vena dalam|DVT
+ICD10,I83.9,Varises tungkai|varises
+ICD10,I84.9,Hemoroid|wasir|ambeien|bawasir|ambeyen
+ICD10,I86.1,Varikokel
+ICD10,I95.9,Hipotensi|darah rendah|tekanan darah rendah
+ICD10,J00,Nasofaringitis akut|common cold|pilek|selesma
+ICD10,J01.9,Sinusitis akut
+ICD10,J02.9,Faringitis akut|radang tenggorokan|sakit tenggorokan
+ICD10,J03.9,Tonsilitis akut|radang amandel|amandel
+ICD10,J04.0,Laringitis akut|radang pita suara
+ICD10,J06.9,ISPA|infeksi saluran pernapasan atas|infeksi saluran napas atas|batuk pilek
+ICD10,J11.1,Influenza|flu
+ICD10,J18.0,Bronkopneumonia|BP
+ICD10,J18.9,Pneumonia|radang paru|paru basah|CAP
+ICD10,J20.9,Bronkitis akut|radang saluran napas
+ICD10,J21.9,Bronkiolitis
+ICD10,J30.4,Rinitis alergi|alergi hidung|pilek alergi
+ICD10,J32.9,Sinusitis kronis|sinusitis
+ICD10,J33.9,Polip hidung
+ICD10,J34.2,Septum deviasi|tulang hidung bengkok
+ICD10,J35.0,Tonsilitis kronis|amandel kronis
+ICD10,J44.1,PPOK eksaserbasi akut|PPOK kambuh
+ICD10,J44.9,PPOK|COPD|penyakit paru obstruktif kronis
+ICD10,J45.9,Asma|asma bronkial|sesak napas asma|mengi
+ICD10,J46,Status asmatikus|serangan asma berat
+ICD10,J47,Bronkiektasis
+ICD10,J81,Edema paru|paru terendam cairan
+ICD10,J90,Efusi pleura|cairan di paru|paru berair
+ICD10,J93.9,Pneumotoraks|paru bocor|paru kolaps
+ICD10,J96.0,Gagal napas akut
+ICD10,K01.1,Gigi impaksi|gigi bungsu terpendam
+ICD10,K02.9,Karies gigi|gigi berlubang|gigi bolong
+ICD10,K04.0,Pulpitis|sakit gigi
+ICD10,K04.7,Abses gigi|gigi bernanah|bengkak gusi
+ICD10,K05.0,Gingivitis akut|radang gusi
+ICD10,K05.1,Gingivitis kronis|radang gusi
+ICD10,K12.0,Stomatitis aftosa|sariawan|aphthous ulcer
+ICD10,K21.9,GERD|refluks asam lambung|asam lambung naik
+ICD10,K25.9,Tukak lambung|ulkus lambung|ulkus peptikum
+ICD10,K29.7,Gastritis|maag|radang lambung|sakit maag
+ICD10,K30,Dispepsia|maag|sakit ulu hati|kembung
+ICD10,K35.9,Apendisitis akut|usus buntu|radang usus buntu
+ICD10,K40.9,Hernia inguinalis|turun berok|hernia
+ICD10,K42.9,Hernia umbilikalis|bodong
+ICD10,K50.9,Penyakit Crohn|Crohn
+ICD10,K51.9,Kolitis ulseratif
+ICD10,K56.6,Ileus obstruktif|sumbatan usus|obstruksi usus
+ICD10,K57.9,Divertikulitis|divertikulosis
+ICD10,K58.9,Sindrom iritasi usus|IBS
+ICD10,K59.0,Konstipasi|sembelit|susah buang air besar
+ICD10,K60.2,Fisura ani|luka anus
+ICD10,K60.3,Fistula ani|fistel anus
+ICD10,K61.0,Abses perianal|bisul dubur
+ICD10,K63.5,Polip kolon|polip usus
+ICD10,K65.9,Peritonitis|radang selaput perut
+ICD10,K74.6,Sirosis hati|pengerasan hati
+ICD10,K75.0,Abses hati
+ICD10,K76.0,Perlemakan hati|fatty liver
+ICD10,K80.2,Batu empedu|kolelitiasis
+ICD10,K81.0,Kolesistitis akut|radang kantung empedu
+ICD10,K85.9,Pankreatitis akut
+ICD10,K92.0,Hematemesis|muntah darah
+ICD10,K92.1,Melena|BAB hitam|buang air besar hitam
+ICD10,K92.2,Perdarahan saluran cerna|SCBA|perdarahan lambung
+ICD10,L01.0,Impetigo|koreng
+ICD10,L02.9,Abses kulit|bisul|furunkel
+ICD10,L03.9,Selulitis|infeksi kulit
+ICD10,L20.9,Dermatitis atopik|eksim|eksem
+ICD10,L25.9,Dermatitis kontak|alergi kulit
+ICD10,L40.9,Psoriasis
+ICD10,L50.9,Urtikaria|biduran|kaligata|alergi gatal
+ICD10,L70.0,Jerawat|akne|acne vulgaris
+ICD10,L80,Vitiligo|belang kulit
+ICD10,L89.9,Ulkus dekubitus|luka tekan|luka baring
+ICD10,L91.0,Keloid
+ICD10,M06.9,Rheumatoid arthritis|RA|rematik|radang sendi
+ICD10,M10.9,Gout|asam urat|pirai|gout arthritis
+ICD10,M16.9,Osteoartritis panggul|pengapuran panggul
+ICD10,M17.9,Osteoartritis lutut|pengapuran lutut|OA genu|nyeri lutut
+ICD10,M32.9,Lupus|SLE
+ICD10,M41.9,Skoliosis|tulang belakang bengkok
+ICD10,M47.9,Spondilosis|pengapuran tulang belakang
+ICD10,M51.1,HNP lumbal|saraf kejepit|syaraf terjepit|hernia nukleus pulposus
+ICD10,M54.5,Nyeri punggung bawah|LBP|low back pain|sakit pinggang|encok
+ICD10,M65.3,Trigger finger|jari pelatuk
+ICD10,M75.0,Frozen shoulder|bahu beku
+ICD10,M81.9,Osteoporosis|tulang keropos
+ICD10,M86.9,Osteomielitis|infeksi tulang
+ICD10,N00.9,Glomerulonefritis akut|GNA
+ICD10,N04.9,Sindrom nefrotik
+ICD10,N10,Pielonefritis akut|infeksi ginjal
+ICD10,N13.3,Hidronefrosis|ginjal bengkak
+ICD10,N17.9,Gagal ginjal akut|AKI
+ICD10,N18.5,Gagal ginjal kronik stadium 5|CKD stage 5|cuci darah|GGK
+ICD10,N18.9,Gagal ginjal kronik|CKD|GGK|penyakit ginjal kronis
+ICD10,N20.0,Batu ginjal|nefrolitiasis
+ICD10,N20.1,Batu ureter|ureterolitiasis|batu saluran kemih
+ICD10,N21.0,Batu kandung kemih|vesikolitiasis
+ICD10,N39.0,Infeksi saluran kemih|ISK|anyang anyangan|infeksi kencing
+ICD10,N40,Pembesaran prostat|BPH|prostat
+ICD10,N43.3,Hidrokel|buah zakar bengkak
+ICD10,N47,Fimosis|kulup sempit
+ICD10,N61,Mastitis|radang payudara
+ICD10,N63,Benjolan payudara|tumor payudara
+ICD10,N73.9,Radang panggul|PID
+ICD10,N75.0,Kista Bartholin|bartolin
+ICD10,N80.9,Endometriosis
+ICD10,N81.4,Prolaps uteri|turun peranakan|rahim turun
+ICD10,N83.2,Kista ovarium|kista indung telur|kista
+ICD10,N84.1,Polip serviks
+ICD10,N89.8,Keputihan|fluor albus
+ICD10,N92.6,Haid tidak teratur|menstruasi tidak teratur
+ICD10,N94.6,Dismenore|nyeri haid
+ICD10,N95.1,Menopause|sindrom menopause
+ICD10,N97.9,Infertilitas wanita|sulit hamil|mandul
+ICD10,O00.9,Kehamilan ektopik|KET|hamil di luar kandungan
+ICD10,O01.9,Mola hidatidosa|hamil anggur
+ICD10,O03.4,Abortus inkomplit|keguguran|keguguran tidak lengkap
+ICD10,O13,Hipertensi gestasional|hipertensi kehamilan
+ICD10,O14.1,Preeklampsia berat|PEB
+ICD10,O14.9,Preeklampsia|PE
+ICD10,O15.9,Eklampsia|kejang kehamilan
+ICD10,O20.0,Abortus imminens|keguguran mengancam|flek saat hamil
+ICD10,O21.0,Hiperemesis gravidarum|mual muntah berlebihan saat hamil
+ICD10,O24.4,Diabetes gestasional|diabetes kehamilan
+ICD10,O30.0,Hamil kembar|gemeli
+ICD10,O32.1,Letak sungsang|bayi sungsang
+ICD10,O34.2,Bekas sesar|riwayat SC|bekas operasi caesar
+ICD10,O36.4,Janin mati dalam kandungan|IUFD
+ICD10,O42.9,Ketuban pecah dini|KPD|PROM
+ICD10,O44.1,Plasenta previa|ari ari di bawah
+ICD10,O45.9,Solusio plasenta|plasenta lepas
+ICD10,O48,Kehamilan lewat waktu|serotinus|postterm
+ICD10,O60.1,Persalinan prematur|lahir prematur|partus prematurus
+ICD10,O63.9,Persalinan lama|partus lama|partus macet
+ICD10,O68.9,Gawat janin|fetal distress
+ICD10,O72.1,Perdarahan pasca persalinan|HPP|perdarahan postpartum
+ICD10,O80.9,Persalinan normal|lahiran normal|melahirkan normal|partus spontan
+ICD10,O82.9,Persalinan sesar|melahirkan caesar|SC
+ICD10,O99.0,Anemia kehamilan|anemia saat hamil
+ICD10,P07.0,Bayi berat lahir sangat rendah|BBLSR
+ICD10,P07.1,Bayi berat lahir rendah|BBLR
+ICD10,P07.3,Bayi prematur|lahir kurang bulan
+ICD10,P21.0,Asfiksia berat|asfiksia neonatorum berat
+ICD10,P21.9,Asfiksia neonatorum|bayi tidak langsung menangis
+ICD10,P22.0,Sindrom gawat napas bayi|RDS|HMD
+ICD10,P22.1,Takipnea transien bayi|TTN
+ICD10,P24.0,Aspirasi mekonium|bayi menelan ketuban hijau
+ICD10,P36.9,Sepsis neonatorum|sepsis bayi
+ICD10,P59.9,Ikterus neonatorum|bayi kuning|hiperbilirubinemia bayi
+ICD10,P70.4,Hipoglikemia bayi
+ICD10,P80.9,Hipotermia bayi|bayi kedinginan
+ICD10,Q21.0,VSD|bocor sekat bilik jantung|jantung bocor
+ICD10,Q21.1,ASD|bocor sekat serambi jantung|jantung bocor
+ICD10,Q21.3,Tetralogi Fallot|TOF|bayi biru
+ICD10,Q25.0,PDA|duktus arteriosus paten
+ICD10,Q35.9,Langit langit sumbing|palatoskisis
+ICD10,Q36.9,Bibir sumbing|labioskisis
+ICD10,Q37.9,Labiopalatoskisis|bibir dan langit langit sumbing
+ICD10,Q42.3,Atresia ani|tidak punya lubang anus
+ICD10,Q43.1,Hirschsprung|megakolon kongenital
+ICD10,Q53.9,Undescended testis|kriptorkismus|testis tidak turun
+ICD10,Q54.9,Hipospadia
+ICD10,Q66.0,Kaki pengkor|CTEV|clubfoot
+ICD10,Q69.9,Polidaktili|jari lebih
+ICD10,Q90.9,Sindrom Down|down syndrome
+ICD10,R04.0,Mimisan|epistaksis
+ICD10,R05,Batuk
+ICD10,R06.0,Sesak napas|dispnea
+ICD10,R07.4,Nyeri dada
+ICD10,R10.4,Nyeri perut|sakit perut
+ICD10,R11,Mual muntah|muntah
+ICD10,R18,Asites|perut berisi cairan
+ICD10,R22.1,Benjolan leher
+ICD10,R31,Hematuria|kencing berdarah
+ICD10,R40.2,Koma|penurunan kesadaran|tidak sadar
+ICD10,R42,Pusing|vertigo|pening
+ICD10,R50.9,Demam|panas|febris
+ICD10,R51,Sakit kepala|nyeri kepala|cefalgia
+ICD10,R53,Lemas|kelelahan|malaise
+ICD10,R55,Pingsan|sinkop
+ICD10,R56.0,Kejang demam|step
+ICD10,R56.8,Kejang
+ICD10,R57.1,Syok hipovolemik
+ICD10,R57.9,Syok
+ICD10,S00.9,Cedera kepala superfisial|benjol kepala
+ICD10,S02.2,Patah tulang hidung|fraktur nasal
+ICD10,S02.9,Patah tulang tengkorak|fraktur kranium
+ICD10,S06.0,Gegar otak|komosio|cedera kepala ringan|CKR
+ICD10,S06.4,Perdarahan epidural|EDH
+ICD10,S06.5,Perdarahan subdural|SDH
+ICD10,S42.0,Patah tulang selangka|fraktur klavikula
+ICD10,S42.3,Patah tulang lengan atas|fraktur humerus
+ICD10,S43.0,Dislokasi bahu|bahu lepas|bahu copot
+ICD10,S52.5,Patah tulang pergelangan tangan|fraktur radius distal
+ICD10,S52.9,Patah tulang lengan bawah|fraktur radius ulna|fraktur antebrachii
+ICD10,S72.0,Patah tulang leher paha|fraktur kolum femur|patah tulang pinggul
+ICD10,S72.9,Patah tulang paha|fraktur femur
+ICD10,S82.2,Patah tulang kering|fraktur tibia
+ICD10,S83.5,Cedera ligamen lutut|robek ACL|ACL
+ICD10,S93.4,Keseleo pergelangan kaki|terkilir|sprain ankle
+ICD10,T14.1,Luka terbuka|luka robek|vulnus laceratum|luka sobek
+ICD10,T30.0,Luka bakar|combustio
+ICD10,T30.2,Luka bakar derajat 2|combustio grade 2
+ICD10,T50.9,Keracunan obat|overdosis obat
+ICD10,T60.9,Keracunan pestisida|keracunan racun serangga|minum racun
+ICD10,T62.9,Keracunan makanan beracun|keracunan jamur
+ICD10,T63.0,Gigitan ular|digigit ular
+ICD10,Z00.0,Medical check up|pemeriksaan kesehatan umum|MCU
+ICD10,Z09.8,Kontrol pasca pengobatan|kontrol ulang
+ICD10,Z30.9,Pelayanan KB|kontrasepsi|keluarga berencana
+ICD10,Z34.9,Pemeriksaan kehamilan|ANC|periksa hamil|kontrol kehamilan
+ICD10,Z47.0,Pelepasan pen|lepas implan tulang|aff implant
+ICD10,Z48.0,Perawatan luka|ganti balutan|ganti perban
+ICD10,Z49.1,Hemodialisis|cuci darah|HD
+ICD10,Z50.1,Fisioterapi|rehabilitasi medik|terapi fisik
+ICD10,Z51.0,Radioterapi|penyinaran|terapi sinar
+ICD10,Z51.1,Kemoterapi|kemo
+ICD10,Z51.3,Transfusi darah tanpa diagnosis lain|transfusi
+ICD10,Z51.5,Perawatan paliatif|paliatif
+ICD9CM,13.41,Operasi katarak fakoemulsifikasi|phaco|fakoemulsifikasi|operasi katarak
+ICD9CM,13.59,Operasi katarak ekstrakapsular|ECCE|SICS|operasi katarak
+ICD9CM,13.71,Pemasangan lensa tanam|IOL|tanam lensa
+ICD9CM,14.74,Vitrektomi
+ICD9CM,11.39,Eksisi pterigium|operasi selaput mata
+ICD9CM,12.64,Trabekulektomi|operasi glaukoma
+ICD9CM,19.4,Miringoplasti|timpanoplasti|tambal gendang telinga|operasi gendang telinga
+ICD9CM,21.88,Septoplasti|operasi tulang hidung
+ICD9CM,28.2,Tonsilektomi|operasi amandel|angkat amandel
+ICD9CM,28.3,Tonsiloadenoidektomi|operasi amandel dan adenoid
+ICD9CM,23.09,Cabut gigi|ekstraksi gigi
+ICD9CM,23.19,Odontektomi|operasi gigi bungsu|cabut gigi impaksi
+ICD9CM,23.2,Tambal gigi|restorasi gigi
+ICD9CM,01.24,Kraniotomi|operasi kepala|bedah otak
+ICD9CM,01.31,Evakuasi hematoma intrakranial|operasi perdarahan otak
+ICD9CM,02.34,VP shunt|pemasangan selang otak ke perut
+ICD9CM,03.09,Laminektomi|operasi saraf kejepit|dekompresi tulang belakang
+ICD9CM,03.31,Pungsi lumbal|lumbal pungsi|ambil cairan otak
+ICD9CM,06.39,Tiroidektomi parsial|operasi gondok|lobektomi tiroid
+ICD9CM,06.4,Tiroidektomi total|angkat kelenjar tiroid
+ICD9CM,31.1,Trakeostomi|lubang di leher
+ICD9CM,33.23,Bronkoskopi
+ICD9CM,34.04,Pemasangan selang dada|WSD|chest tube
+ICD9CM,34.91,Torakosentesis|pungsi pleura|sedot cairan paru
+ICD9CM,36.06,Pasang ring jantung|PCI|stent jantung|pasang stent
+ICD9CM,36.07,Pasang ring jantung bersalut obat|DES|stent bersalut obat|pasang ring
+ICD9CM,36.12,Bypass jantung|CABG|operasi bypass
+ICD9CM,37.22,Kateterisasi jantung kiri|kateterisasi jantung
+ICD9CM,88.56,Angiografi koroner|kateterisasi|kateter jantung
+ICD9CM,37.81,Pasang pacu jantung satu ruang|pacemaker
+ICD9CM,37.83,Pasang pacu jantung dua ruang|pacemaker|pacu jantung
+ICD9CM,38.95,Pasang kateter vena untuk cuci darah|CDL|akses dialisis
+ICD9CM,39.27,Pembuatan AV shunt|cimino|AV fistula
+ICD9CM,39.95,Hemodialisis|cuci darah|HD
+ICD9CM,45.13,Gastroskopi|endoskopi lambung|EGD|teropong lambung
+ICD9CM,45.23,Kolonoskopi|teropong usus besar
+ICD9CM,47.01,Apendektomi laparoskopi|operasi usus buntu laparoskopi
+ICD9CM,47.09,Apendektomi|operasi usus buntu
+ICD9CM,49.46,Hemoroidektomi|operasi wasir|operasi ambeien
+ICD9CM,51.10,ERCP
+ICD9CM,51.22,Kolesistektomi terbuka|operasi batu empedu
+ICD9CM,51.23,Kolesistektomi laparoskopi|operasi batu empedu laparoskopi
+ICD9CM,53.00,Herniorafi inguinal|operasi hernia|operasi turun berok
+ICD9CM,53.05,Hernioplasti inguinal dengan mesh|operasi hernia dengan jaring
+ICD9CM,54.11,Laparotomi eksplorasi|operasi buka perut
+ICD9CM,54.91,Parasentesis|sedot cairan perut|pungsi asites
+ICD9CM,55.04,PCNL|operasi batu ginjal perkutan
+ICD9CM,56.0,Pengambilan batu ureter transuretra|URS|ureteroskopi batu
+ICD9CM,57.94,Pasang kateter urin|pasang kateter kencing
+ICD9CM,60.29,TURP|operasi prostat
+ICD9CM,63.73,Vasektomi|KB pria|MOP
+ICD9CM,64.0,Sirkumsisi|sunat|khitan
+ICD9CM,65.25,Kistektomi ovarium laparoskopi|operasi kista laparoskopi
+ICD9CM,65.29,Kistektomi ovarium|operasi kista indung telur|operasi kista
+ICD9CM,66.32,Tubektomi|steril|MOW|KB steril wanita
+ICD9CM,68.29,Miomektomi|angkat miom|operasi miom
+ICD9CM,68.49,Histerektomi total abdominal|angkat rahim
+ICD9CM,69.02,Kuretase pasca keguguran|kuret|kuretase
+ICD9CM,69.52,Kuret aspirasi pasca keguguran|aspirasi vakum manual|AVM
+ICD9CM,69.7,Pemasangan IUD|pasang spiral|KB spiral
+ICD9CM,72.79,Ekstraksi vakum|vakum|persalinan vakum
+ICD9CM,73.59,Persalinan normal dibantu|pertolongan persalinan|partus normal
+ICD9CM,73.6,Episiotomi|gunting jalan lahir
+ICD9CM,73.4,Induksi persalinan dengan obat|induksi|induksi oksitosin
+ICD9CM,74.1,Operasi sesar|sectio caesarea|SC|caesar|operasi caesar
+ICD9CM,79.31,ORIF humerus|pasang pen lengan atas
+ICD9CM,79.32,ORIF radius ulna|pasang pen lengan bawah
+ICD9CM,79.35,ORIF femur|pasang pen paha|operasi patah tulang paha
+ICD9CM,79.36,ORIF tibia|pasang pen kaki|pasang pen tulang kering
+ICD9CM,78.60,Pelepasan implan tulang|lepas pen|aff implant
+ICD9CM,81.51,Ganti sendi panggul total|THR|total hip replacement
+ICD9CM,81.54,Ganti sendi lutut total|TKR|total knee replacement
+ICD9CM,84.11,Amputasi jari kaki
+ICD9CM,84.15,Amputasi di bawah lutut|amputasi BKA
+ICD9CM,84.17,Amputasi di atas lutut|amputasi AKA
+ICD9CM,85.12,Biopsi payudara terbuka|biopsi benjolan payudara
+ICD9CM,85.21,Eksisi tumor payudara|lumpektomi|angkat benjolan payudara
+ICD9CM,85.43,Mastektomi radikal modifikasi|MRM|angkat payudara
+ICD9CM,86.04,Insisi abses|insisi drainase|buka bisul
+ICD9CM,86.22,Debridemen luka|debridement
+ICD9CM,86.3,Eksisi tumor jaringan lunak|angkat benjolan kulit|eksisi lipoma
+ICD9CM,86.59,Jahit luka|hecting|heacting
+ICD9CM,86.69,Cangkok kulit|skin graft
+ICD9CM,87.03,CT scan kepala|CT scan otak
+ICD9CM,87.44,Rontgen dada|foto toraks|thorax foto
+ICD9CM,88.72,Ekokardiografi|echo jantung|USG jantung
+ICD9CM,88.76,USG perut|USG abdomen
+ICD9CM,88.91,MRI otak|MRI kepala
+ICD9CM,89.52,EKG|rekam jantung
+ICD9CM,92.27,Brakiterapi|radiasi dalam
+ICD9CM,92.29,Radioterapi|penyinaran|terapi sinar
+ICD9CM,93.39,Fisioterapi|terapi fisik
+ICD9CM,96.04,Intubasi|pasang ETT
+ICD9CM,96.07,Pasang NGT|selang makan lewat hidung
+ICD9CM,96.71,Ventilator kurang dari 96 jam|alat bantu napas
+ICD9CM,96.72,Ventilator 96 jam atau lebih|alat bantu napas
+ICD9CM,98.51,ESWL|tembak batu ginjal|pemecahan batu dengan gelombang kejut
+ICD9CM,99.04,Transfusi PRC|transfusi darah|transfusi sel darah merah
+ICD9CM,99.25,Kemoterapi|kemo
+ICD9CM,99.60,Resusitasi jantung paru|RJP|CPR

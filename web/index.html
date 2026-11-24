@@ -68,7 +68,31 @@ button, input, select, textarea { font: inherit; }
 
 /* the screen */
 .bar { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2xs) var(--space-lg); padding-block: var(--space-lg) var(--space-md); }
+.bar { align-items: center; justify-content: space-between; }
+.brand { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2xs) var(--space-lg); min-width: 0; }
 .bar p { color: var(--color-muted); font-size: var(--text-sm); }
+/* the menu: the same groove the choices sit in, a card riding on the open page */
+.tabs { display: inline-flex; gap: var(--space-3xs); padding: var(--space-2xs); border-radius: var(--radius-groove); background-color: var(--color-paper-2); box-shadow: var(--press-groove); }
+.tab { display: inline-flex; align-items: center; min-height: var(--control); padding: 0 var(--space-md); border-radius: var(--radius-input); color: var(--color-ink-2); font-size: var(--text-sm); font-weight: 500; text-decoration: none; white-space: nowrap; }
+.tab[aria-current="page"] { background-color: var(--color-cotton); color: var(--color-print); box-shadow: var(--edge-stock), var(--cast-stock); }
+.tab:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.tab:active { transform: translateY(1px); }
+@media (hover: hover) { .tab:not([aria-current]):hover { color: var(--color-print); background-color: var(--color-paper-3); } }
+@media (max-width: 40rem) { .tabs { width: 100%; } .tab { flex: 1 1 0; justify-content: center; padding: 0 var(--space-xs); } }
+.pilihan { display: grid; gap: var(--space-3xs); min-height: 1lh; font-size: var(--text-sm); }
+.pilihan strong { font-weight: 500; color: var(--color-ink); }
+.pilihan .fig { margin-right: var(--space-xs); }
+.pilihan .en, .opt .en { color: var(--color-muted); }
+.pilihan .err { color: var(--color-error); }
+.pilihan .note, .chip .note { color: var(--color-paid); font-size: var(--text-xs); }
+.chips { display: grid; margin: 0; padding: 0; list-style: none; }
+.chip { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-3xs) var(--space-sm); align-items: center; padding-block: var(--space-xs); border-top: var(--rule-hair) solid var(--color-rule); font-size: var(--text-sm); }
+.chip:last-child { border-bottom: var(--rule-hair) solid var(--color-rule); }
+.chip .fig { margin-right: var(--space-xs); font-weight: 500; }
+.chip .en { grid-column: 1; color: var(--color-muted); font-size: var(--text-xs); }
+.chip .btn { grid-row: 1 / span 3; grid-column: 2; }
+.opt .d .en { display: block; font-size: var(--text-xs); }
+.cx-filter { max-width: 22rem; }
 .work { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap-columns); align-items: start; padding-block: var(--space-xs) var(--space-2xl); }
 @media (max-width: 60rem) { .work { grid-template-columns: minmax(0, 1fr); } }
 
@@ -103,14 +127,7 @@ button, input, select, textarea { font: inherit; }
 .sub { display: grid; gap: var(--space-sm); padding-top: var(--space-xs); }
 .sub > h3 { font-size: var(--text-sm); font-weight: 500; letter-spacing: 0; color: var(--color-ink-2); }
 .help.err { color: var(--color-error); }
-.tebak { border-top: var(--rule-hair) solid var(--color-rule); padding-top: var(--space-sm); }
-.tebak summary { cursor: pointer; font-size: var(--text-sm); font-weight: 500; color: var(--color-ink-2); text-decoration: underline; text-decoration-color: var(--color-rule-2); text-underline-offset: 0.2em; }
-.tebak summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
-@media (hover: hover) { .tebak summary:hover { text-decoration-color: var(--color-accent-2); color: var(--color-print); } }
-.tebak-body { display: grid; gap: var(--space-sm); padding-top: var(--space-sm); }
 .tebak-seg { display: grid; gap: var(--space-sm); justify-items: start; }
-.tebak-act { display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: center; }
-.tb-filter-wrap { flex: 1 1 12rem; }
 .tb-meta { display: grid; gap: var(--space-3xs); font-size: var(--text-sm); color: var(--color-ink-2); }
 .tb-list { display: grid; margin: 0; padding: 0; list-style: none; }
 .tb-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-2xs) var(--space-sm); align-items: center; padding-block: var(--space-sm); border-top: var(--rule-hair) solid var(--color-rule); }
@@ -230,11 +247,17 @@ button, input, select, textarea { font: inherit; }
 </svg>
 
 <header class="bar container">
-  <h1>Kalkulator INA-CBG</h1>
-  <p>Tarif klaim JKN di FKRTL menurut Permenkes No. 3 Tahun 2023, sebagai estimasi.</p>
+  <div class="brand">
+    <h1>Kalkulator INA-CBG</h1>
+    <p>Tarif klaim JKN di FKRTL menurut Permenkes No. 3 Tahun 2023, sebagai estimasi.</p>
+  </div>
+  <nav class="tabs" aria-label="Menu">
+    <a class="tab" href="#kalkulator" id="tab-kalkulator" aria-current="page">Kalkulator Tarif</a>
+    <a class="tab" href="#cari-kode" id="tab-kode">Cari Kode CBG</a>
+  </nav>
 </header>
 
-<main class="work container">
+<main class="work container" id="v-kalkulator">
   <form class="stock entry" id="f" autocomplete="off" novalidate aria-label="Data klaim">
     <section class="grp" aria-labelledby="h-cbg">
       <h2 id="h-cbg">Kode CBG</h2>
@@ -245,48 +268,7 @@ button, input, select, textarea { font: inherit; }
         <ul class="listbox" id="cbg-list" role="listbox" aria-label="Kode CBG yang cocok" hidden></ul>
       </div>
       <div class="cbg-info" id="cbg-info" aria-live="polite"></div>
-      <details class="tebak" id="tebak">
-        <summary>Belum tahu kodenya? Cari kandidat dari diagnosis</summary>
-        <div class="tebak-body">
-          <p class="help">Estimasi. Case group mengikuti Tabel 2 PMK 26/2021; CMG ditebak dari bab ICD dengan pemetaan yang disusun sendiri, bukan tabel resmi. Kode final dari grouper E-Klaim.</p>
-          <div class="tebak-seg">
-            <fieldset class="choice"><legend>Jenis rawat</legend><div class="seg">
-              <input type="radio" name="tb-jr" id="tb-ri" value="RI" checked><label for="tb-ri">Rawat inap</label>
-              <input type="radio" name="tb-jr" id="tb-rj" value="RJ"><label for="tb-rj">Rawat jalan</label>
-            </div></fieldset>
-            <fieldset class="choice"><legend>Kategori</legend><div class="seg">
-              <input type="radio" name="tb-kat" id="tb-umum" value="umum" checked><label for="tb-umum">Umum</label>
-              <input type="radio" name="tb-kat" id="tb-bidan" value="kebidanan"><label for="tb-bidan">Kebidanan</label>
-              <input type="radio" name="tb-kat" id="tb-neo" value="neonatal"><label for="tb-neo">Neonatal</label>
-            </div></fieldset>
-          </div>
-          <div class="row">
-            <label class="field"><span>Diagnosis utama ICD-10</span>
-              <input type="text" id="tb-dx" class="input code" placeholder="I21.0" spellcheck="false">
-            </label>
-            <label class="field"><span>Prosedur ICD-9-CM (bila ada)</span>
-              <input type="text" id="tb-pr" class="input code" placeholder="36.06" spellcheck="false">
-              <span class="help">Pisahkan dengan koma</span>
-            </label>
-            <label class="field" id="tb-sev-wrap"><span>Tingkat keparahan</span>
-              <select id="tb-sev" class="input">
-                <option value="">Belum tahu</option>
-                <option value="I">I ringan</option>
-                <option value="II">II sedang</option>
-                <option value="III">III berat</option>
-              </select>
-              <span class="help">I tanpa komplikasi/komorbid, II ringan, III mayor</span>
-            </label>
-          </div>
-          <div class="tebak-act">
-            <button type="button" class="btn btn--card" id="tb-cari">Cari kandidat</button>
-            <label class="field tb-filter-wrap"><span class="visually-hidden">Saring kandidat</span>
-              <input type="text" id="tb-filter" class="input" placeholder="Saring kandidat, mis. infark" hidden>
-            </label>
-          </div>
-          <div id="tb-hasil" aria-live="polite"></div>
-        </div>
-      </details>
+      <p class="help"><a href="#cari-kode" id="ke-kode">Belum tahu kodenya? Cari dari nama penyakit atau tindakan</a></p>
     </section>
 
     <section class="grp" aria-labelledby="h-faskes">
@@ -420,6 +402,76 @@ button, input, select, textarea { font: inherit; }
     <div class="st-head"><h2 id="h-hasil">Rincian klaim</h2></div>
     <div class="skel" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <p class="fine">Memuat data tarif&hellip;</p>
+  </section>
+</main>
+
+<main class="work container" id="v-kode" hidden>
+  <form class="stock entry" id="fk" autocomplete="off" novalidate aria-label="Cari kode CBG">
+    <section class="grp" aria-labelledby="h-kode">
+      <h2 id="h-kode">Cari kode CBG</h2>
+      <p class="help">Isi diagnosis utama dan tindakan dengan nama atau kode, lalu tekan Cari kandidat. Hasilnya daftar grup INA-CBG yang mungkin, bukan kode pasti.</p>
+      <div class="tebak-seg">
+        <fieldset class="choice"><legend>Jenis rawat</legend><div class="seg">
+          <input type="radio" name="cx-jr" id="cx-ri" value="RI" checked><label for="cx-ri">Rawat inap</label>
+          <input type="radio" name="cx-jr" id="cx-rj" value="RJ"><label for="cx-rj">Rawat jalan</label>
+        </div></fieldset>
+        <fieldset class="choice"><legend>Kategori</legend><div class="seg">
+          <input type="radio" name="cx-kat" id="cx-umum" value="umum" checked><label for="cx-umum">Umum</label>
+          <input type="radio" name="cx-kat" id="cx-bidan" value="kebidanan"><label for="cx-bidan">Kebidanan</label>
+          <input type="radio" name="cx-kat" id="cx-neo" value="neonatal"><label for="cx-neo">Neonatal</label>
+        </div></fieldset>
+      </div>
+    </section>
+
+    <section class="grp" aria-labelledby="h-dx">
+      <h2 id="h-dx">Diagnosis utama</h2>
+      <div class="field combo">
+        <label for="cx-dx">Nama penyakit atau kode ICD-10</label>
+        <input type="text" id="cx-dx" class="input" placeholder="mis. tifoid, demam berdarah, I21.0" spellcheck="false" aria-describedby="cx-dx-pilih"
+          role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="cx-dx-list">
+        <ul class="listbox" id="cx-dx-list" role="listbox" aria-label="Diagnosis yang cocok" hidden></ul>
+      </div>
+      <div class="pilihan" id="cx-dx-pilih" aria-live="polite"></div>
+    </section>
+
+    <section class="grp" aria-labelledby="h-pr">
+      <h2 id="h-pr">Tindakan atau prosedur</h2>
+      <div class="field combo">
+        <label for="cx-pr">Nama tindakan atau kode ICD-9-CM, bila ada</label>
+        <input type="text" id="cx-pr" class="input" placeholder="mis. operasi sesar, pasang ring, 36.06" spellcheck="false" aria-describedby="cx-pr-help"
+          role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="cx-pr-list">
+        <ul class="listbox" id="cx-pr-list" role="listbox" aria-label="Tindakan yang cocok" hidden></ul>
+      </div>
+      <p class="help" id="cx-pr-help">Pilih dari daftar. Bisa lebih dari satu tindakan.</p>
+      <ul class="chips" id="cx-pr-pilih" aria-label="Tindakan terpilih"></ul>
+    </section>
+
+    <section class="grp" id="cx-sev-grp" aria-labelledby="h-sev">
+      <h2 id="h-sev">Tingkat keparahan</h2>
+      <fieldset class="choice"><legend class="visually-hidden">Tingkat keparahan</legend><div class="seg">
+        <input type="radio" name="cx-sev" id="cx-sev-0" value="" checked><label for="cx-sev-0">Belum tahu</label>
+        <input type="radio" name="cx-sev" id="cx-sev-1" value="I"><label for="cx-sev-1">I ringan</label>
+        <input type="radio" name="cx-sev" id="cx-sev-2" value="II"><label for="cx-sev-2">II sedang</label>
+        <input type="radio" name="cx-sev" id="cx-sev-3" value="III"><label for="cx-sev-3">III berat</label>
+      </div></fieldset>
+      <p class="help">I tanpa komplikasi atau komorbid, II dengan komplikasi atau komorbid ringan, III mayor (PMK 26/2021 hal. 12). Grouper resmi menentukannya dari diagnosis sekunder.</p>
+    </section>
+
+    <div class="actions">
+      <button type="submit" class="btn btn--ink" id="cx-cari">Cari kandidat</button>
+      <div class="more">
+        <button type="button" class="btn btn--quiet" id="cx-kosong">Kosongkan</button>
+      </div>
+    </div>
+  </form>
+
+  <section class="stock statement" id="cx-hasil" aria-live="polite" aria-labelledby="h-cx-hasil">
+    <div class="st-head"><h2 id="h-cx-hasil">Kandidat kode</h2></div>
+    <div class="empty">
+      <p>Daftar grup INA-CBG yang cocok muncul di sini.</p>
+      <p>Contoh: ketik <strong>tifoid</strong> di diagnosis, atau <strong>serangan jantung</strong> dengan tindakan <strong>pasang ring</strong>.</p>
+    </div>
+    <p class="fine" id="cx-disclaimer"></p>
   </section>
 </main>
 <script id="engine">
@@ -787,7 +839,38 @@ var INACBG = (function () {
       return out;
     } };
   }
-  return { buat: buat, REGIONAL: REGIONAL, losFase: losFase, ADL_MIN: ADL_MIN, ADL_MAX: ADL_MAX };
+  // pencarian ICD-10 / ICD-9-CM dari nama atau kode (port dari src/inacbg/icd.py)
+  function normIcd(s) {
+    return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9.]+/g, " ").trim().split(/\s+/).join(" ");
+  }
+  function indeksIcd(baris, istilah) {
+    var entri = baris.map(function (b) {
+      var ist = istilah[b[0]] || [];
+      var wk = normIcd([b[0]].concat(ist).join(" ")).split(" ");
+      var persis = {}; persis[normIcd(b[0])] = 1; ist.forEach(function (i) { persis[normIcd(i)] = 1; });
+      return { kode: b[0], judul: b[1], istilah: ist, tanda: b[2] || 0, wk: wk, semua: wk.concat(normIcd(b[1]).split(" ")), persis: persis };
+    });
+    var perKode = {};
+    entri.forEach(function (e) { perKode[e.kode] = e; });
+    function ada(ws, t) { for (var i = 0; i < ws.length; i++) if (ws[i].indexOf(t) === 0) return true; return false; }
+    function cari(q, maks) {
+      var nq = normIcd(q);
+      if (!nq) return { hasil: [], jumlah: 0 };
+      var toks = nq.split(" "), tk = [[], [], []];
+      entri.forEach(function (e) {
+        if (!toks.every(function (t) { return ada(e.semua, t); })) return;
+        var t = e.persis[nq] ? 0 : (toks.every(function (x) { return ada(e.wk, x); }) ? 1 : 2);
+        tk[t].push(e);
+      });
+      var semua = tk[0].map(function (e) { return [0, e]; }).concat(tk[1].map(function (e) { return [1, e]; }), tk[2].map(function (e) { return [2, e]; }));
+      return { hasil: semua.slice(0, maks == null ? 30 : maks).map(function (x) {
+        var e = x[1]; return { kode: e.kode, judul: e.judul, istilah: e.istilah, tanda: e.tanda, tingkat: x[0] }; }), jumlah: semua.length };
+    }
+    return { cari: cari, entri: function (kode) { return perKode[kode] || null; } };
+  }
+  function buatIcd(d) { return { icd10: indeksIcd(d.icd10, d.istilah10), icd9: indeksIcd(d.icd9, d.istilah9) }; }
+
+  return { buat: buat, buatIcd: buatIcd, normIcd: normIcd, REGIONAL: REGIONAL, losFase: losFase, ADL_MIN: ADL_MIN, ADL_MAX: ADL_MAX };
 })();
 if (typeof module !== "undefined") module.exports = INACBG;
 </script>
@@ -1086,64 +1169,201 @@ if (typeof module !== "undefined") module.exports = INACBG;
     if (o) { e.preventDefault(); pilih(o.dataset.kode); }
   });
 
-  // penuntun kode (ESTIMASI)
-  var tbHasil = null;
-  function tbRender() {
-    var out = $("tb-hasil");
-    if (!tbHasil) { out.innerHTML = ""; return; }
-    var h = tbHasil, q = $("tb-filter").value.trim().toUpperCase();
-    var ri = h.case_group[0].kode === 1 || h.case_group[0].kode === 4 || h.case_group[0].kode === 6 || h.case_group[0].kode === 8;
+  // ===== menu: Kalkulator Tarif | Cari Kode CBG =====
+  var icdIdx = null, icdMuat = null;
+  function muatIcd() {
+    if (icdMuat) return icdMuat;
+    ["cx-dx", "cx-pr"].forEach(function (id) { $(id).setAttribute("aria-busy", "true"); });
+    $("cx-dx-pilih").innerHTML = '<span class="hint">Memuat daftar ICD&hellip;</span>';
+    icdMuat = fetch("data/icd.json").then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    }).then(function (d) {
+      icdIdx = INACBG.buatIcd(d);
+      ["cx-dx", "cx-pr"].forEach(function (id) { $(id).removeAttribute("aria-busy"); });
+      cxDxTampil();
+      return icdIdx;
+    }).catch(function (e) {
+      icdMuat = null;
+      $("cx-dx-pilih").innerHTML = '<span class="err">Daftar ICD gagal dimuat (' + esc(e.message) + '). Buka menu ini lagi untuk mencoba ulang.</span>';
+    });
+    return icdMuat;
+  }
+  function tampil(v) {
+    var kode = v === "cari-kode";
+    $("v-kalkulator").hidden = kode; $("v-kode").hidden = !kode;
+    if (kode) { $("tab-kode").setAttribute("aria-current", "page"); $("tab-kalkulator").removeAttribute("aria-current"); muatIcd(); }
+    else { $("tab-kalkulator").setAttribute("aria-current", "page"); $("tab-kode").removeAttribute("aria-current"); }
+  }
+  function dariHash() { tampil(location.hash === "#cari-kode" ? "cari-kode" : "kalkulator"); }
+  window.addEventListener("hashchange", function () { dariHash(); window.scrollTo(0, 0); });
+  dariHash();
+
+  // ===== kotak pencarian ICD (diagnosis & tindakan) =====
+  var TANDA = { 1: "Kode ICD-10 versi 2010 yang dipakai E-Klaim.", 2: "Kode baru setelah ICD-10 2010; E-Klaim memakai versi 2010, cek kode penggantinya." };
+  function namaIcd(h) { return h.istilah.length ? h.istilah[0] : h.judul; }
+  function comboIcd(inp, lb, tipe, pilih) {
+    var cocok = [], aktif = -1;
+    function idx() { return icdIdx && (tipe === "dx" ? icdIdx.icd10 : icdIdx.icd9); }
+    function tutup() { lb.hidden = true; inp.setAttribute("aria-expanded", "false"); inp.removeAttribute("aria-activedescendant"); aktif = -1; }
+    function tandai(i) {
+      var opts = lb.querySelectorAll(".opt");
+      if (!opts.length) return;
+      aktif = (i + opts.length) % opts.length;
+      opts.forEach(function (o, j) { o.setAttribute("aria-selected", j === aktif ? "true" : "false"); });
+      inp.setAttribute("aria-activedescendant", opts[aktif].id);
+      opts[aktif].scrollIntoView({ block: "nearest" });
+    }
+    function buka() {
+      var ix = idx(), q = inp.value.trim();
+      if (!ix || !q) { tutup(); return; }
+      var r = ix.cari(q, 40); cocok = r.hasil;
+      lb.innerHTML = cocok.length ? cocok.map(function (h, i) {
+        return '<li class="opt" role="option" id="' + lb.id + "-" + i + '" data-i="' + i + '" aria-selected="false"><span class="fig">' + h.kode + '</span><span class="d">' + esc(namaIcd(h)) +
+          (h.istilah.length ? '<span class="en">' + esc(h.judul) + "</span>" : "") + "</span></li>";
+      }).join("") + (r.jumlah > cocok.length ? '<li class="opt-note" role="presentation">' + (r.jumlah - cocok.length) + " kode lain cocok. Ketik lebih spesifik.</li>" : "")
+        : '<li class="opt-note" role="presentation">Tidak ditemukan. Coba nama lain, istilah Inggris (mis. fracture), atau kodenya.</li>';
+      lb.hidden = false; inp.setAttribute("aria-expanded", "true"); aktif = -1; inp.removeAttribute("aria-activedescendant");
+    }
+    function ambil(i) { var h = cocok[i]; if (!h) return; tutup(); pilih(h); }
+    inp.addEventListener("input", buka);
+    inp.addEventListener("focus", function () { if (inp.value.trim() && inp.dataset.kode !== inp.value.trim()) buka(); });
+    inp.addEventListener("blur", function () { setTimeout(tutup, 120); });
+    inp.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown") { e.preventDefault(); if (lb.hidden) buka(); tandai(aktif + 1); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); if (!lb.hidden) tandai(aktif - 1); }
+      else if (e.key === "Enter" && !lb.hidden && cocok.length) { e.preventDefault(); ambil(aktif >= 0 ? aktif : 0); }
+      else if (e.key === "Escape" && !lb.hidden) { e.preventDefault(); tutup(); }
+    });
+    lb.addEventListener("mousedown", function (e) {
+      var o = e.target.closest(".opt");
+      if (o) { e.preventDefault(); ambil(+o.dataset.i); }
+    });
+    return { tutup: tutup, terbaik: function () { var ix = idx(); var r = ix ? ix.cari(inp.value.trim(), 1).hasil : []; return r[0] || null; } };
+  }
+
+  var cxDx = null, cxPr = [];
+  function cxDxTampil() {
+    var el = $("cx-dx-pilih");
+    if (!cxDx) { el.innerHTML = icdIdx ? '<span class="hint">Pilih dari daftar yang muncul saat mengetik.</span>' : ""; return; }
+    el.innerHTML = "<strong><span class=\"fig\">" + cxDx.kode + "</span>" + esc(namaIcd(cxDx)) + "</strong>" +
+      (cxDx.istilah.length ? '<span class="en">' + esc(cxDx.judul) + "</span>" : "") +
+      (cxDx.tanda ? '<span class="note">' + TANDA[cxDx.tanda] + "</span>" : "");
+  }
+  function cxPrTampil() {
+    $("cx-pr-pilih").innerHTML = cxPr.map(function (h, i) {
+      return '<li class="chip"><span><span class="fig">' + h.kode + "</span>" + esc(namaIcd(h)) + "</span>" +
+        '<button type="button" class="btn btn--quiet btn--mini" data-hapus="' + i + '" aria-label="Hapus ' + h.kode + '">Hapus</button>' +
+        (h.istilah.length ? '<span class="en">' + esc(h.judul) + "</span>" : "") + "</li>";
+    }).join("");
+  }
+  var comboDx = comboIcd($("cx-dx"), $("cx-dx-list"), "dx", function (h) {
+    cxDx = h; $("cx-dx").value = h.kode + " " + namaIcd(h); $("cx-dx").dataset.kode = $("cx-dx").value; cxDxTampil(); cxBasi();
+  });
+  var comboPr = comboIcd($("cx-pr"), $("cx-pr-list"), "pr", function (h) {
+    if (!cxPr.some(function (x) { return x.kode === h.kode; })) cxPr.push(h);
+    $("cx-pr").value = ""; cxPrTampil(); cxBasi();
+  });
+  $("cx-dx").addEventListener("input", function () {
+    if (cxDx && $("cx-dx").value.trim() !== $("cx-dx").dataset.kode) { cxDx = null; cxDxTampil(); }
+    $("cx-dx").removeAttribute("aria-invalid");
+  });
+  $("cx-pr-pilih").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-hapus]");
+    if (!b) return;
+    cxPr.splice(+b.dataset.hapus, 1); cxPrTampil(); cxBasi(); $("cx-pr").focus();
+  });
+
+  // ===== hasil kandidat =====
+  var cxHasil = null, cxJr = "RI";
+  var CX_DISC = "Estimasi. Case group mengikuti Tabel 2 PMK 26/2021; CMG ditebak dari bab ICD dengan pemetaan yang disusun sendiri, bukan tabel resmi. Istilah Indonesia juga disusun sendiri. Kode final ditentukan grouper E-Klaim.";
+  $("cx-disclaimer").textContent = CX_DISC;
+  function cxBasi() {
+    var st = $("cx-hasil");
+    if (cxHasil && !st.querySelector(".stale")) st.querySelector(".st-head").insertAdjacentHTML("afterend", '<p class="stale">Isian berubah. Tekan Cari kandidat lagi.</p>');
+  }
+  function cxAtur() {
+    cxJr = document.querySelector("input[name=cx-jr]:checked").value;
+    $("cx-sev-grp").hidden = cxJr !== "RI";
+  }
+  function cxRender() {
+    var out = $("cx-hasil"), h = cxHasil;
+    var fEl = $("cx-filter"), q = fEl ? fEl.value.trim().toUpperCase() : "";
+    var ri = h.jenis_rawat === "RI";
     var list = h.kandidat.filter(function (k) { return !q || k.deskripsi.indexOf(q) >= 0 || k.grup.indexOf(q) >= 0; });
-    var s = '<div class="tb-meta"><span>Case group: ' + h.case_group.map(function (c) { return c.kode + " " + esc(c.deskripsi); }).join(", ") + "</span>" +
-      "<span>CMG ditebak: " + h.cmg.slice(0, 4).map(function (c) { return c.kode + " (" + esc(c.alasan) + ")"; }).join("; ") + (h.cmg.length > 4 ? ", dan " + (h.cmg.length - 4) + " lainnya" : "") + "</span>" +
-      "<span>" + h.jumlah_kandidat + " grup kandidat" + (q ? ", " + list.length + " cocok dengan saringan" : "") + "</span></div>";
+    var s = '<div class="st-head"><h2 id="h-cx-hasil">Kandidat kode</h2></div>' +
+      '<div class="tb-meta"><span>Diagnosis: ' + (h.dx ? '<span class="fig">' + h.dx.kode + "</span> " + esc(namaIcd(h.dx)) : "belum diisi") + "</span>" +
+      (h.pr.length ? "<span>Tindakan: " + h.pr.map(function (p) { return '<span class="fig">' + p.kode + "</span> " + esc(namaIcd(p)); }).join(", ") + "</span>" : "") +
+      "<span>Case group: " + h.case_group.map(function (c) { return c.kode + " " + esc(c.deskripsi); }).join(", ") + "</span>" +
+      "<span>CMG ditebak: " + h.cmg.slice(0, 4).map(function (c) { return c.kode + " (" + esc(c.alasan) + ")"; }).join("; ") + (h.cmg.length > 4 ? ", dan " + (h.cmg.length - 4) + " lainnya" : "") + "</span></div>";
     s += h.peringatan.map(function (p) { return '<p class="help err">' + esc(p) + "</p>"; }).join("");
+    if (h.kandidat.length) {
+      s += '<p class="help">' + (h.kandidat[0].lampiran_ia.length ? "Grup yang disebut di Lampiran I.A untuk diagnosis atau tindakan ini ada di atas. Sisanya" : "Daftar") +
+        " urut menurut kode, bukan menurut kemungkinan. Baca nama grupnya dan pilih yang paling sesuai dengan kasus.</p>";
+      s += '<label class="field cx-filter"><span>Saring ' + h.jumlah_kandidat + ' kandidat</span><input type="text" id="cx-filter" class="input" placeholder="mis. infark, operasi" value="' + esc(fEl ? fEl.value : "") + '"></label>';
+    }
     var TAMPIL = 12, sisa = q ? 0 : Math.max(0, list.length - TAMPIL);
     if (sisa) list = list.slice(0, TAMPIL);
     s += '<ul class="tb-list">' + list.map(function (k) {
-      var acts = ri ? ["I", "II", "III"].filter(function (v) { return k.kode[v]; }).map(function (v) {
-        return '<button type="button" class="btn btn--card btn--mini" data-pakai="' + k.kode[v] + '" aria-label="Pakai ' + k.kode[v] + '">' + v + "</button>"; }).join("")
-        : '<button type="button" class="btn btn--card btn--mini" data-pakai="' + k.kode["0"] + '">Pakai</button>';
+      var acts = ri ? ["I", "II", "III"].filter(function (v) { return k.kode[v] && (!h.severity.dipilih || h.severity.dipilih === v); }).map(function (v) {
+        return '<button type="button" class="btn btn--card btn--mini" data-pakai="' + k.kode[v] + '" aria-label="Pakai ' + k.kode[v] + ' di kalkulator">' + (h.severity.dipilih ? "Pakai" : v) + "</button>"; }).join("")
+        : '<button type="button" class="btn btn--card btn--mini" data-pakai="' + k.kode["0"] + '" aria-label="Pakai ' + k.kode["0"] + ' di kalkulator">Pakai</button>';
       return '<li class="tb-item"><span class="d"><span class="fig">' + (k.kode_terpilih || k.grup) + "</span>" + esc(k.deskripsi) + "</span>" +
         '<span class="acts">' + acts + "</span>" +
         '<span class="w">' + (k.lampiran_ia.length ? "<strong>Disebut di Lampiran I.A bersama " + k.lampiran_ia.join(", ") + ".</strong> " : "") + esc(k.alasan) + "</span></li>";
     }).join("") + "</ul>";
+    if (q && !list.length) s += '<p class="empty-line">Tidak ada kandidat yang cocok dengan saringan.</p>';
     if (sisa) s += '<p class="help">' + sisa + " grup lain tidak ditampilkan. Ketik kata kunci di kolom saring untuk mencari di semua kandidat.</p>";
-    if (ri) s += '<p class="help">Tombol I, II, III memilih tingkat keparahan: I tanpa komplikasi/komorbid, II komplikasi/komorbid ringan, III mayor (PMK 26/2021 hal. 12).</p>';
-    s += '<p class="fine">' + esc(h.disclaimer) + "</p>";
+    if (ri && !h.severity.dipilih) s += '<p class="help">Tombol I, II, III memilih tingkat keparahan, lalu membuka kalkulator dengan kode itu.</p>';
+    s += '<p class="fine">' + esc(CX_DISC) + "</p>";
     out.innerHTML = s;
+    var nf = $("cx-filter");
+    if (nf && fEl && document.activeElement === document.body) { nf.focus(); nf.setSelectionRange(nf.value.length, nf.value.length); }
   }
-  function tbCari() {
-    var jr = document.querySelector("input[name=tb-jr]:checked").value;
-    tbHasil = eng.tebak({ icd10_utama: $("tb-dx").value, icd9: daftar($("tb-pr").value), jenis_rawat: jr,
-      kategori: document.querySelector("input[name=tb-kat]:checked").value, severity: $("tb-sev").value || null, maks: 200 });
-    $("tb-filter").hidden = false;
-    tbRender();
+  function cxCari() {
+    var raw = $("cx-dx").value.trim();
+    if (!cxDx && raw) {
+      if (/^[A-Za-z]\d\d(\.\d+)?$/.test(raw) && !(icdIdx && icdIdx.icd10.entri(raw.toUpperCase()))) cxDx = { kode: raw.toUpperCase(), judul: "kode di luar daftar", istilah: [], tanda: 0 };
+      else cxDx = comboDx.terbaik();
+      if (cxDx) { $("cx-dx").value = cxDx.kode + " " + namaIcd(cxDx); $("cx-dx").dataset.kode = $("cx-dx").value; }
+      else { $("cx-dx").setAttribute("aria-invalid", "true"); $("cx-dx-pilih").innerHTML = '<span class="err">Diagnosis "' + esc(raw) + '" tidak ditemukan. Coba nama lain atau kodenya.</span>'; return; }
+      cxDxTampil();
+    }
+    if ($("cx-pr").value.trim()) { var p = comboPr.terbaik(); if (p && !cxPr.some(function (x) { return x.kode === p.kode; })) cxPr.push(p); $("cx-pr").value = ""; cxPrTampil(); }
+    comboDx.tutup(); comboPr.tutup();
+    var kat = document.querySelector("input[name=cx-kat]:checked").value;
+    var sev = cxJr === "RI" ? document.querySelector("input[name=cx-sev]:checked").value || null : null;
+    var h = eng.tebak({ icd10_utama: cxDx ? cxDx.kode : "", icd9: cxPr.map(function (x) { return x.kode; }), jenis_rawat: cxJr, kategori: kat, severity: sev, maks: 300 });
+    h.jenis_rawat = cxJr; h.dx = cxDx; h.pr = cxPr.slice();
+    cxHasil = h;
+    var fEl = $("cx-filter"); if (fEl) fEl.value = "";
+    cxRender();
+    if (window.matchMedia("(max-width: 60rem)").matches) $("cx-hasil").scrollIntoView({ block: "start" });
   }
-  function tbAtur() {
-    var ri = document.querySelector("input[name=tb-jr]:checked").value === "RI";
-    $("tb-sev-wrap").hidden = !ri;
-  }
-  $("tb-cari").addEventListener("click", function () { if (eng) tbCari(); });
-  $("tb-filter").addEventListener("input", tbRender);
-  ["tb-dx", "tb-pr"].forEach(function (id) {
-    $(id).addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); if (eng) tbCari(); } });
+  $("fk").addEventListener("submit", function (e) { e.preventDefault(); if (!eng) return; muatIcd().then(cxCari); });
+  $("fk").addEventListener("change", function (e) { if (e.target.name === "cx-jr" || e.target.name === "cx-kat" || e.target.name === "cx-sev") { cxAtur(); cxBasi(); } });
+  $("cx-kosong").addEventListener("click", function () {
+    cxDx = null; cxPr = []; cxHasil = null;
+    $("cx-dx").value = ""; $("cx-pr").value = ""; $("cx-dx").removeAttribute("aria-invalid");
+    $("cx-ri").checked = true; $("cx-umum").checked = true; $("cx-sev-0").checked = true;
+    cxAtur(); cxDxTampil(); cxPrTampil();
+    $("cx-hasil").innerHTML = '<div class="st-head"><h2 id="h-cx-hasil">Kandidat kode</h2></div><div class="empty"><p>Daftar grup INA-CBG yang cocok muncul di sini.</p></div><p class="fine">' + esc(CX_DISC) + "</p>";
+    $("cx-dx").focus();
   });
-  $("tebak").addEventListener("change", function (e) { e.stopPropagation(); tbAtur(); if (tbHasil && e.target.name !== undefined && e.target.id !== "tb-filter") tbCari(); });
-  $("tebak").addEventListener("input", function (e) { e.stopPropagation(); });
-  $("tb-hasil").addEventListener("click", function (e) {
+  $("cx-hasil").addEventListener("input", function (e) { if (e.target.id === "cx-filter") cxRender(); });
+  $("cx-hasil").addEventListener("click", function (e) {
     var b = e.target.closest("[data-pakai]");
-    if (!b) return;
-    $("kode").value = b.getAttribute("data-pakai");
-    var jrPakai = document.querySelector("input[name=tb-jr]:checked").value;
-    if (!$("icd10").value.trim() && $("tb-dx").value.trim()) $("icd10").value = $("tb-dx").value.trim().toUpperCase();
-    if (!$("icd9").value.trim() && $("tb-pr").value.trim()) $("icd9").value = $("tb-pr").value.trim();
+    if (!b || !cxHasil) return;
+    var h = cxHasil;
+    $("kode").value = b.getAttribute("data-pakai"); tutup();
+    $("icd10").value = h.dx ? h.dx.kode : "";
+    $("icd9").value = h.pr.map(function (x) { return x.kode; }).join(", ");
+    $("sps-list").dataset.kode = "";
     aturForm(); tandaiBasi();
-    $("tebak").open = false;
-    diamSekali = true; $("kode").focus(); diamSekali = false;
-    $("cbg-info").insertAdjacentHTML("beforeend", '<span class="hint">Kode dari penuntun (' + (jrPakai === "RI" ? "rawat inap" : "rawat jalan") + "). Periksa lagi sebelum menghitung.</span>");
+    location.hash = "#kalkulator";
+    $("cbg-info").insertAdjacentHTML("beforeend", '<span class="hint">Kode dan ICD diisi dari menu Cari Kode CBG. Lengkapi data faskes dan pasien, lalu tekan Hitung.</span>');
   });
-  tbAtur();
+  cxAtur();
 
   var f = $("f");
   f.addEventListener("input", function (e) {

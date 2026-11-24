@@ -8,6 +8,7 @@ Contoh:
 """
 import argparse
 import json
+import re
 import sys
 
 from . import rules as R
@@ -102,13 +103,18 @@ def main(argv=None):
     h.add_argument("--json", action="store_true", help="keluaran JSON")
 
     t = sub.add_parser("tebak", help="penuntun kode CBG dari diagnosis dan prosedur (ESTIMASI)")
-    t.add_argument("--icd10", help="diagnosis utama, mis. I21.0")
-    t.add_argument("--icd9", help="prosedur, dipisah koma, mis. 36.06")
+    t.add_argument("--icd10", help="diagnosis utama: kode (I21.0) atau nama penyakit (tifoid)")
+    t.add_argument("--icd9", help="prosedur dipisah koma: kode (36.06) atau nama tindakan (pasang ring)")
     t.add_argument("--rawat", choices=["RI", "RJ", "ri", "rj"], default="RI")
     t.add_argument("--kategori", choices=["umum", "kebidanan", "neonatal"], default="umum")
     t.add_argument("--tanpa-prosedur", action="store_true", help="abaikan prosedur untuk case group")
     t.add_argument("--severity", choices=["I", "II", "III"])
     t.add_argument("--json", action="store_true")
+
+    i = sub.add_parser("icd", help="cari kode ICD-10 dari nama penyakit, atau ICD-9-CM dari nama tindakan")
+    i.add_argument("kata")
+    i.add_argument("--prosedur", action="store_true", help="cari di ICD-9-CM (prosedur)")
+    i.add_argument("--maks", type=int, default=20)
 
     c = sub.add_parser("cari", help="cari kode CBG berdasarkan kata kunci")
     c.add_argument("kata")
@@ -119,12 +125,42 @@ def main(argv=None):
         for r, ps in R.REGIONAL_PROVINSI.items():
             print(f"Regional {r}: {', '.join(ps)}")
         return 0
+    if a.perintah == "icd":
+        from . import icd
+        r = icd.cari(a.kata, "ICD9CM" if a.prosedur else "ICD10", a.maks)
+        for h in r["hasil"]:
+            nama = h["istilah"][0] + " (" + h["judul"] + ")" if h["istilah"] else h["judul"]
+            print(f"{h['kode']:<8} {nama}" + (f"  [{icd.CATATAN_TANDA[h['tanda']]}]" if h["tanda"] else ""))
+        print(f"\n{r['jumlah']} kode cocok" + (f", {len(r['hasil'])} ditampilkan" if r["jumlah"] > len(r["hasil"]) else "")
+              + ". Istilah Indonesia disusun sendiri; judul resmi berbahasa Inggris (ICD-10 WHO, ICD-9-CM CMS).")
+        return 0
     eng = INACBGEngine()
     if a.perintah == "tebak":
+        from . import icd
+        dx, pr = a.icd10, _daftar(a.icd9)
+        if dx and not re.match(r"^[A-Za-z]\d", dx.strip()):
+            r = icd.cari(dx, "ICD10", 1)["hasil"]
+            if not r:
+                print(f"Kesalahan: diagnosis '{dx}' tidak ditemukan. Coba: inacbg icd \"{dx}\"", file=sys.stderr)
+                return 2
+            print(f"Diagnosis '{dx}' -> {r[0]['kode']} {r[0]['judul']}")
+            dx = r[0]["kode"]
+        if a.icd9 and not all(re.match(r"^\d", x) for x in pr):
+            pr = []
+            for nama in [x.strip() for x in a.icd9.split(",") if x.strip()]:
+                if re.match(r"^\d", nama):
+                    pr.append(nama)
+                    continue
+                r = icd.cari(nama, "ICD9CM", 1)["hasil"]
+                if not r:
+                    print(f"Kesalahan: prosedur '{nama}' tidak ditemukan. Coba: inacbg icd --prosedur \"{nama}\"", file=sys.stderr)
+                    return 2
+                print(f"Prosedur '{nama}' -> {r[0]['kode']} {r[0]['judul']}")
+                pr.append(r[0]["kode"])
         from . import penuntun as P
         trig = [{"kode_spesial": d["kode_spesial"], "cbg": d["cbg"], "ICD10": d["ICD10"], "ICD9CM": d["ICD9CM"]}
                 for d in eng.trigger.values()]
-        h = P.tebak(eng.cbg, trig, icd10_utama=a.icd10, icd9=_daftar(a.icd9), jenis_rawat=a.rawat.upper(),
+        h = P.tebak(eng.cbg, trig, icd10_utama=dx, icd9=pr, jenis_rawat=a.rawat.upper(),
                     kategori=a.kategori, ada_prosedur=False if a.tanpa_prosedur else None, severity=a.severity)
         if a.json:
             print(json.dumps(h, ensure_ascii=False, indent=2))
