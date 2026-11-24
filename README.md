@@ -28,6 +28,10 @@ Fitur yang tersedia:
 
 Belum tersedia: estimasi ICD → kode CBG (grouper resmi bersifat tertutup) dan tarif Non INA-CBG.
 
+## Versi web
+
+`web/index.html` adalah kalkulator yang sama dalam bentuk halaman HTML. Datanya diambil dari `web/data/kalkulator.json`, yang dibuat dengan `python3 scripts/bangun_data_web.py`. Halaman ini butuh server HTTP karena datanya dimuat dengan `fetch` (contoh: `cd web && python3 -m http.server`). Logika hitungnya diuji identik dengan engine Python pada 600 kasus acak (`tests/test_web_engine.py`).
+
 ## Data
 
 | File | Isi |

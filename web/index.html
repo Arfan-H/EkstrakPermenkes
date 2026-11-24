@@ -1,0 +1,720 @@
+<title>Kalkulator INA-CBG</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: formulir isian di kiri, "lembar rincian klaim" (seperti kuitansi) menempel di kanan; satu kolom di ponsel. */
+:root {
+  --bg: #f3f5f4;
+  --panel: #ffffff;
+  --ink: #17221f;
+  --muted: #5b6b66;
+  --line: #d6dfdb;
+  --accent: #0d6b5e;
+  --accent-soft: #e2f0ec;
+  --warn: #9a5b00;
+  --warn-soft: #fbf0dc;
+  --bad: #a3352b;
+  --bad-soft: #f8e4e1;
+  --paper: #fbfcf9;
+  --f-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1614; --panel: #16201d; --ink: #e3ebe8; --muted: #93a6a0; --line: #2a3a35;
+    --accent: #4fc2ae; --accent-soft: #163a33; --warn: #e3a64a; --warn-soft: #3a2b12;
+    --bad: #ef8a7f; --bad-soft: #3d1d19; --paper: #121b18; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1614; --panel: #16201d; --ink: #e3ebe8; --muted: #93a6a0; --line: #2a3a35;
+  --accent: #4fc2ae; --accent-soft: #163a33; --warn: #e3a64a; --warn-soft: #3a2b12;
+  --bad: #ef8a7f; --bad-soft: #3d1d19; --paper: #121b18; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.5 var(--f-body); }
+.wrap {
+  max-width: 1180px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 48px;
+}
+header.top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; padding-bottom: 16px; border-bottom: 2px solid var(--ink); margin-bottom: 20px; }
+h1 { font: 700 clamp(1.6rem, 3vw, 2.1rem)/1.1 var(--f-display); margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+h1 span { color: var(--accent); }
+.top p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 20px; align-items: start; }
+@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+
+form { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+fieldset { margin: 0; border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 14px 16px 16px; display: grid; gap: 12px; min-width: 0; }
+legend { font: 600 0.78rem/1 var(--f-display); text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); padding: 0 6px; }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px 12px; }
+label { display: grid; gap: 4px; font-size: 0.82rem; color: var(--muted); font-weight: 500; min-width: 0; }
+label.check { display: flex; align-items: center; gap: 8px; color: var(--ink); font-size: 0.88rem; font-weight: 400; }
+input[type=text], input[type=number], select {
+  font: 400 0.95rem var(--f-body); color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line); border-radius: 4px; padding: 7px 9px; width: 100%; min-width: 0;
+}
+input.code { font-family: var(--f-mono); font-weight: 500; letter-spacing: 0.02em; }
+input:focus-visible, select:focus-visible, button:focus-visible, input[type=checkbox]:focus-visible, input[type=radio]:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+input:disabled, select:disabled { opacity: 0.5; }
+.hint { font-size: 0.78rem; color: var(--muted); margin: 0; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg label { display: flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 4px; padding: 6px 10px; cursor: pointer; color: var(--ink); font-size: 0.86rem; background: var(--paper); }
+.seg label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.seg input { margin: 0; accent-color: var(--accent); }
+.cbg-info { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; font-size: 0.88rem; min-height: 1.4em; }
+.chip { font: 600 0.7rem/1 var(--f-display); letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 7px; border-radius: 3px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+.chip.warn { background: var(--warn-soft); color: var(--warn); }
+.sps-list { display: grid; gap: 6px; }
+.sps { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; align-items: start; font-size: 0.86rem; padding: 7px 9px; border: 1px solid var(--line); border-radius: 4px; background: var(--paper); }
+.sps input[type=checkbox] { margin-top: 3px; accent-color: var(--accent); }
+.sps .k { font-family: var(--f-mono); font-weight: 600; margin-right: 6px; }
+.sps .sub { grid-column: 2; color: var(--muted); font-size: 0.78rem; }
+.sps .var { grid-column: 2; display: flex; gap: 12px; flex-wrap: wrap; }
+.sps .var label { display: flex; gap: 5px; align-items: center; color: var(--ink); font-size: 0.82rem; }
+button { font: 500 0.85rem var(--f-body); border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 4px; padding: 6px 12px; cursor: pointer; }
+button:hover { border-color: var(--accent); color: var(--accent); }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+/* lembar rincian klaim */
+.sheet { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); background: var(--paper); border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: 6px; padding: 18px 20px 20px; min-width: 0; }
+@media (max-width: 860px) { .sheet { position: static; } }
+.sheet .eyebrow { font: 600 0.72rem/1 var(--f-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.sheet h2 { font: 600 1.25rem/1.25 var(--f-display); margin: 6px 0 2px; text-wrap: balance; }
+.sheet h2 .code { font-family: var(--f-mono); color: var(--accent); margin-right: 8px; }
+.meta { color: var(--muted); font-size: 0.85rem; margin: 0 0 14px; }
+table.rincian { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.rincian td { padding: 8px 0; border-bottom: 1px dashed var(--line); vertical-align: top; }
+.rincian td.amt { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 12px; }
+.rincian .lbl { font-weight: 500; }
+.rincian .src { display: block; font-size: 0.75rem; color: var(--muted); font-family: var(--f-mono); }
+.rincian tr.tolak td { color: var(--bad); }
+.rincian tr.tolak .src { color: var(--bad); font-family: var(--f-body); }
+.rincian tr.total td { border-bottom: 0; border-top: 2px solid var(--ink); padding-top: 12px; font-weight: 600; font-size: 1.05rem; }
+.rincian tr.total td.amt { font-size: 1.45rem; color: var(--accent); }
+.block { margin-top: 16px; padding: 12px 14px; border-radius: 4px; font-size: 0.86rem; display: grid; gap: 6px; }
+.block h3 { margin: 0; font: 600 0.75rem/1 var(--f-display); text-transform: uppercase; letter-spacing: 0.08em; }
+.block.info { background: var(--accent-soft); }
+.block.info h3 { color: var(--accent); }
+.block.warn { background: var(--warn-soft); }
+.block.warn h3 { color: var(--warn); }
+.block.bad { background: var(--bad-soft); color: var(--bad); }
+.block ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.big { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 1.1rem; font-weight: 600; }
+.disclaimer { margin-top: 16px; font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
+.contoh { font-size: 0.78rem; color: var(--warn); }
+@media (prefers-reduced-motion: no-preference) { .sheet { transition: border-color .2s; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1>Kalkulator <span>INA-CBG</span></h1>
+    <p>Tarif klaim JKN di FKRTL menurut Permenkes No. 3 Tahun 2023 &middot; estimasi</p>
+  </header>
+
+  <div class="grid">
+    <form id="f" autocomplete="off">
+      <fieldset>
+        <legend>Kode CBG</legend>
+        <label>Kode atau kata kunci diagnosis/prosedur
+          <input type="text" id="kode" class="code" list="daftar-cbg" placeholder="mis. I-1-40-I atau &quot;kardiovaskular&quot;">
+        </label>
+        <datalist id="daftar-cbg"></datalist>
+        <div class="cbg-info" id="cbg-info"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Fasilitas kesehatan</legend>
+        <div class="seg" role="radiogroup" aria-label="Jenis fasilitas">
+          <label><input type="radio" name="faskes" id="fk-rs" value="rs" checked> Rumah sakit</label>
+          <label><input type="radio" name="faskes" id="fk-nas" value="nasional"> RS khusus nasional</label>
+          <label><input type="radio" name="faskes" id="fk-klinik" value="klinik"> Klinik utama</label>
+        </div>
+        <div class="row" id="grp-lokasi">
+          <label>Provinsi
+            <select id="provinsi"></select>
+          </label>
+          <label id="lbl-kelas-rs">Kelas RS
+            <select id="kelas-rs"><option>A</option><option selected>B</option><option>C</option><option>D</option></select>
+          </label>
+          <label>Kepemilikan
+            <select id="kepemilikan"><option value="PEMERINTAH">Pemerintah</option><option value="SWASTA" selected>Swasta</option></select>
+          </label>
+        </div>
+        <div class="row" id="grp-rs">
+          <label>Jenis RS
+            <select id="tipe-rs">
+              <option value="umum">RS umum</option>
+              <option value="khusus_jantung">RS khusus jantung</option>
+              <option value="khusus_lain">RS khusus lainnya</option>
+            </select>
+          </label>
+          <label class="check" style="align-self:end"><input type="checkbox" id="luar-khusus"> Pelayanan di luar kekhususan RS</label>
+        </div>
+        <div class="row" id="grp-nas" hidden>
+          <label>RS khusus nasional
+            <select id="rs-nas">
+              <option value="RSCM">RSUPN Dr. Cipto Mangunkusumo (RSCM)</option>
+              <option value="RSJP-HK">RS Jantung dan Pembuluh Darah Harapan Kita</option>
+              <option value="RSK DHARMAIS">RS Kanker Dharmais</option>
+              <option value="RSAB-HK">RS Anak dan Bunda Harapan Kita</option>
+              <option value="RSPON">RS Pusat Otak Nasional</option>
+            </select>
+          </label>
+        </div>
+        <div class="row" id="grp-klinik" hidden>
+          <label>Persentase tarif rawat inap (70&ndash;100%)
+            <input type="number" id="persen-klinik" min="70" max="100" step="1" value="100">
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Pasien dan tindakan</legend>
+        <div class="row">
+          <div>
+            <span class="hint" id="hak-hint">Hak kelas rawat inap</span>
+            <div class="seg" role="radiogroup" aria-label="Hak kelas rawat">
+              <label><input type="radio" name="kelas" id="k1" value="1" checked> Kelas 1</label>
+              <label><input type="radio" name="kelas" id="k2" value="2"> Kelas 2</label>
+              <label><input type="radio" name="kelas" id="k3" value="3"> Kelas 3</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <label>Diagnosis ICD-10 (pisahkan koma)
+            <input type="text" id="icd10" class="code" placeholder="mis. I21.0, E11.9">
+          </label>
+          <label>Prosedur ICD-9-CM (pisahkan koma)
+            <input type="text" id="icd9" class="code" placeholder="mis. 36.06">
+          </label>
+        </div>
+        <div>
+          <span class="hint">Top up Special CMG yang berlaku untuk CBG ini</span>
+          <div class="sps-list" id="sps-list"></div>
+        </div>
+        <div class="row">
+          <label>Lama rawat / LOS (hari)
+            <input type="number" id="los" min="1" step="1" placeholder="isi bila &gt; 42 hari">
+          </label>
+          <label>Skor ADL fase sub akut
+            <input type="number" id="adl-sub" min="1" max="60" step="1" placeholder="1&ndash;60">
+          </label>
+          <label>Skor ADL fase kronis
+            <input type="number" id="adl-kro" min="1" max="60" step="1" placeholder="1&ndash;60">
+          </label>
+        </div>
+        <label class="check" id="lbl-hd" hidden><input type="checkbox" id="hd-reuse"> Alat/BMHP hemodialisis dipakai ulang (re-use)</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Naik kelas / selisih biaya</legend>
+        <div class="row">
+          <label>Naik ke
+            <select id="naik"><option value="">Tidak naik kelas</option><option value="1">Kelas 1</option><option value="VIP">Di atas kelas 1 (VIP)</option></select>
+          </label>
+          <label>Jenis peserta
+            <select id="peserta">
+              <option value="">Peserta lain (PPU, PBPU/BP kelas 1–2)</option>
+              <option value="PBI">PBI Jaminan Kesehatan</option>
+              <option value="PBPU_KELAS_3">PBPU kelas 3</option>
+              <option value="BP_KELAS_3">Bukan Pekerja kelas 3</option>
+              <option value="PEMDA">Didaftarkan Pemerintah Daerah</option>
+              <option value="PPU_PHK">PPU yang mengalami PHK (dan keluarga)</option>
+            </select>
+          </label>
+          <label>Biaya riil RS (opsional, Rp)
+            <input type="number" id="biaya" min="0" step="1000">
+          </label>
+        </div>
+        <label class="check"><input type="checkbox" id="rj-eks"> Rawat jalan eksekutif</label>
+      </fieldset>
+
+      <div class="actions">
+        <button type="button" id="btn-contoh">Isi contoh PCI</button>
+        <button type="button" id="btn-hip">Isi contoh Hip replacement</button>
+        <button type="button" id="btn-kosong">Kosongkan</button>
+      </div>
+    </form>
+
+    <section class="sheet" id="hasil" aria-live="polite">
+      <div class="eyebrow">Rincian klaim</div>
+      <p class="meta">Memuat data tarif&hellip;</p>
+    </section>
+  </div>
+</div>
+
+<script id="engine">
+/* Engine kalkulator INA-CBG (port dari src/inacbg/engine.py). */
+var INACBG = (function () {
+  var UNIT_COST = 879103, LOS_AKUT = 42, LOS_SUB = 103, LOS_KRONIS = 180;
+  var REGIONAL = {
+    1: ["DI Yogyakarta", "Jawa Barat", "Jawa Tengah", "Jawa Timur", "DKI Jakarta"],
+    2: ["Nusa Tenggara Barat", "Bengkulu", "Sulawesi Tengah", "Kalimantan Barat", "Lampung", "Banten", "Sumatera Barat", "Bali", "Sumatera Utara"],
+    3: ["Sulawesi Tenggara", "Jambi", "Sulawesi Barat", "Gorontalo"],
+    4: ["Kalimantan Selatan", "Riau", "Kalimantan Tengah", "Kalimantan Timur", "Kalimantan Utara", "Kepulauan Riau", "Sumatera Selatan"],
+    5: ["Sulawesi Selatan", "Papua Barat", "Papua Selatan", "Papua Tengah", "Papua Pegunungan", "Papua", "Papua Barat Daya", "Aceh", "Kepulauan Bangka Belitung", "Sulawesi Utara", "Nusa Tenggara Timur", "Maluku", "Maluku Utara"]
+  };
+  var PROV = {};
+  Object.keys(REGIONAL).forEach(function (r) { REGIONAL[r].forEach(function (p) { PROV[p.toLowerCase()] = +r; }); });
+  var TURUN = { A: "B", B: "C", C: "D", D: "D" };
+  var NASIONAL = ["RSCM", "RSJP-HK", "RSK DHARMAIS", "RSAB-HK", "RSPON"];
+  var PESERTA_KECUALI = {
+    PBI: "peserta Penerima Bantuan Iuran Jaminan Kesehatan",
+    PBPU_KELAS_3: "peserta Pekerja Bukan Penerima Upah kelas 3",
+    BP_KELAS_3: "peserta Bukan Pekerja kelas 3",
+    PEMDA: "peserta yang didaftarkan oleh Pemerintah Daerah",
+    PPU_PHK: "peserta Pekerja Penerima Upah yang mengalami PHK dan anggota keluarganya"
+  };
+  var DISCLAIMER = "Hasil ini estimasi/simulasi berdasarkan Permenkes No. 3 Tahun 2023. Angka final klaim ditentukan oleh grouper resmi E-Klaim INA-CBG (Kemenkes) dan verifikasi BPJS Kesehatan.";
+
+  function bulat(x) { return Math.floor(x + 0.5); }
+  function kelasEf(rs) { return rs.kelas_rs === "KHUSUS_NASIONAL" ? "A" : rs.kelas_rs; }
+  function bukanKelas() { var ks = [].slice.call(arguments); return function (rs) { return ks.indexOf(kelasEf(rs)) < 0; }; }
+
+  // Lampiran II (hal. 85-91)
+  var KRITERIA = {
+    "RR-02-II": { layanan: "Contegra", halaman: 85, syarat_teks: "hanya RS Khusus Jantung Kelas A milik Pemerintah",
+      syarat: function (rs) { return rs.kelas_rs === "KHUSUS_NASIONAL" ? rs.nama === "RSJP-HK" : (rs.kelas_rs === "A" && rs.kepemilikan === "PEMERINTAH" && rs.tipe_rs === "khusus_jantung"); }, catatan: [] },
+    "RR-04-III": { layanan: "Hip Implant/Knee Implant", halaman: 85, syarat: bukanKelas("D"), syarat_teks: "tidak dapat di RS kelas D",
+      catatan: ["operator sesuai kewenangan klinis dan kompetensinya", "alat untuk operasi Hip/Knee Implant tersedia"] },
+    "RR-05-III": { layanan: "Prostesis Evar/Tevar", halaman: 85, syarat_teks: "hanya RS Kelas A Umum atau RS Khusus Jantung Kelas A",
+      syarat: function (rs) { return rs.kelas_rs === "KHUSUS_NASIONAL" ? (rs.nama === "RSCM" || rs.nama === "RSJP-HK") : (rs.kelas_rs === "A" && (rs.tipe_rs === "umum" || rs.tipe_rs === "khusus_jantung")); },
+      catatan: ["hanya 1 kali penjaminan untuk setiap jenis prosedur dengan prosthesis Evar/Tevar", "dokter sesuai kewenangan klinis dan kompetensinya"] },
+    "YY-13-III": { layanan: "Coil", halaman: 86, syarat: bukanKelas("D"), syarat_teks: "tidak dapat di RS kelas D",
+      catatan: ["CT Scan kepala minimal 64 slice saat pasien datang", "dirawat di ICU/HCU (neurologi) setelah coiling", "operator sesuai kewenangan klinis dan kompetensi"] },
+    "YY-14-III": { layanan: "Trombektomi", halaman: 87, syarat: bukanKelas("D"), syarat_teks: "tidak dapat di RS kelas D",
+      catatan: ["CT Scan kepala minimal 64 slice saat pasien datang", "dirawat di ICU/HCU (neurologi) setelah trombektomi", "operator sesuai kewenangan klinis dan kompetensinya"] },
+    "YY-15-III": { layanan: "Percutaneous Endoscopy Gastrostomy", halaman: 88, syarat: bukanKelas("C", "D"), syarat_teks: "tidak dapat di RS kelas C dan D", jenis_rawat: "RI",
+      catatan: ["sarana prasarana dan kewenangan klinis RS memenuhi standar", "hanya untuk indikasi terapeutik"] },
+    "YY-10-III": { layanan: "Phacoemulsification", halaman: 89, syarat: null,
+      catatan: ["kriteria penjaminan sesuai Peraturan BPJS Kesehatan", "tindakan elektif mengikuti kesepakatan kapasitas BPJS Kesehatan dengan FKRTL"] },
+    "YY-16-III": { layanan: "Odontektomi", halaman: 89, syarat: null, jenis_rawat: "RJ",
+      catatan: ["dokter gigi spesialis/subspesialis sesuai kewenangan klinis", "disebabkan kelainan patologis, bukan semata posisi anatomi"] },
+    "YY-17-III": { layanan: "Brakiterapi", halaman: 90, syarat: bukanKelas("D"), syarat_teks: "tidak dapat di RS kelas D",
+      catatan: ["sesuai PNPK/PPK dan/atau keputusan Tumor Board"] }
+  };
+  var KRITERIA_CBG = {
+    KEMOTERAPI: { kode: ["C-4-13-I", "C-4-13-II", "C-4-13-III", "C-3-23-0"], halaman: 91,
+      catatan: ["kemoterapi sesuai PNPK/PPK, formularium nasional, dan ketentuan yang berlaku", "dilakukan oleh dokter berkompetensi di bidang onkologi"] },
+    HEMODIALISIS: { kode: ["N-3-15-0"], halaman: 91, persen_reuse: 85,
+      catatan: ["alat dan BMHP hemodialisis digunakan single use; bila re-use tarif dibayar 85%"] }
+  };
+
+  function regionalDariProvinsi(p) {
+    var r = PROV[String(p).toLowerCase().trim()];
+    if (!r) throw new Error("Provinsi tidak dikenal: " + p);
+    return r;
+  }
+  function losFase(los) {
+    return [Math.min(los, LOS_AKUT), Math.max(0, Math.min(los, LOS_SUB) - LOS_AKUT), Math.max(0, los - LOS_SUB)];
+  }
+  function riw(adl) {
+    adl = Number(adl);
+    if (!(adl > 0 && adl <= 60)) throw new Error("Skor ADL harus di antara 0 dan 60, didapat " + adl);
+    return adl / 60;
+  }
+  function subakutKronis(los, adlS, adlK) {
+    var f = losFase(los), hs = f[1], hk = f[2];
+    var h = { los_subakut: hs, los_kronis: hk, topup_subakut: 0, topup_kronis: 0 };
+    if (hs) {
+      if (adlS == null) throw new Error("LOS > 42 hari: isi skor ADL fase sub akut");
+      h.topup_subakut = bulat(0.375 * riw(adlS) * UNIT_COST * hs);
+    }
+    if (hk) {
+      if (adlK == null) throw new Error("LOS > 103 hari: isi skor ADL fase kronis");
+      h.topup_kronis = bulat(0.25 * riw(adlK) * UNIT_COST * hk);
+    }
+    return h;
+  }
+
+  function buat(data) {
+    var gIdx = {};
+    data.grup.forEach(function (g, i) { gIdx[g[0] + "|" + g[1]] = i; });
+    var topupIdx = {};
+    data.topup.forEach(function (e) { (topupIdx[e.k + "|" + e.c] = topupIdx[e.k + "|" + e.c] || []).push(e); });
+
+    function grup(rs) { return rs.kelas_rs === "KHUSUS_NASIONAL" ? gIdx["NASIONAL|" + rs.nama] : gIdx[rs.regional + "|" + rs.kelas_rs + " " + rs.kepemilikan]; }
+    function tarif(kode, rs, kelas) {
+      var c = data.cbg[kode], n = c[1] === "RI" ? 3 : 1, g = grup(rs);
+      var v = c[2][g * n + (kelas ? kelas - 1 : 0)];
+      return { tarif: v == null ? null : v * 100, tersedia: v != null, halaman: data.halaman_awal[c[1]][g] + Number(c[3][g]) };
+    }
+    function cocokPemicu(ksp, kode, icd10, icd9) {
+      var komb = data.trigger.filter(function (d) { return d.k === ksp && d.cbg.indexOf(kode) >= 0; });
+      if (!komb.length) return [false, null];
+      if (!icd10.length && !icd9.length) return [null, komb[0]];
+      for (var i = 0; i < komb.length; i++) {
+        var d = komb[i];
+        var ok10 = !d.icd10.length || icd10.some(function (x) { return d.icd10.indexOf(x) >= 0; });
+        var ok9 = !d.icd9.length || icd9.some(function (x) { return d.icd9.indexOf(x) >= 0; });
+        if (ok10 && ok9) return [true, d];
+      }
+      return [false, komb[0]];
+    }
+    function profilRS(inp, pr) {
+      if (inp.rs_khusus_nasional) {
+        if (NASIONAL.indexOf(inp.rs_khusus_nasional) < 0) throw new Error("RS khusus nasional tidak dikenal");
+        if (inp.sesuai_kekhususan === false) pr.push("PMK 3/2023 tidak mengatur kelompok tarif yang lebih rendah untuk RS kelompok (a); tarif kelompok RS khusus nasional tetap dipakai.");
+        return { kelas_rs: "KHUSUS_NASIONAL", kepemilikan: null, nama: inp.rs_khusus_nasional, regional: "NASIONAL", tipe_rs: inp.tipe_rs || "umum", label: "RS khusus nasional " + inp.rs_khusus_nasional };
+      }
+      var regional = inp.regional;
+      if (inp.provinsi) regional = regionalDariProvinsi(inp.provinsi);
+      if (!regional) throw new Error("Pilih provinsi");
+      var milik = (inp.kepemilikan || "").toUpperCase(), kelas, label;
+      if (inp.klinik_utama) {
+        milik = milik || "SWASTA"; kelas = "D";
+        label = "Klinik utama (kelompok RS kelas D " + milik + ")";
+      } else {
+        kelas = (inp.kelas_rs || "").toUpperCase();
+        if (["A", "B", "C", "D"].indexOf(kelas) < 0) throw new Error("Pilih kelas RS");
+        label = "RS kelas " + kelas + " " + milik;
+        if ((inp.tipe_rs || "umum").indexOf("khusus") === 0 && inp.sesuai_kekhususan === false) {
+          var baru = TURUN[kelas];
+          if (baru === kelas) pr.push("RS khusus kelas D di luar kekhususan: tidak ada kelompok tarif yang lebih rendah, tetap memakai kelas D (Pasal 29, hal. 19).");
+          else pr.push("Pelayanan RS khusus di luar kekhususan: tarif turun satu tingkat dari kelas " + kelas + " ke kelas " + baru + " (Pasal 29 ayat 2, hal. 19).");
+          label = "RS khusus kelas " + kelas + " " + milik + ", di luar kekhususan -> tarif kelas " + baru;
+          kelas = baru;
+        }
+      }
+      if (milik !== "PEMERINTAH" && milik !== "SWASTA") throw new Error("Pilih kepemilikan");
+      return { kelas_rs: kelas, kepemilikan: milik, nama: null, regional: String(regional), tipe_rs: inp.tipe_rs || "umum", label: label };
+    }
+
+    function nilaiTopup(ksp, varian, kode, jr, rs, kelas, icd10, icd9, asal, pr) {
+      var sp = data.special[ksp];
+      if (!sp) throw new Error("Kode special CMG " + ksp + " tidak dikenal");
+      var baris = topupIdx[ksp + "|" + kode];
+      if (!baris) return { kode_spesial: ksp, deskripsi: sp[0], nilai: null, diterima: false, sumber: asal, alasan: ksp + " tidak berlaku untuk CBG " + kode + " (Lampiran I.B)" };
+      if (baris.length > 1) {
+        if (!varian) throw new Error(ksp + " punya beberapa varian, pilih salah satu: " + baris.map(function (b) { return b.d; }).join(", "));
+        var cocok = baris.filter(function (b) { return b.d.toLowerCase() === varian.toLowerCase(); });
+        if (!cocok.length) throw new Error("Varian " + varian + " tidak ada untuk " + ksp);
+        baris = cocok;
+      }
+      var e = baris[0], n = jr === "RI" ? 3 : 1, g = grup(rs);
+      var iv = g * n + (jr === "RI" ? kelas - 1 : 0), v = e.t[iv], hal = e.h[iv];
+      var tu = { kode_spesial: ksp, deskripsi: e.d, nilai: v == null ? null : v * 100, diterima: true, sumber: asal, alasan: "", sumber_halaman: hal };
+      if (v == null) { tu.diterima = false; tu.nilai = null; tu.alasan = "tidak dijamin untuk " + rs.label + " (tarif '-' di PDF hal. " + hal + ")"; return tu; }
+      var kr = KRITERIA[ksp];
+      if (kr) {
+        if (kr.syarat && !kr.syarat(rs)) { tu.diterima = false; tu.nilai = null; tu.alasan = "kriteria RS tidak terpenuhi: " + kr.syarat_teks + " (Lampiran II, hal. " + kr.halaman + ")"; return tu; }
+        if (kr.jenis_rawat && kr.jenis_rawat !== jr) { tu.diterima = false; tu.nilai = null; tu.alasan = "hanya untuk " + (kr.jenis_rawat === "RI" ? "rawat inap" : "rawat jalan") + " (Lampiran II, hal. " + kr.halaman + ")"; return tu; }
+        kr.catatan.forEach(function (c) { pr.push(ksp + " " + kr.layanan + ": pastikan " + c + " (Lampiran II, hal. " + kr.halaman + ")."); });
+      }
+      if (asal === "dipilih") {
+        var cp = cocokPemicu(ksp, kode, icd10, icd9), ok = cp[0], d = cp[1];
+        if (ok === null) {
+          var s = [];
+          if (d && d.icd10.length) s.push("ICD-10 " + d.icd10.slice().sort().slice(0, 6).join(", ") + (d.icd10.length > 6 ? "..." : ""));
+          if (d && d.icd9.length) s.push("ICD-9-CM " + d.icd9.slice().sort().slice(0, 6).join(", ") + (d.icd9.length > 6 ? "..." : ""));
+          pr.push(ksp + ": ICD belum diisi, pemicu tidak dicek. Syarat Lampiran I.A: " + s.join("; ") + ".");
+        } else if (ok === false) {
+          pr.push(ksp + ": ICD yang diisi tidak cocok dengan pemicu Lampiran I.A (hal. " + d.hal.join(", ") + "); top up berisiko ditolak.");
+        }
+      }
+      return tu;
+    }
+
+    function selisih(inp, kode, jr, rs, kelas, pr) {
+      var jp = (inp.jenis_peserta || "").toUpperCase();
+      if (PESERTA_KECUALI[jp]) return { berlaku: false, nilai: null, maksimum: null, dasar: "Tidak boleh naik kelas dengan selisih biaya: " + PESERTA_KECUALI[jp] + " (Pasal 48 ayat 8, hal. 26-27)" };
+      if (inp.rawat_jalan_eksekutif) {
+        if (jr !== "RJ") pr.push("Rawat jalan eksekutif dipilih untuk CBG rawat inap; diabaikan.");
+        else return { berlaku: true, nilai: null, maksimum: 400000, dasar: "Pasal 48 ayat (3) huruf A: rawat jalan eksekutif paling banyak Rp400.000 (hal. 26)" };
+      }
+      if (jr !== "RI") return { berlaku: false, nilai: null, maksimum: null, dasar: "Naik kelas hanya berlaku untuk rawat inap" };
+      var tk = {};
+      for (var k = 1; k <= 3; k++) {
+        var t = tarif(kode, rs, k);
+        if (!t.tersedia) return { berlaku: false, nilai: null, maksimum: null, dasar: "Tarif kelas " + k + " tidak tersedia, selisih tidak bisa dihitung" };
+        tk[k] = t.tarif;
+      }
+      var naik = String(inp.naik_kelas).toUpperCase() === "VIP" ? "VIP" : Number(inp.naik_kelas), s;
+      if (kelas === 2 && naik === 1) s = { berlaku: true, nilai: tk[1] - tk[2], maksimum: tk[1] - tk[2], dasar: "Pasal 48 ayat (3) huruf B: tarif kelas 1 - tarif kelas 2 (hal. 26)" };
+      else if (naik === "VIP" && (kelas === 1 || kelas === 2)) {
+        if (inp.biaya_riil != null && inp.biaya_riil <= tk[kelas]) s = { berlaku: false, nilai: 0, maksimum: 0, dasar: "Pasal 48 ayat (4): biaya rawat inap tidak melebihi tarif INA-CBG sesuai hak peserta, ketentuan selisih tidak berlaku (hal. 26)" };
+        else {
+          var vip = bulat(75 / 100 * tk[1]);
+          s = kelas === 1 ? { berlaku: true, nilai: null, maksimum: vip, dasar: "Pasal 48 ayat (3) huruf C: paling banyak 75% x tarif kelas 1 (hal. 26)" }
+            : { berlaku: true, nilai: null, maksimum: (tk[1] - tk[2]) + vip, pasti: tk[1] - tk[2], dasar: "Pasal 48 ayat (3) huruf D: (tarif kelas 1 - kelas 2) + paling banyak 75% x tarif kelas 1 (hal. 26)" };
+        }
+      } else s = { berlaku: false, nilai: null, maksimum: null, dasar: "Naik dari hak kelas " + kelas + " ke " + naik + " tidak diatur dalam Pasal 48 ayat (3) (hal. 26)" };
+      s.tarif_kelas = tk;
+      return s;
+    }
+
+    function hitung(inp) {
+      var pr = [];
+      var kode = String(inp.kode_cbg || "").trim().toUpperCase();
+      if (!/^[A-Z]-\d-\d{2}-(I|II|III|0)$/.test(kode)) throw new Error("Format kode CBG tidak valid (contoh: I-1-40-I)");
+      var c = data.cbg[kode];
+      if (!c) throw new Error("Kode CBG " + kode + " tidak ada di Lampiran III PMK 3/2023");
+      var jr = c[1], rs = profilRS(inp, pr), kelas = null;
+      if (jr === "RI") {
+        if ([1, 2, 3].indexOf(inp.kelas_rawat) < 0) throw new Error("Kode CBG rawat inap: pilih hak kelas rawat 1/2/3");
+        kelas = inp.kelas_rawat;
+      } else if (inp.kelas_rawat != null) pr.push("Kode CBG rawat jalan: kelas rawat diabaikan (rawat jalan satu tarif).");
+      var t = tarif(kode, rs, kelas);
+      var h = { kode_cbg: kode, deskripsi_cbg: c[0], jenis_rawat: jr === "RI" ? "RAWAT INAP" : "RAWAT JALAN", kelompok_tarif: rs.label,
+        regional: rs.regional, kelas_rawat: kelas, tarif_dasar: t.tarif, tarif_dasar_tersedia: t.tersedia, sumber_halaman: t.halaman,
+        topup: [], kandidat_topup: [], topup_subakut_kronis: null, total_klaim_inacbg: null, rentang_total: null, selisih_biaya: null,
+        peringatan: pr, disclaimer: DISCLAIMER };
+      if (!t.tersedia) { pr.push("Layanan " + kode + " tidak tersedia/tidak dijamin untuk " + rs.label + " (tarif '-' di PDF hal. " + t.halaman + ")."); return h; }
+
+      var tarifDasar = t.tarif, rentang = null;
+      if (KRITERIA_CBG.HEMODIALISIS.kode.indexOf(kode) >= 0 && inp.hd_reuse) {
+        tarifDasar = bulat(tarifDasar * 85 / 100);
+        pr.push("Hemodialisis re-use: tarif dibayar 85% dari tarif (Lampiran II, hal. 91).");
+      } else if (inp.hd_reuse) pr.push("hd_reuse hanya berlaku untuk hemodialisis (N-3-15-0); diabaikan.");
+      if (inp.klinik_utama && jr === "RI") {
+        var persen = inp.persen_klinik_utama != null ? inp.persen_klinik_utama : 100;
+        if (!(persen >= 70 && persen <= 100)) throw new Error("Persentase klinik utama harus 70-100");
+        rentang = { persen: [70, 100], tarif_dasar: [bulat(tarifDasar * 70 / 100), tarifDasar] };
+        tarifDasar = bulat(tarifDasar * persen / 100);
+        pr.push("Klinik utama rawat inap: " + persen + "% dari tarif RS kelas D (rentang 70%-100% sesuai kesepakatan BPJS Kesehatan dan asosiasi; Pasal 31, hal. 19).");
+      }
+      h.tarif_dasar = tarifDasar;
+
+      var icd10 = (inp.icd10 || []).map(function (x) { return x.trim().toUpperCase(); }).filter(Boolean);
+      var icd9 = (inp.icd9 || []).map(function (x) { return x.trim(); }).filter(Boolean);
+      var dipilih = {}, urutan = [];
+      (inp.kode_spesial || []).forEach(function (item) {
+        var i = item.indexOf(":"), k = (i < 0 ? item : item.slice(0, i)).trim().toUpperCase();
+        if (!(k in dipilih)) urutan.push(k);
+        dipilih[k] = i < 0 ? null : (item.slice(i + 1).trim() || null);
+      });
+      var auto = [];
+      data.trigger.forEach(function (d) {
+        var ksp = d.k;
+        if (d.cbg.indexOf(kode) < 0 || ksp in dipilih) return;
+        if (cocokPemicu(ksp, kode, icd10, icd9)[0] !== true) return;
+        var pre = ksp.slice(0, 2);
+        if (pre === "YY" || pre === "II") { if (auto.indexOf(ksp) < 0) auto.push(ksp); }
+        else if (!h.kandidat_topup.some(function (x) { return x.kode_spesial === ksp; }))
+          h.kandidat_topup.push({ kode_spesial: ksp, deskripsi: data.special[ksp][0], jenis: data.special[ksp][1] });
+      });
+      urutan.forEach(function (k) { h.topup.push(nilaiTopup(k, dipilih[k], kode, jr, rs, kelas, icd10, icd9, "dipilih", pr)); });
+      auto.forEach(function (k) { h.topup.push(nilaiTopup(k, null, kode, jr, rs, kelas, icd10, icd9, "otomatis dari ICD", pr)); });
+
+      if (inp.los != null && inp.los > LOS_AKUT) {
+        if (jr !== "RI") throw new Error("Kasus sub akut/kronis hanya untuk rawat inap");
+        h.topup_subakut_kronis = subakutKronis(inp.los, inp.adl_subakut, inp.adl_kronis);
+        pr.push("Top up sub-akut/kronis hanya untuk kasus yang memenuhi kriteria special CMG subacute/chronic (Pasal 27).");
+        if (inp.los > LOS_KRONIS) pr.push("LOS " + inp.los + " hari melebihi batas fase kronis (180 hari) di hal. 84; rumus tetap diterapkan.");
+      }
+      var total = h.tarif_dasar + h.topup.reduce(function (a, x) { return a + (x.diterima ? x.nilai : 0); }, 0);
+      if (h.topup_subakut_kronis) total += h.topup_subakut_kronis.topup_subakut + h.topup_subakut_kronis.topup_kronis;
+      h.total_klaim_inacbg = total;
+      if (rentang) {
+        var naikTot = total - h.tarif_dasar;
+        h.rentang_total = { persen: rentang.persen, total: [rentang.tarif_dasar[0] + naikTot, rentang.tarif_dasar[1] + naikTot] };
+      }
+      if (inp.naik_kelas || inp.rawat_jalan_eksekutif) h.selisih_biaya = selisih(inp, kode, jr, rs, kelas, pr);
+      Object.keys(KRITERIA_CBG).forEach(function (nama) {
+        var kr = KRITERIA_CBG[nama];
+        if (kr.kode.indexOf(kode) >= 0) kr.catatan.forEach(function (c) { pr.push(nama.charAt(0) + nama.slice(1).toLowerCase() + ": " + c + " (Lampiran II, hal. " + kr.halaman + ")."); });
+      });
+      return h;
+    }
+    return { hitung: hitung, data: data, topupUntuk: function (kode) {
+      var out = {};
+      data.topup.forEach(function (e) { if (e.c === kode) (out[e.k] = out[e.k] || []).push(e.d); });
+      return out;
+    } };
+  }
+  return { buat: buat, REGIONAL: REGIONAL, losFase: losFase };
+})();
+if (typeof module !== "undefined") module.exports = INACBG;
+</script>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var eng = null;
+  var rp = function (v) { return v == null ? "-" : "Rp" + Math.round(v).toLocaleString("id-ID"); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  var daftar = function (s) { return s.split(/[,;\s]+/).map(function (x) { return x.trim(); }).filter(Boolean); };
+  var num = function (id) { var v = $(id).value.trim(); return v === "" ? null : Number(v); };
+
+  // provinsi per regional
+  var sel = $("provinsi");
+  Object.keys(INACBG.REGIONAL).forEach(function (r) {
+    var og = document.createElement("optgroup"); og.label = "Regional " + r;
+    INACBG.REGIONAL[r].slice().sort().forEach(function (p) { var o = document.createElement("option"); o.textContent = p; og.appendChild(o); });
+    sel.appendChild(og);
+  });
+  sel.value = "Jawa Barat";
+
+  function faskes() { return document.querySelector("input[name=faskes]:checked").value; }
+
+  function aturForm() {
+    var fk = faskes();
+    $("grp-lokasi").hidden = fk === "nasional";
+    $("grp-rs").hidden = fk !== "rs";
+    $("grp-nas").hidden = fk !== "nasional";
+    $("grp-klinik").hidden = fk !== "klinik";
+    $("lbl-kelas-rs").hidden = fk !== "rs";
+    $("tipe-rs").disabled = fk !== "rs";
+    var kode = $("kode").value.trim().toUpperCase().split(" ")[0];
+    var c = eng && eng.data.cbg[kode];
+    var info = $("cbg-info");
+    if (c) {
+      info.innerHTML = '<span class="chip">' + (c[1] === "RI" ? "Rawat inap" : "Rawat jalan") + "</span><span>" + esc(c[0]) + "</span>";
+    } else if (kode) {
+      info.innerHTML = '<span class="chip warn">Belum dikenal</span><span class="hint">Pilih dari daftar atau ketik kode lengkap, mis. I-1-40-I</span>';
+    } else info.innerHTML = "";
+    var ri = !c || c[1] === "RI";
+    document.querySelectorAll("input[name=kelas]").forEach(function (x) { x.disabled = !ri; });
+    $("hak-hint").textContent = ri ? "Hak kelas rawat inap" : "Hak kelas rawat inap (tidak dipakai untuk rawat jalan)";
+    $("lbl-hd").hidden = kode !== "N-3-15-0";
+    // daftar top up
+    var list = $("sps-list"), dipilih = {};
+    list.querySelectorAll("input[type=checkbox]").forEach(function (x) { if (x.checked) dipilih[x.value] = true; });
+    var varianLama = {};
+    list.querySelectorAll("input[type=radio]:checked").forEach(function (x) { varianLama[x.name] = x.value; });
+    var tu = c ? eng.topupUntuk(kode) : {};
+    var keys = Object.keys(tu);
+    if (list.dataset.kode !== kode) {
+      list.dataset.kode = kode;
+      list.innerHTML = keys.length ? keys.map(function (k) {
+        var sp = eng.data.special[k], jenis = sp[1];
+        var auto = /^(YY|II)/.test(k);
+        var html = '<label class="sps"><input type="checkbox" id="sps-' + k + '" value="' + k + '"' + (dipilih[k] ? " checked" : "") + '>' +
+          '<span><span class="k">' + k + "</span>" + esc(tu[k].length > 1 ? sp[0] : tu[k][0]) + '</span><span class="sub">' + esc(jenis) +
+          (auto ? " &middot; ditambahkan otomatis bila ICD-9-CM cocok" : " &middot; centang bila obat/alat ini diberikan") + "</span>";
+        if (tu[k].length > 1) {
+          html += '<span class="var">' + tu[k].map(function (v, i) {
+            var nm = "var-" + k, chk = varianLama[nm] ? varianLama[nm] === v : i === 0;
+            return '<label><input type="radio" name="' + nm + '" value="' + esc(v) + '"' + (chk ? " checked" : "") + "> " + esc(v) + "</label>";
+          }).join("") + "</span>";
+        }
+        return html + "</label>";
+      }).join("") : '<p class="hint">' + (c ? "Tidak ada top up Special CMG untuk CBG ini." : "Pilih kode CBG dulu.") + "</p>";
+    }
+  }
+
+  function bacaInput() {
+    var fk = faskes(), kode = $("kode").value.trim().toUpperCase().split(" ")[0];
+    var sps = [];
+    $("sps-list").querySelectorAll("input[type=checkbox]:checked").forEach(function (x) {
+      var v = document.querySelector('input[name="var-' + x.value + '"]:checked');
+      sps.push(v ? x.value + ":" + v.value : x.value);
+    });
+    var inp = {
+      kode_cbg: kode,
+      provinsi: fk === "nasional" ? null : $("provinsi").value,
+      kelas_rs: fk === "rs" ? $("kelas-rs").value : null,
+      kepemilikan: fk === "nasional" ? null : $("kepemilikan").value,
+      rs_khusus_nasional: fk === "nasional" ? $("rs-nas").value : null,
+      tipe_rs: fk === "rs" ? $("tipe-rs").value : "umum",
+      sesuai_kekhususan: !(fk === "rs" && $("luar-khusus").checked),
+      klinik_utama: fk === "klinik",
+      persen_klinik_utama: fk === "klinik" ? num("persen-klinik") : null,
+      kelas_rawat: null,
+      icd10: daftar($("icd10").value), icd9: daftar($("icd9").value), kode_spesial: sps,
+      los: num("los"), adl_subakut: num("adl-sub"), adl_kronis: num("adl-kro"),
+      hd_reuse: $("hd-reuse").checked && kode === "N-3-15-0",
+      naik_kelas: $("naik").value || null, rawat_jalan_eksekutif: $("rj-eks").checked,
+      jenis_peserta: $("peserta").value || null, biaya_riil: num("biaya")
+    };
+    var c = eng.data.cbg[kode];
+    if (c && c[1] === "RI") inp.kelas_rawat = Number(document.querySelector("input[name=kelas]:checked").value);
+    return inp;
+  }
+
+  function render() {
+    aturForm();
+    var out = $("hasil"), inp = bacaInput(), h;
+    if (!inp.kode_cbg) { out.innerHTML = '<div class="eyebrow">Rincian klaim</div><h2>Belum ada kode CBG</h2><p class="meta">Ketik kode CBG atau kata kunci di kolom pertama, lalu pilih dari daftar.</p>'; return; }
+    try { h = eng.hitung(inp); }
+    catch (e) {
+      out.innerHTML = '<div class="eyebrow">Rincian klaim</div><h2>Lengkapi isian</h2><div class="block bad">' + esc(e.message) + "</div>";
+      return;
+    }
+    var reg = h.regional === "NASIONAL" ? "tarif nasional" : "Regional " + h.regional;
+    var s = '<div class="eyebrow">Rincian klaim ' + (h.jenis_rawat === "RAWAT INAP" ? "rawat inap" : "rawat jalan") + "</div>" +
+      '<h2><span class="code">' + h.kode_cbg + "</span>" + esc(h.deskripsi_cbg) + "</h2>" +
+      '<p class="meta">' + esc(h.kelompok_tarif) + " &middot; " + reg + (h.kelas_rawat ? " &middot; hak kelas " + h.kelas_rawat : "") + "</p>";
+    if (!h.tarif_dasar_tersedia) {
+      s += '<div class="block bad"><strong>Tarif tidak tersedia.</strong> Di PDF hal. ' + h.sumber_halaman + " CBG ini bertanda &ldquo;-&rdquo; untuk kelompok RS tersebut, artinya layanan tidak dijamin di kelas RS ini.</div>";
+    } else {
+      s += '<table class="rincian"><tbody>';
+      s += '<tr><td><span class="lbl">Tarif dasar CBG</span><span class="src">Lampiran III &middot; PDF hal. ' + h.sumber_halaman + '</span></td><td class="amt">' + rp(h.tarif_dasar) + "</td></tr>";
+      h.topup.forEach(function (t) {
+        if (t.diterima) s += '<tr><td><span class="lbl">Top up ' + t.kode_spesial + "</span> " + esc(t.deskripsi) + '<span class="src">' + (t.sumber === "dipilih" ? "dipilih" : "otomatis dari ICD-9-CM") + " &middot; PDF hal. " + t.sumber_halaman + '</span></td><td class="amt">' + rp(t.nilai) + "</td></tr>";
+        else s += '<tr class="tolak"><td><span class="lbl">Top up ' + t.kode_spesial + "</span> " + esc(t.deskripsi) + '<span class="src">Ditolak: ' + esc(t.alasan) + '</span></td><td class="amt">Rp0</td></tr>';
+      });
+      var sk = h.topup_subakut_kronis;
+      if (sk) {
+        s += '<tr><td><span class="lbl">Top up fase sub akut</span><span class="src">' + sk.los_subakut + " hari &middot; 0,375 &times; ADL/60 &times; Rp879.103 &times; hari &middot; hal. 84</span></td><td class=\"amt\">" + rp(sk.topup_subakut) + "</td></tr>";
+        if (sk.los_kronis) s += '<tr><td><span class="lbl">Top up fase kronis</span><span class="src">' + sk.los_kronis + " hari &middot; 0,25 &times; ADL/60 &times; Rp879.103 &times; hari &middot; hal. 84</span></td><td class=\"amt\">" + rp(sk.topup_kronis) + "</td></tr>";
+      }
+      s += '<tr class="total"><td>Total klaim INA-CBG</td><td class="amt">' + rp(h.total_klaim_inacbg) + "</td></tr></tbody></table>";
+      if (h.rentang_total) s += '<div class="block info"><h3>Rentang klinik utama</h3><div>Pada ' + h.rentang_total.persen[0] + "&ndash;" + h.rentang_total.persen[1] + '% tarif kelas D: <span class="big">' + rp(h.rentang_total.total[0]) + " &ndash; " + rp(h.rentang_total.total[1]) + "</span></div></div>";
+    }
+    if (h.kandidat_topup.length) {
+      s += '<div class="block info"><h3>Kandidat top up</h3><div>Pemicu ICD cocok. Centang di formulir bila obat/alat ini benar diberikan:</div><ul>' +
+        h.kandidat_topup.map(function (k) { return "<li><strong>" + k.kode_spesial + "</strong> " + esc(k.deskripsi) + " (" + esc(k.jenis) + ")</li>"; }).join("") + "</ul></div>";
+    }
+    var sb = h.selisih_biaya;
+    if (sb) {
+      s += '<div class="block ' + (sb.berlaku ? "info" : "warn") + '"><h3>Selisih biaya naik kelas</h3>';
+      if (!sb.berlaku) s += "<div>Tidak berlaku. " + esc(sb.dasar) + "</div>";
+      else {
+        if (sb.nilai != null) s += '<div>Peserta membayar <span class="big">' + rp(sb.nilai) + "</span></div>";
+        else s += "<div>" + (sb.pasti != null ? "Minimal " + rp(sb.pasti) + ", " : "") + 'paling banyak <span class="big">' + rp(sb.maksimum) + "</span></div>";
+        s += '<div class="hint">' + esc(sb.dasar) + "</div>";
+      }
+      s += "</div>";
+    }
+    var pr = h.peringatan.filter(function (x, i, a) { return a.indexOf(x) === i; });
+    if (pr.length) s += '<div class="block warn"><h3>Perlu dicek</h3><ul>' + pr.map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") + "</ul></div>";
+    s += '<p class="disclaimer">' + esc(h.disclaimer) + "</p>";
+    out.innerHTML = s;
+  }
+
+  function isi(o) {
+    $("fk-" + (o.faskes || "rs")).checked = true;
+    $("kode").value = o.kode || "";
+    $("provinsi").value = o.provinsi || "Jawa Barat";
+    $("kelas-rs").value = o.kelas || "B";
+    $("kepemilikan").value = o.milik || "SWASTA";
+    $("tipe-rs").value = "umum"; $("luar-khusus").checked = false;
+    $("k" + (o.hak || 1)).checked = true;
+    $("icd10").value = o.icd10 || ""; $("icd9").value = o.icd9 || "";
+    ["los", "adl-sub", "adl-kro", "biaya"].forEach(function (id) { $(id).value = ""; });
+    $("naik").value = o.naik || ""; $("peserta").value = ""; $("rj-eks").checked = false; $("hd-reuse").checked = false;
+    $("sps-list").dataset.kode = ""; $("sps-list").innerHTML = "";
+    aturForm();
+    (o.sps || []).forEach(function (k) { var x = $("sps-" + k); if (x) x.checked = true; });
+    render();
+  }
+
+  $("f").addEventListener("input", render);
+  $("f").addEventListener("change", render);
+  $("f").addEventListener("submit", function (e) { e.preventDefault(); });
+  $("btn-contoh").addEventListener("click", function () { isi({ kode: "I-1-40-I", icd9: "36.06" }); });
+  $("btn-hip").addEventListener("click", function () { isi({ kode: "M-1-04-I", icd9: "81.51", hak: 2, naik: "VIP", sps: ["RR-04-III"] }); });
+  $("btn-kosong").addEventListener("click", function () { isi({ kode: "" }); });
+
+  fetch("data/kalkulator.json").then(function (r) {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  }).then(function (data) {
+    eng = INACBG.buat(data);
+    $("daftar-cbg").innerHTML = Object.keys(data.cbg).map(function (k) {
+      return '<option value="' + k + '">' + esc(data.cbg[k][0]) + "</option>";
+    }).join("");
+    isi({ kode: "I-1-40-I", icd9: "36.06" });
+  }).catch(function (e) {
+    $("hasil").innerHTML = '<div class="eyebrow">Rincian klaim</div><div class="block bad">Data tarif gagal dimuat (' + esc(e.message) + "). Muat ulang halaman.</div>";
+  });
+})();
+</script>
