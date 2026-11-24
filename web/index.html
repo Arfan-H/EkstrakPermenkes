@@ -10,6 +10,7 @@
  * axes: light/grotesk-sans/warm · posture: restrained · contrast: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V3 · weakest: V, a form beside a result is the category's own shape; kept it because coders know it, and moved the identity into the statement sheet and the pressed estimasi mark */
 /* Hallmark · dismissed F4 · the cotton card buttons are Coral's letterpress secondary control on paper stock; the ink board Hitung is the one filled primary */
+/* Hallmark · dropped daftar-cbg · the native datalist opened beside the field in Chrome; replaced by the listbox #cbg-list that opens below it */
 /* Hallmark · fonts: General Sans loads from Fontshare where the host allows it; Hanken Grotesk (Google Fonts) is the same-build fallback for hosts that only admit Google Fonts */
 
 /* tokens.css (Coral, app scale) */
@@ -89,6 +90,16 @@ button, input, select, textarea { font: inherit; }
 .input:disabled { opacity: 0.55; cursor: not-allowed; background-color: var(--color-paper-2); }
 .input[aria-invalid="true"] { border-color: var(--color-error); }
 @media (hover: hover) { .input:not(:disabled):hover { background-color: var(--color-paper-2); } }
+.field > label { font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); }
+.combo { position: relative; }
+.listbox { position: absolute; left: 0; right: 0; top: calc(100% + var(--space-2xs)); z-index: var(--z-dropdown); max-height: min(22rem, 55vh); overflow-y: auto; overscroll-behavior: contain; margin: 0; padding: var(--space-2xs); list-style: none; background-color: var(--color-cotton); background-image: var(--tex-cotton); border-radius: var(--radius-card); box-shadow: var(--edge-stock), var(--cast-stock-lift); }
+.opt { display: grid; gap: var(--space-3xs); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-input); cursor: pointer; }
+.opt .fig { font-size: var(--text-sm); font-weight: 500; color: var(--color-print); }
+.opt .d { font-size: var(--text-sm); color: var(--color-ink-2); }
+.opt[aria-selected="true"] { background-color: var(--color-paper-3); }
+@media (hover: hover) { .opt:hover { background-color: var(--color-paper-2); } }
+.opt-note { padding: var(--space-xs) var(--space-sm); font-size: var(--text-sm); color: var(--color-muted); }
+.cbg-info .hint { color: var(--color-muted); }
 .cbg-info { display: grid; gap: var(--space-3xs); min-height: 1lh; font-size: var(--text-sm); }
 .cbg-info strong { font-weight: 500; color: var(--color-ink); }
 .cbg-info .err { color: var(--color-error); }
@@ -207,10 +218,12 @@ button, input, select, textarea { font: inherit; }
   <form class="stock entry" id="f" autocomplete="off" novalidate aria-label="Data klaim">
     <section class="grp" aria-labelledby="h-cbg">
       <h2 id="h-cbg">Kode CBG</h2>
-      <label class="field"><span>Kode, atau kata kunci diagnosis dan prosedur</span>
-        <input type="text" id="kode" class="input code" list="daftar-cbg" placeholder="I-1-40-I" aria-describedby="cbg-info" spellcheck="false">
-      </label>
-      <datalist id="daftar-cbg"></datalist>
+      <div class="field combo">
+        <label for="kode">Kode, atau kata kunci diagnosis dan prosedur</label>
+        <input type="text" id="kode" class="input code" placeholder="I-1-40-I" aria-describedby="cbg-info" spellcheck="false"
+          role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="cbg-list">
+        <ul class="listbox" id="cbg-list" role="listbox" aria-label="Kode CBG yang cocok" hidden></ul>
+      </div>
       <div class="cbg-info" id="cbg-info" aria-live="polite"></div>
     </section>
 
@@ -659,7 +672,7 @@ if (typeof module !== "undefined") module.exports = INACBG;
     var kode = kodeSekarang(), c = eng && eng.data.cbg[kode], info = $("cbg-info");
     $("kode").removeAttribute("aria-invalid");
     if (c) info.innerHTML = "<strong>" + esc(c[0]) + "</strong><span>" + (c[1] === "RI" ? "Rawat inap" : "Rawat jalan") + "</span>";
-    else if (kode && eng) info.innerHTML = '<span class="err">Kode belum dikenal. Pilih dari daftar, atau ketik kode lengkap seperti I-1-40-I.</span>';
+    else if (kode && eng) info.innerHTML = '<span class="hint">Pilih kode dari daftar di bawah kolom, atau ketik kode lengkap seperti I-1-40-I.</span>';
     else info.innerHTML = "";
     var ri = !c || c[1] === "RI";
     document.querySelectorAll("input[name=kelas]").forEach(function (x) { x.disabled = !ri; });
@@ -746,7 +759,10 @@ if (typeof module !== "undefined") module.exports = INACBG;
       hasil.dataset.state = "error";
       hasil.innerHTML = '<div class="st-head"><h2 id="h-hasil">Rincian klaim</h2></div>' +
         '<div class="part bad"><h3>Belum bisa dihitung</h3><p>' + esc(e.message) + "</p><p>Perbaiki isian di formulir, lalu tekan Hitung lagi.</p></div>";
-      if (!eng.data.cbg[inp.kode_cbg]) { $("kode").setAttribute("aria-invalid", "true"); $("kode").focus(); }
+      if (!eng.data.cbg[inp.kode_cbg]) {
+        $("kode").setAttribute("aria-invalid", "true"); $("kode").focus();
+        $("cbg-info").innerHTML = '<span class="err">Kode belum dikenal. Pilih dari daftar, atau ketik kode lengkap seperti I-1-40-I.</span>';
+      }
       return;
     }
     sudahDihitung = true;
@@ -800,7 +816,7 @@ if (typeof module !== "undefined") module.exports = INACBG;
 
   function isi(o) {
     $("fk-" + (o.faskes || "rs")).checked = true;
-    $("kode").value = o.kode || "";
+    $("kode").value = o.kode || ""; tutup();
     $("provinsi").value = o.provinsi || "Jawa Barat";
     $("kelas-rs").value = o.kelas || "B";
     $("kepemilikan").value = o.milik || "SWASTA";
@@ -816,6 +832,55 @@ if (typeof module !== "undefined") module.exports = INACBG;
     kosong();
   }
 
+  // daftar kode CBG yang terbuka ke bawah (pengganti datalist bawaan browser)
+  var kodeEl = $("kode"), lb = $("cbg-list"), cocok = [], aktif = -1, MAKS = 60;
+  function cari(q) {
+    q = q.trim().toUpperCase();
+    if (!q || !eng) return [];
+    var kode = [], desk = [];
+    Object.keys(eng.data.cbg).forEach(function (k) {
+      if (k.indexOf(q) === 0) kode.push(k);
+      else if (eng.data.cbg[k][0].indexOf(q) >= 0 || k.indexOf(q) >= 0) desk.push(k);
+    });
+    return kode.concat(desk);
+  }
+  function tutup() { lb.hidden = true; kodeEl.setAttribute("aria-expanded", "false"); kodeEl.removeAttribute("aria-activedescendant"); aktif = -1; }
+  function tandai(i) {
+    var opts = lb.querySelectorAll(".opt");
+    if (!opts.length) return;
+    aktif = (i + opts.length) % opts.length;
+    opts.forEach(function (o, j) { o.setAttribute("aria-selected", j === aktif ? "true" : "false"); });
+    kodeEl.setAttribute("aria-activedescendant", opts[aktif].id);
+    opts[aktif].scrollIntoView({ block: "nearest" });
+  }
+  function buka() {
+    cocok = cari(kodeEl.value);
+    var tepat = cocok.length === 1 && cocok[0] === kodeSekarang();
+    if (!kodeEl.value.trim() || tepat) { tutup(); return; }
+    lb.innerHTML = cocok.length ? cocok.slice(0, MAKS).map(function (k, i) {
+      return '<li class="opt" role="option" id="opt-' + i + '" data-kode="' + k + '" aria-selected="false"><span class="fig">' + k + '</span><span class="d">' + esc(eng.data.cbg[k][0]) + "</span></li>";
+    }).join("") + (cocok.length > MAKS ? '<li class="opt-note" role="presentation">' + (cocok.length - MAKS) + " kode lain cocok. Ketik lebih spesifik.</li>" : "")
+      : '<li class="opt-note" role="presentation">Tidak ada kode atau deskripsi yang cocok.</li>';
+    lb.hidden = false; kodeEl.setAttribute("aria-expanded", "true"); aktif = -1;
+    kodeEl.removeAttribute("aria-activedescendant");
+  }
+  function pilih(k) {
+    kodeEl.value = k; tutup(); aturForm(); tandaiBasi(); kodeEl.focus();
+  }
+  kodeEl.addEventListener("input", buka);
+  kodeEl.addEventListener("focus", function () { if (kodeEl.value.trim()) buka(); });
+  kodeEl.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowDown") { e.preventDefault(); if (lb.hidden) buka(); tandai(aktif + 1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); if (!lb.hidden) tandai(aktif - 1); }
+    else if (e.key === "Enter" && !lb.hidden && aktif >= 0) { e.preventDefault(); pilih(lb.querySelectorAll(".opt")[aktif].dataset.kode); }
+    else if (e.key === "Escape" && !lb.hidden) { e.preventDefault(); tutup(); }
+  });
+  kodeEl.addEventListener("blur", function () { setTimeout(tutup, 120); });
+  lb.addEventListener("mousedown", function (e) {
+    var o = e.target.closest(".opt");
+    if (o) { e.preventDefault(); pilih(o.dataset.kode); }
+  });
+
   var f = $("f");
   f.addEventListener("input", function () { aturForm(); tandaiBasi(); });
   f.addEventListener("change", function () { aturForm(); tandaiBasi(); });
@@ -830,9 +895,6 @@ if (typeof module !== "undefined") module.exports = INACBG;
     return r.json();
   }).then(function (data) {
     eng = INACBG.buat(data);
-    $("daftar-cbg").innerHTML = Object.keys(data.cbg).map(function (k) {
-      return '<option value="' + k + '">' + esc(data.cbg[k][0]) + "</option>";
-    }).join("");
     $("btn-hitung").disabled = false;
     isi({ kode: "I-1-40-I", icd9: "36.06" });
   }).catch(function (e) {
