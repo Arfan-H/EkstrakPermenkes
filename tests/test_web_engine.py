@@ -132,3 +132,46 @@ fs.writeFileSync('./out.json', JSON.stringify(out));
     assert n_ok > 400, n_ok
     for x in beda[:6]: print("BEDA", x)
     assert not beda, len(beda)
+
+
+def test_penuntun_js_sama_dengan_python(tmp_path):
+    from inacbg import penuntun as P
+    eng = INACBGEngine()
+    trig = [{"kode_spesial": d["kode_spesial"], "cbg": d["cbg"], "ICD10": d["ICD10"], "ICD9CM": d["ICD9CM"]}
+            for d in eng.trigger.values()]
+    rnd = random.Random(11)
+    dxs = ["I21.0", "A41.9", "K35.8", "O82.0", "J06.9", "I63.9", "M17.1", "P07.1", "Z51.1", "V89.2", "C50.9",
+           "D48.5", "Q21.0", "R10.4", "T81.4", "Z38.0", "F10.2", "N40", "H25.9", "X99", "", "U07.1", "K80.2"]
+    pros = ["36.06", "81.54", "74.1", "99.25", "47.09", "39.95", "13.41", "92.27", "86.22", "99.99", "1"]
+    cases = []
+    for _ in range(400):
+        cases.append({"icd10_utama": rnd.choice(dxs), "icd9": rnd.sample(pros, rnd.randint(0, 2)),
+                      "jenis_rawat": rnd.choice(["RI", "RJ"]), "kategori": rnd.choice(["umum", "umum", "kebidanan", "neonatal"]),
+                      "ada_prosedur": rnd.choice([None, True, False]), "severity": rnd.choice([None, "I", "II", "III"]),
+                      "maks": rnd.choice([60, 1000])})
+    ref = [P.tebak(eng.cbg, trig, **c) for c in cases]
+    src = open(HTML, encoding="utf-8").read()
+    js = re.search(r'<script id="engine">(.*?)</script>', src, re.S).group(1)
+    (tmp_path / "engine.js").write_text(js, encoding="utf-8")
+    (tmp_path / "cases.json").write_text(json.dumps(cases), encoding="utf-8")
+    (tmp_path / "run.js").write_text("""
+const E = require('./engine.js'); const fs = require('fs');
+const eng = E.buat(JSON.parse(fs.readFileSync(process.argv[2], 'utf8')));
+const cases = JSON.parse(fs.readFileSync('./cases.json', 'utf8'));
+fs.writeFileSync('./out.json', JSON.stringify(cases.map(c => eng.tebak(c))));
+""", encoding="utf-8")
+    subprocess.run(["node", "run.js", DATA], cwd=tmp_path, check=True)
+    got = json.loads((tmp_path / "out.json").read_text(encoding="utf-8"))
+    beda = []
+    for i, (a, b) in enumerate(zip(ref, got)):
+        for k in ("case_group", "cmg", "jumlah_kandidat", "peringatan", "disclaimer", "severity"):
+            if json.loads(json.dumps(a[k])) != b[k]:
+                beda.append((i, k, a[k], b[k]))
+        ka = [(x["grup"], x["cmg"], x["case_group"], x["deskripsi"], x["alasan"], x["lampiran_ia"], x["kode"], x["kode_terpilih"]) for x in a["kandidat"]]
+        kb = [(x["grup"], x["cmg"], x["case_group"], x["deskripsi"], x["alasan"], x["lampiran_ia"], x["kode"], x["kode_terpilih"]) for x in b["kandidat"]]
+        if ka != kb:
+            beda.append((i, "kandidat", ka[:2], kb[:2]))
+    for x in beda[:4]:
+        print("BEDA", cases[x[0]], x[1:])
+    assert not beda, len(beda)
+

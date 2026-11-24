@@ -14,6 +14,7 @@ Pemakaian: python scripts/bangun_data_web.py
 import csv
 import json
 import os
+import sys
 from collections import defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -96,7 +97,13 @@ def main():
     for d in trig.values():
         d["hal"] = sorted(d["hal"])
 
-    data = {"grup": GRUP, "halaman_awal": {"RI": awal_ri, "RJ": awal_rj}, "cbg": out_cbg,
+    sys.path.insert(0, os.path.join(ROOT, "src"))
+    from inacbg import penuntun as PN
+    penuntun = {"icd10": [list(b) for b in PN.ICD10_KE_CMG], "icd10_awalan": [list(b) for b in PN.ICD10_AWALAN],
+                "icd9": [list(b) for b in PN.ICD9_KE_CMG], "icd9_awalan": [list(b) for b in PN.ICD9_AWALAN],
+                "case_group": {str(k): v for k, v in PN.CASE_GROUP.items()}, "severity": PN.SEVERITY,
+                "disclaimer": PN.DISCLAIMER_PENUNTUN}
+    data = {"penuntun": penuntun, "grup": GRUP, "halaman_awal": {"RI": awal_ri, "RJ": awal_rj}, "cbg": out_cbg,
             "topup": list(tp.values()), "special": sp, "trigger": list(trig.values())}
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:

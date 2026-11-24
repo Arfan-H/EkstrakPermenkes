@@ -256,7 +256,7 @@ Tambahan test:
 
 ## Roadmap
 
-Status (24 Nov 2026): fase 1–4 sudah diimplementasikan di `src/inacbg/` (CLI `python -m inacbg`), test di `tests/`.
+Status (24 Nov 2026): fase 1–5 sudah diimplementasikan di `src/inacbg/` (CLI `python -m inacbg`, web `web/index.html` di GitHub Pages), test di `tests/`. Fase 6 bagian rule-based sudah ada sebagai **penuntun kode** (`src/inacbg/penuntun.py`, `inacbg tebak`, panel web): case group dari Tabel 2 PMK 26/2021, CMG dari pemetaan bab ICD buatan sendiri (bukan resmi), Lampiran I.A sebagai petunjuk kuat, severity dipilih pengguna. Keluaran = daftar grup kandidat berlabel ESTIMASI. Port JS-nya diuji identik dengan Python. Web punya dua menu (Kalkulator Tarif, Cari Kode CBG `#cari-kode`); di menu Cari Kode CBG diagnosis/tindakan dicari dengan nama Indonesia/awam, istilah Inggris, atau kode (`src/inacbg/icd.py`, data `scripts/bangun_icd.py`: ICD-10 WHO 2019 + kode 2010 yang berubah, ICD-9-CM CMS v32, istilah `data/manual/istilah_icd.csv` disusun sendiri). Kandidat urut kode, bukan peringkat kemungkinan (uji urutan kata kunci terlalu sering menyesatkan, mis. pneumonia ke "emboli paru").
 
 
 1. **Fase 1 — Data bersih + lookup CBG → tarif** (dari xlsx yang ada) + unit test golden values.

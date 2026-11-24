@@ -48,7 +48,8 @@ def main():
     os.makedirs(os.path.join(out, "data"))
     with open(os.path.join(out, "index.html"), "w", encoding="utf-8") as f:
         f.write(KERANGKA.replace("{kepala}", kepala).replace("{isi}", isi.strip()))
-    shutil.copy(os.path.join(WEB, "data", "kalkulator.json"), os.path.join(out, "data", "kalkulator.json"))
+    for nama in ("kalkulator.json", "icd.json"):
+        shutil.copy(os.path.join(WEB, "data", nama), os.path.join(out, "data", nama))
     open(os.path.join(out, ".nojekyll"), "w").close()
     print(f"situs ditulis ke {out}")
 
