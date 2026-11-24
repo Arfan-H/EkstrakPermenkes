@@ -1,0 +1,13 @@
+Perbandingan Special CMG: Tabel 4 Permenkes 26/2021 (hal. 14-20) vs Lampiran I.A Permenkes 3/2023 (hal. 31-39)
+Kode spesial di PMK 26/2021: 31; di PMK 3/2023: 36
+
+DD-06-II cbg: PMK 3/2023 menambah ['D-4-11-II', 'D-4-11-III']; tidak ada lagi di PMK 3/2023 -
+RR-02-II icd9: PMK 3/2023 menambah ['35.92']; tidak ada lagi di PMK 3/2023 ['35.81']
+YY-08-III icd9: PMK 3/2023 menambah ['32.50', '32.59']; tidak ada lagi di PMK 3/2023 -
+YY-13-III: hanya di PMK 3/2023
+YY-14-III: hanya di PMK 3/2023
+YY-15-III: hanya di PMK 3/2023
+YY-16-III: hanya di PMK 3/2023
+YY-17-III: hanya di PMK 3/2023
+
+Identik di kedua peraturan (28): DD-01-I, DD-02-II, DD-03-II, DD-04-II, DD-05-II, DD-07-II, DD-08-II, DD-09-II, DD-10-II, DD-11-II, II-01-III, II-02-III, II-03-III, RR-01-II, RR-03-III, RR-04-III, RR-05-III, YY-01-II, YY-02-III, YY-03-III, YY-04-III, YY-05-III, YY-06-III, YY-07-III, YY-09-III, YY-10-III, YY-11-III, YY-12-III

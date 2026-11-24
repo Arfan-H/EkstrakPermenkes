@@ -305,18 +305,19 @@ button, input, select, textarea { font: inherit; }
       </div>
       <div class="sub" role="group" aria-labelledby="h-lama">
         <h3 id="h-lama">Rawat inap lama (sub akut dan kronis)</h3>
+        <label class="check"><input type="checkbox" id="psikiatri-kusta"> Pasien psikiatri atau kusta</label>
         <div class="row">
           <label class="field"><span>Lama rawat (hari)</span>
             <input type="number" id="los" class="input fig" min="1" step="1" inputmode="numeric" aria-describedby="los-help">
             <span class="help" id="los-help">Isi bila lebih dari 42 hari</span>
           </label>
-          <label class="field"><span>Skor ADL fase sub akut</span>
-            <input type="number" id="adl-sub" class="input fig" min="1" max="60" step="1" inputmode="numeric" aria-describedby="adl-sub-help" disabled>
-            <span class="help" id="adl-sub-help">Aktif bila lama rawat lebih dari 42 hari</span>
+          <label class="field"><span>Skor WHODAS 2.0 fase sub akut</span>
+            <input type="number" id="adl-sub" class="input fig" min="12" max="60" step="1" inputmode="numeric" aria-describedby="adl-sub-help" disabled>
+            <span class="help" id="adl-sub-help">Aktif untuk pasien psikiatri atau kusta</span>
           </label>
-          <label class="field"><span>Skor ADL fase kronis</span>
-            <input type="number" id="adl-kro" class="input fig" min="1" max="60" step="1" inputmode="numeric" aria-describedby="adl-kro-help" disabled>
-            <span class="help" id="adl-kro-help">Aktif bila lama rawat lebih dari 103 hari</span>
+          <label class="field"><span>Skor WHODAS 2.0 fase kronis</span>
+            <input type="number" id="adl-kro" class="input fig" min="12" max="60" step="1" inputmode="numeric" aria-describedby="adl-kro-help" disabled>
+            <span class="help" id="adl-kro-help">Aktif untuk pasien psikiatri atau kusta</span>
           </label>
         </div>
       </div>
@@ -427,9 +428,11 @@ var INACBG = (function () {
   function losFase(los) {
     return [Math.min(los, LOS_AKUT), Math.max(0, Math.min(los, LOS_SUB) - LOS_AKUT), Math.max(0, los - LOS_SUB)];
   }
+  // Permenkes 26/2021 hal. 21: skor ADL = skor WHODAS 2.0, 12 variabel x skala 1 sampai 5
+  var ADL_MIN = 12, ADL_MAX = 60;
   function riw(adl) {
     adl = Number(adl);
-    if (!(adl > 0 && adl <= 60)) throw new Error("Skor ADL harus di antara 0 dan 60, didapat " + adl);
+    if (!(adl >= ADL_MIN && adl <= ADL_MAX)) throw new Error("Skor ADL (WHODAS 2.0) harus 12 sampai 60, didapat " + adl);
     return adl / 60;
   }
   function subakutKronis(los, adlS, adlK) {
@@ -617,9 +620,13 @@ var INACBG = (function () {
 
       if (inp.los != null && inp.los > LOS_AKUT) {
         if (jr !== "RI") throw new Error("Kasus sub akut/kronis hanya untuk rawat inap");
-        h.topup_subakut_kronis = subakutKronis(inp.los, inp.adl_subakut, inp.adl_kronis);
-        pr.push("Top up sub-akut/kronis hanya untuk kasus yang memenuhi kriteria special CMG subacute/chronic (Pasal 27).");
-        if (inp.los > LOS_KRONIS) pr.push("LOS " + inp.los + " hari melebihi batas fase kronis (180 hari) di hal. 84; rumus tetap diterapkan.");
+        // hanya kasus psikiatri dan kusta (Permenkes 26/2021 hal. 20 sampai 21)
+        if (!inp.kasus_psikiatri_kusta) {
+          pr.push("Top up sub akut dan kronis hanya untuk kasus psikiatri dan kusta (Permenkes 26/2021 hal. 20); lama rawat tidak menambah tarif.");
+        } else {
+          h.topup_subakut_kronis = subakutKronis(inp.los, inp.adl_subakut, inp.adl_kronis);
+          if (inp.los > LOS_KRONIS) pr.push("LOS " + inp.los + " hari: perawatan lebih dari 180 hari diklaim sebagai satu episode dengan fase kronis (PMK 26/2021 hal. 21).");
+        }
       }
       var total = h.tarif_dasar + h.topup.reduce(function (a, x) { return a + (x.diterima ? x.nilai : 0); }, 0);
       if (h.topup_subakut_kronis) total += h.topup_subakut_kronis.topup_subakut + h.topup_subakut_kronis.topup_kronis;
@@ -641,7 +648,7 @@ var INACBG = (function () {
       return out;
     } };
   }
-  return { buat: buat, REGIONAL: REGIONAL, losFase: losFase };
+  return { buat: buat, REGIONAL: REGIONAL, losFase: losFase, ADL_MIN: ADL_MIN, ADL_MAX: ADL_MAX };
 })();
 if (typeof module !== "undefined") module.exports = INACBG;
 </script>
@@ -708,22 +715,26 @@ if (typeof module !== "undefined") module.exports = INACBG;
     }).join("") : '<p class="empty-line">' + (c ? "Tidak ada top up Special CMG untuk kode ini." : "Pilih kode CBG dulu.") + "</p>";
   }
 
-  // kolom rawat inap lama: ADL aktif sesuai fase yang dicapai lama rawat (hal. 84)
+  // kolom rawat inap lama: skor WHODAS 2.0 aktif hanya untuk pasien psikiatri atau kusta
+  // (PMK 26/2021 hal. 20 sampai 21), sesuai fase yang dicapai lama rawat (PMK 3/2023 hal. 84)
   function aturLama(ri) {
-    var los = $("los"), sub = $("adl-sub"), kro = $("adl-kro");
-    los.disabled = !ri;
+    var los = $("los"), sub = $("adl-sub"), kro = $("adl-kro"), pk = $("psikiatri-kusta");
+    los.disabled = !ri; pk.disabled = !ri;
+    var ok = ri && pk.checked;
     var n = ri ? num("los") : null, f = n && n > 0 ? INACBG.losFase(Math.floor(n)) : null;
-    sub.disabled = !(f && f[1] > 0);
-    kro.disabled = !(f && f[2] > 0);
+    sub.disabled = !(ok && f && f[1] > 0);
+    kro.disabled = !(ok && f && f[2] > 0);
     var help = $("los-help");
     if (!ri) help.textContent = "Tidak dipakai untuk rawat jalan";
     else if (!f || (!f[1] && !f[2])) help.textContent = "Isi bila lebih dari 42 hari";
-    else help.textContent = n + " hari = " + f[0] + " akut + " + f[1] + " sub akut" + (f[2] ? " + " + f[2] + " kronis" : "") + (n > 180 ? ". PMK mengatur sampai 180 hari" : "");
+    else if (!pk.checked) help.textContent = n + " hari. Top up sub akut dan kronis hanya untuk pasien psikiatri atau kusta";
+    else help.textContent = n + " hari = " + f[0] + " akut + " + f[1] + " sub akut" + (f[2] ? " + " + f[2] + " kronis" : "") + (n > 180 ? ", lebih dari 180 hari tetap satu episode fase kronis" : "");
     [[sub, "adl-sub-help", 42], [kro, "adl-kro-help", 103]].forEach(function (x) {
       var el = x[0], hp = $(x[1]);
       if (el.getAttribute("aria-invalid") === "true" && !el.disabled) return;
       el.removeAttribute("aria-invalid"); hp.classList.remove("err");
-      hp.textContent = el.disabled ? "Aktif bila lama rawat lebih dari " + x[2] + " hari" : "1 sampai 60";
+      hp.textContent = !el.disabled ? INACBG.ADL_MIN + " sampai " + INACBG.ADL_MAX
+        : (!pk.checked ? "Aktif untuk pasien psikiatri atau kusta" : "Aktif bila lama rawat lebih dari " + x[2] + " hari");
     });
   }
 
@@ -734,8 +745,8 @@ if (typeof module !== "undefined") module.exports = INACBG;
       var el = $(x[0]), hp = $(x[1]);
       if (el.disabled) return;
       var v = num(x[0]), msg = null;
-      if (v == null) msg = "Isi skor ADL " + x[2] + " (1 sampai 60).";
-      else if (!(v >= 1 && v <= 60)) msg = "Skor ADL " + x[2] + " harus 1 sampai 60.";
+      if (v == null) msg = "Isi skor WHODAS 2.0 " + x[2] + " (12 sampai 60).";
+      else if (!(v >= INACBG.ADL_MIN && v <= INACBG.ADL_MAX)) msg = "Skor WHODAS 2.0 " + x[2] + " harus 12 sampai 60.";
       if (msg) {
         el.setAttribute("aria-invalid", "true"); hp.textContent = msg; hp.classList.add("err");
         if (!salah) salah = { el: el, msg: "Lama rawat " + num("los") + " hari: " + msg.charAt(0).toLowerCase() + msg.slice(1) };
@@ -763,6 +774,7 @@ if (typeof module !== "undefined") module.exports = INACBG;
       kelas_rawat: null,
       icd10: daftar($("icd10").value), icd9: daftar($("icd9").value), kode_spesial: sps,
       los: num("los"), adl_subakut: num("adl-sub"), adl_kronis: num("adl-kro"),
+      kasus_psikiatri_kusta: $("psikiatri-kusta").checked && !$("psikiatri-kusta").disabled,
       hd_reuse: $("hd-reuse").checked && kode === "N-3-15-0",
       naik_kelas: $("naik").value || null, rawat_jalan_eksekutif: $("rj-eks").checked,
       jenis_peserta: $("peserta").value || null, biaya_riil: num("biaya")
@@ -801,7 +813,7 @@ if (typeof module !== "undefined") module.exports = INACBG;
       sudahDihitung = false;
       hasil.dataset.state = "error";
       hasil.innerHTML = '<div class="st-head"><h2 id="h-hasil">Rincian klaim</h2></div>' +
-        '<div class="part bad"><h3>Belum bisa dihitung</h3><p>' + esc(salah.msg) + "</p><p>Kolom yang perlu diisi sudah ditandai merah di formulir. Bila ini bukan kasus sub akut atau kronis, kosongkan lama rawat.</p></div>";
+        '<div class="part bad"><h3>Belum bisa dihitung</h3><p>' + esc(salah.msg) + "</p><p>Kolom yang perlu diisi sudah ditandai merah di formulir. Bila pasien bukan psikiatri atau kusta, hapus centangnya.</p></div>";
       salah.el.focus();
       return;
     }
@@ -876,6 +888,7 @@ if (typeof module !== "undefined") module.exports = INACBG;
     $("k" + (o.hak || 1)).checked = true;
     $("icd10").value = o.icd10 || ""; $("icd9").value = o.icd9 || "";
     ["los", "adl-sub", "adl-kro", "biaya"].forEach(function (id) { $(id).value = ""; });
+    $("psikiatri-kusta").checked = false;
     $("naik").value = o.naik || ""; $("peserta").value = ""; $("rj-eks").checked = false; $("hd-reuse").checked = false;
     $("sps-list").dataset.kode = ""; $("sps-list").innerHTML = "";
     aturForm();

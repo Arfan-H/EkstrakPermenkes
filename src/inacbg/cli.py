@@ -93,6 +93,7 @@ def main(argv=None):
     h.add_argument("--los", type=int)
     h.add_argument("--adl-subakut", type=float)
     h.add_argument("--adl-kronis", type=float)
+    h.add_argument("--psikiatri-kusta", action="store_true", help="kasus psikiatri atau kusta (syarat top up sub akut/kronis)")
     h.add_argument("--hd-reuse", action="store_true")
     h.add_argument("--naik-kelas", choices=["1", "VIP", "vip"])
     h.add_argument("--rawat-jalan-eksekutif", action="store_true")
@@ -120,7 +121,7 @@ def main(argv=None):
         sesuai_kekhususan=not a.di_luar_kekhususan, klinik_utama=a.klinik_utama,
         persen_klinik_utama=a.persen_klinik_utama, kelas_rawat=a.kelas_rawat,
         icd10=_daftar(a.icd10), icd9=_daftar(a.icd9), kode_spesial=_daftar(a.kode_spesial),
-        los=a.los, adl_subakut=a.adl_subakut, adl_kronis=a.adl_kronis, hd_reuse=a.hd_reuse,
+        los=a.los, adl_subakut=a.adl_subakut, adl_kronis=a.adl_kronis, kasus_psikiatri_kusta=a.psikiatri_kusta, hd_reuse=a.hd_reuse,
         naik_kelas=a.naik_kelas, rawat_jalan_eksekutif=a.rawat_jalan_eksekutif,
         jenis_peserta=a.jenis_peserta, biaya_riil=a.biaya_riil)
     try:

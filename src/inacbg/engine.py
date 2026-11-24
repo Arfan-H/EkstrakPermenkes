@@ -50,6 +50,7 @@ class InputKlaim:
     los: Optional[int] = None
     adl_subakut: Optional[float] = None
     adl_kronis: Optional[float] = None
+    kasus_psikiatri_kusta: bool = False       # syarat top up sub akut/kronis (PMK 26/2021 hal. 20)
     hd_reuse: bool = False
     # selisih biaya
     naik_kelas: Optional[str] = None          # "1" atau "VIP"
@@ -294,18 +295,21 @@ class INACBGEngine(TariffEngine):
             asal = "dipilih" if ksp in dipilih else "otomatis dari ICD"
             hasil.topup.append(self._nilai_topup(ksp, var, kode, jr, rs, kelas, icd10, icd9, asal, peringatan))
 
-        # sub akut & kronis
+        # sub akut & kronis: hanya kasus psikiatri dan kusta (Permenkes 26/2021 hal. 20 sampai 21)
         if inp.los is not None and int(inp.los) > R.LOS_AKUT_MAKS:
             if jr != "RI":
                 raise KalkulatorError("Kasus sub akut/kronis hanya untuk rawat inap")
-            sk = R.topup_subakut_kronis(inp.los, inp.adl_subakut, inp.adl_kronis)
-            sk["dasar"] = "Perhitungan tarif special groups kasus sub-akut dan kronis (hal. 84)"
-            hasil.topup_subakut_kronis = sk
-            peringatan.append("Top up sub-akut/kronis hanya untuk kasus yang memenuhi kriteria "
-                              "special CMG subacute/chronic (Pasal 27).")
-            if int(inp.los) > R.LOS_KRONIS_MAKS:
-                peringatan.append(f"LOS {inp.los} hari melebihi batas fase kronis "
-                                  f"({R.LOS_KRONIS_MAKS} hari) di hal. 84; rumus tetap diterapkan.")
+            if not inp.kasus_psikiatri_kusta:
+                peringatan.append("Top up sub akut dan kronis hanya untuk kasus psikiatri dan kusta "
+                                  "(Permenkes 26/2021 hal. 20); lama rawat tidak menambah tarif.")
+            else:
+                sk = R.topup_subakut_kronis(inp.los, inp.adl_subakut, inp.adl_kronis)
+                sk["dasar"] = ("Perhitungan tarif special groups kasus sub-akut dan kronis (PMK 3/2023 hal. 84); "
+                               "skor ADL dari WHODAS 2.0 (PMK 26/2021 hal. 21)")
+                hasil.topup_subakut_kronis = sk
+                if int(inp.los) > R.LOS_KRONIS_MAKS:
+                    peringatan.append(f"LOS {inp.los} hari: perawatan lebih dari {R.LOS_KRONIS_MAKS} hari "
+                                      "diklaim sebagai satu episode dengan fase kronis (PMK 26/2021 hal. 21).")
 
         total = hasil.tarif_dasar + sum(t.nilai for t in hasil.topup if t.diterima)
         if hasil.topup_subakut_kronis:
