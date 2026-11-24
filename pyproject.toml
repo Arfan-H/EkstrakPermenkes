@@ -1,0 +1,24 @@
+[project]
+name = "inacbg"
+version = "0.1.0"
+description = "Kalkulator tarif INA-CBG berbasis Permenkes No. 3 Tahun 2023 (estimasi)"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+etl = ["pandas", "openpyxl", "pdfplumber"]
+dev = ["pytest"]
+
+[project.scripts]
+inacbg = "inacbg.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
