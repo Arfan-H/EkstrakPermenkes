@@ -100,6 +100,9 @@ button, input, select, textarea { font: inherit; }
 @media (hover: hover) { .opt:hover { background-color: var(--color-paper-2); } }
 .opt-note { padding: var(--space-xs) var(--space-sm); font-size: var(--text-sm); color: var(--color-muted); }
 .cbg-info .hint { color: var(--color-muted); }
+.sub { display: grid; gap: var(--space-sm); padding-top: var(--space-xs); }
+.sub > h3 { font-size: var(--text-sm); font-weight: 500; letter-spacing: 0; color: var(--color-ink-2); }
+.help.err { color: var(--color-error); }
 .cbg-info { display: grid; gap: var(--space-3xs); min-height: 1lh; font-size: var(--text-sm); }
 .cbg-info strong { font-weight: 500; color: var(--color-ink); }
 .cbg-info .err { color: var(--color-error); }
@@ -300,19 +303,22 @@ button, input, select, textarea { font: inherit; }
         <span class="label" id="sps-label">Top up Special CMG untuk kode ini</span>
         <div class="sps-list" id="sps-list" role="group" aria-labelledby="sps-label"></div>
       </div>
-      <div class="row">
-        <label class="field"><span>Lama rawat (hari)</span>
-          <input type="number" id="los" class="input fig" min="1" step="1" inputmode="numeric" aria-describedby="los-help">
-          <span class="help" id="los-help">Isi bila lebih dari 42 hari</span>
-        </label>
-        <label class="field"><span>Skor ADL fase sub akut</span>
-          <input type="number" id="adl-sub" class="input fig" min="1" max="60" step="1" inputmode="numeric">
-          <span class="help">1 sampai 60</span>
-        </label>
-        <label class="field"><span>Skor ADL fase kronis</span>
-          <input type="number" id="adl-kro" class="input fig" min="1" max="60" step="1" inputmode="numeric">
-          <span class="help">1 sampai 60</span>
-        </label>
+      <div class="sub" role="group" aria-labelledby="h-lama">
+        <h3 id="h-lama">Rawat inap lama (sub akut dan kronis)</h3>
+        <div class="row">
+          <label class="field"><span>Lama rawat (hari)</span>
+            <input type="number" id="los" class="input fig" min="1" step="1" inputmode="numeric" aria-describedby="los-help">
+            <span class="help" id="los-help">Isi bila lebih dari 42 hari</span>
+          </label>
+          <label class="field"><span>Skor ADL fase sub akut</span>
+            <input type="number" id="adl-sub" class="input fig" min="1" max="60" step="1" inputmode="numeric" aria-describedby="adl-sub-help" disabled>
+            <span class="help" id="adl-sub-help">Aktif bila lama rawat lebih dari 42 hari</span>
+          </label>
+          <label class="field"><span>Skor ADL fase kronis</span>
+            <input type="number" id="adl-kro" class="input fig" min="1" max="60" step="1" inputmode="numeric" aria-describedby="adl-kro-help" disabled>
+            <span class="help" id="adl-kro-help">Aktif bila lama rawat lebih dari 103 hari</span>
+          </label>
+        </div>
       </div>
       <label class="check" id="lbl-hd" hidden><input type="checkbox" id="hd-reuse"> Alat dan BMHP hemodialisis dipakai ulang (re-use)</label>
     </section>
@@ -646,7 +652,7 @@ if (typeof module !== "undefined") module.exports = INACBG;
   var rp = function (v) { return v == null ? "-" : "Rp" + Math.round(v).toLocaleString("id-ID"); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var daftar = function (s) { return s.split(/[,;\s]+/).map(function (x) { return x.trim(); }).filter(Boolean); };
-  var num = function (id) { var v = $(id).value.trim(); return v === "" ? null : Number(v); };
+  var num = function (id) { var el = $(id), v = el.value.trim(); return el.disabled || v === "" ? null : Number(v); };
   var hasil = $("hasil");
 
   // provinsi, dikelompokkan per regional
@@ -678,6 +684,7 @@ if (typeof module !== "undefined") module.exports = INACBG;
     document.querySelectorAll("input[name=kelas]").forEach(function (x) { x.disabled = !ri; });
     $("hak-hint").textContent = ri ? "Hak kelas rawat inap" : "Hak kelas rawat inap (tidak dipakai untuk rawat jalan)";
     $("lbl-hd").hidden = kode !== "N-3-15-0";
+    aturLama(ri);
     var list = $("sps-list");
     if (list.dataset.kode === kode) return;
     var dipilih = {}, varianLama = {};
@@ -699,6 +706,42 @@ if (typeof module !== "undefined") module.exports = INACBG;
       }
       return h + "</label>";
     }).join("") : '<p class="empty-line">' + (c ? "Tidak ada top up Special CMG untuk kode ini." : "Pilih kode CBG dulu.") + "</p>";
+  }
+
+  // kolom rawat inap lama: ADL aktif sesuai fase yang dicapai lama rawat (hal. 84)
+  function aturLama(ri) {
+    var los = $("los"), sub = $("adl-sub"), kro = $("adl-kro");
+    los.disabled = !ri;
+    var n = ri ? num("los") : null, f = n && n > 0 ? INACBG.losFase(Math.floor(n)) : null;
+    sub.disabled = !(f && f[1] > 0);
+    kro.disabled = !(f && f[2] > 0);
+    var help = $("los-help");
+    if (!ri) help.textContent = "Tidak dipakai untuk rawat jalan";
+    else if (!f || (!f[1] && !f[2])) help.textContent = "Isi bila lebih dari 42 hari";
+    else help.textContent = n + " hari = " + f[0] + " akut + " + f[1] + " sub akut" + (f[2] ? " + " + f[2] + " kronis" : "") + (n > 180 ? ". PMK mengatur sampai 180 hari" : "");
+    [[sub, "adl-sub-help", 42], [kro, "adl-kro-help", 103]].forEach(function (x) {
+      var el = x[0], hp = $(x[1]);
+      if (el.getAttribute("aria-invalid") === "true" && !el.disabled) return;
+      el.removeAttribute("aria-invalid"); hp.classList.remove("err");
+      hp.textContent = el.disabled ? "Aktif bila lama rawat lebih dari " + x[2] + " hari" : "1 sampai 60";
+    });
+  }
+
+  // cek isian yang wajib sebelum menghitung; kembalikan pesan pertama yang gagal
+  function validasi() {
+    var salah = null;
+    [["adl-sub", "adl-sub-help", "fase sub akut"], ["adl-kro", "adl-kro-help", "fase kronis"]].forEach(function (x) {
+      var el = $(x[0]), hp = $(x[1]);
+      if (el.disabled) return;
+      var v = num(x[0]), msg = null;
+      if (v == null) msg = "Isi skor ADL " + x[2] + " (1 sampai 60).";
+      else if (!(v >= 1 && v <= 60)) msg = "Skor ADL " + x[2] + " harus 1 sampai 60.";
+      if (msg) {
+        el.setAttribute("aria-invalid", "true"); hp.textContent = msg; hp.classList.add("err");
+        if (!salah) salah = { el: el, msg: "Lama rawat " + num("los") + " hari: " + msg.charAt(0).toLowerCase() + msg.slice(1) };
+      }
+    });
+    return salah;
   }
 
   function bacaInput() {
@@ -751,6 +794,15 @@ if (typeof module !== "undefined") module.exports = INACBG;
     if (!inp.kode_cbg) {
       $("kode").setAttribute("aria-invalid", "true"); $("kode").focus();
       $("cbg-info").innerHTML = '<span class="err">Isi kode CBG dulu.</span>';
+      return;
+    }
+    var salah = validasi();
+    if (salah) {
+      sudahDihitung = false;
+      hasil.dataset.state = "error";
+      hasil.innerHTML = '<div class="st-head"><h2 id="h-hasil">Rincian klaim</h2></div>' +
+        '<div class="part bad"><h3>Belum bisa dihitung</h3><p>' + esc(salah.msg) + "</p><p>Kolom yang perlu diisi sudah ditandai merah di formulir. Bila ini bukan kasus sub akut atau kronis, kosongkan lama rawat.</p></div>";
+      salah.el.focus();
       return;
     }
     try { h = eng.hitung(inp); }
@@ -882,7 +934,13 @@ if (typeof module !== "undefined") module.exports = INACBG;
   });
 
   var f = $("f");
-  f.addEventListener("input", function () { aturForm(); tandaiBasi(); });
+  f.addEventListener("input", function (e) {
+    if (e.target.getAttribute && e.target.getAttribute("aria-invalid") === "true" && e.target.id !== "kode") {
+      e.target.removeAttribute("aria-invalid");
+      var hp = document.getElementById(e.target.id + "-help"); if (hp) hp.classList.remove("err");
+    }
+    aturForm(); tandaiBasi();
+  });
   f.addEventListener("change", function () { aturForm(); tandaiBasi(); });
   f.addEventListener("submit", function (e) { e.preventDefault(); if (eng) hitung(); });
   $("btn-contoh").addEventListener("click", function () { isi({ kode: "I-1-40-I", icd9: "36.06" }); });
