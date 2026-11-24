@@ -72,6 +72,7 @@ def topup_subakut_kronis(los, adl_subakut=None, adl_kronis=None):
     Top up sub akut = 0,375 x RIW sub akut x UC x LOS sub akut
     Top up kronis   = 0,25  x RIW kronis  x UC x LOS kronis
     RIW = skor ADL : 60. Hasil dibulatkan ke rupiah terdekat.
+    Skor ADL = skor WHODAS 2.0 (Permenkes 26/2021 hal. 21), 12 sampai 60.
     """
     _, hs, hk = los_fase(los)
     hasil = {"los_subakut": hs, "los_kronis": hk, "topup_subakut": 0, "topup_kronis": 0,
@@ -91,10 +92,15 @@ def topup_subakut_kronis(los, adl_subakut=None, adl_kronis=None):
     return hasil
 
 
+# Permenkes 26/2021 hal. 21: skor ADL = skor WHODAS 2.0, 12 variabel (s1-s12)
+# dengan skala 1 sampai 5, jadi total 12 sampai 60.
+ADL_MIN, ADL_MAX = 12, 60
+
+
 def _riw(adl):
     adl = float(adl)
-    if not 0 < adl <= 60:
-        raise ValueError(f"Skor ADL harus di antara 0 dan 60, didapat {adl}")
+    if not ADL_MIN <= adl <= ADL_MAX:
+        raise ValueError(f"Skor ADL (WHODAS 2.0) harus {ADL_MIN} sampai {ADL_MAX}, didapat {adl:g}")
     return adl / 60
 
 

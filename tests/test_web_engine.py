@@ -51,8 +51,8 @@ def kasus(eng, n, seed=7):
         if jr == "RI":
             d["kelas_rawat"] = rnd.choice([1, 2, 3])
             if rnd.random() < 0.2:
-                d.update(los=rnd.choice([30, 43, 80, 103, 104, 150, 200]), adl_subakut=rnd.choice([12, 30, 60]),
-                         adl_kronis=rnd.choice([12, 45]))
+                d.update(los=rnd.choice([30, 43, 80, 103, 104, 150, 200]), adl_subakut=rnd.choice([10, 12, 30, 60]),
+                         adl_kronis=rnd.choice([12, 45]), kasus_psikiatri_kusta=rnd.random() < 0.7)
             if rnd.random() < 0.3:
                 d.update(naik_kelas=rnd.choice(["1", "VIP"]),
                          jenis_peserta=rnd.choice([None, None, "PBI", "PEMDA"]),

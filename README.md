@@ -22,7 +22,7 @@ Fitur yang tersedia:
   - Special procedure dan investigation (YY, II) ditambahkan otomatis bila ICD-9-CM-nya cocok dengan Lampiran I.A.
   - Special drug dan prosthesis (DD, RR) muncul sebagai kandidat, lalu ditambahkan lewat `--kode-spesial`.
   - Kriteria RS di Lampiran II ikut dicek, misalnya Contegra hanya di RS khusus jantung kelas A pemerintah, dan Hip/Knee Implant tidak boleh di kelas D.
-- **Sub-akut dan kronis** (LOS lebih dari 42 hari) memakai rumus di hal. 84.
+- **Sub-akut dan kronis** (LOS lebih dari 42 hari) memakai rumus PMK 3/2023 hal. 84, hanya untuk kasus psikiatri dan kusta dengan skor WHODAS 2.0 12 sampai 60 (PMK 26/2021 hal. 20 sampai 21).
 - **Selisih biaya naik kelas** dihitung sesuai Pasal 48, termasuk pengecualian peserta PBI, kelas 3, dan lainnya.
 - **Aturan lain**: regional dari provinsi (38 provinsi), RS khusus yang melayani di luar kekhususannya turun satu tingkat, klinik utama memakai tarif kelas D (rawat inap 70–100%), dan hemodialisis re-use dibayar 85%.
 
@@ -42,6 +42,9 @@ Pengaturan awal cukup dilakukan sekali: buka **Settings → Pages → Build and 
 
 | File | Isi |
 |---|---|
+| `Permenkes Nomor 26 Tahun 2021.pdf` | Pedoman INA-CBG dari JDIH Kemenkes (asal-usul dan SHA-256 di `sumber/SUMBER.md`) |
+| `data/processed/cmg.csv`, `case_group.csv` | Tabel CMG dan Case Group resmi (PMK 26/2021 hal. 11 sampai 12), dibuat `scripts/ekstrak_pmk26.py` |
+| `output/banding_special_cmg_pmk26_vs_pmk3.txt` | Perbandingan Special CMG PMK 26/2021 dengan PMK 3/2023 |
 | `Permenkes_3_2023_hal40-akhir.pdf` | PDF asli, halaman 40 sampai akhir |
 | `output/Tarif_INA-CBG_Permenkes_3_2023.xlsx` | Hasil ekstraksi dengan sheet `Top Up`, `Tarif INA-CBG`, dan `Gabungan` |
 | `output/laporan_verifikasi_independen.txt` | Hasil cek ulang setiap sel dengan metode kedua (`scripts/verifikasi.py`): 0 beda |

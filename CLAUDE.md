@@ -29,8 +29,14 @@ Ruang lingkup yang realistis:
 | Regulasi | Isi | Dipakai untuk |
 |---|---|---|
 | **Permenkes 3/2023** | Standar tarif pelayanan JKN (tarif INA-CBG, top-up, Non INA-CBG, selisih biaya) | Sumber utama data & aturan kalkulator |
-| **Permenkes 26/2021** | Pedoman INA-CBG (grouping, struktur kode, severity, kaidah koding) | Validasi struktur kode, definisi case type & severity |
+| **Permenkes 26/2021** | Pedoman INA-CBG (grouping, struktur kode, severity, kaidah koding). File: `Permenkes Nomor 26 Tahun 2021.pdf` (56 hal., status Berlaku di JDIH, lihat `sumber/SUMBER.md`) | Tabel CMG dan Case Group (`data/processed/cmg.csv`, `case_group.csv`), syarat sub akut/kronis (psikiatri dan kusta, WHODAS 2.0), aturan koding |
 | ICD-10 WHO 2010, ICD-9-CM 2010 | Standar koding | Referensi kode diagnosis/prosedur |
+
+### Struktur kode menurut Permenkes 26/2021 (hal. 10 sampai 12)
+- Digit 1 = **CMG** (huruf; Tabel 1, 29 CMG: 22 sistem organ + SF, YY, DD, II, RR, CF, X). **Q tidak ada di Tabel 1**, padahal tarif PMK 3/2023 punya 35 kode Q (mis. `Q-5-18-0` konsultasi/pemeriksaan lain-lain, dipakai sebagai contoh di Tabel 3).
+- Digit 2 = **Case Group** (Tabel 2): 1 prosedur RI, 2 prosedur besar RJ, 3 prosedur signifikan RJ, 4 RI bukan prosedur, 5 RJ bukan prosedur, 6 RI kebidanan, 7 RJ kebidanan, 8 RI neonatal, 9 RJ neonatal, 0 error.
+- Digit 3 = **Case Type** 01 sampai 99 (spesifik CBG). Digit 4 = **severity**: 0 RJ; I ringan (tanpa komplikasi/komorbiditas), II sedang (mild), III berat (major).
+- Tabel 4 (Special CMG) dibandingkan dengan Lampiran I.A PMK 3/2023: 28 kode identik, PMK 3/2023 menambah YY-13 sampai YY-17 dan mengubah DD-06-II, RR-02-II (35.81 jadi 35.92), YY-08-III (`output/banding_special_cmg_pmk26_vs_pmk3.txt`). Item 1 sampai 5 identik, jadi transkripsi manual hal. 31 PMK 3/2023 terkonfirmasi.
 
 ### Status iDRG (per November 2026)
 - **iDRG (Indonesian Diagnosis Related Groups)** adalah penerus INA-CBG, masih **tahap uji coba/transisi bertahap**. **Tarif klaim JKN yang berlaku tetap INA-CBG** (PMK 3/2023 + PMK 26/2021).
@@ -174,6 +180,8 @@ Kronis         : LOS 104–180 → Total = Tarif akut + top-up sub-akut + 0,25 �
 LOS_subakut    = LOS − max(LOS − 103, 0) − 42   (bila LOS ≤ 42 → 0)
 LOS_kronis     = max(LOS − 103, 0)
 ```
+Dari Permenkes 26/2021 (hal. 20 sampai 22): special CMG sub akut dan kronis **hanya untuk kasus psikiatri dan kusta**; skor ADL = skor **WHODAS 2.0** (12 variabel x skala 1 sampai 5, jadi **12 sampai 60**), dinilai di hari ke-43 dan ke-104; perawatan lebih dari 180 hari diklaim sebagai satu episode fase kronis. Kalkulator: input `kasus_psikiatri_kusta`, validasi ADL 12 sampai 60.
+
 Catatan: teks PDF untuk rumus LOS sub-akut agak ambigu ("Bila (LOS-103) hasilnya 0 atau negatif maka LOS = LOS-42"); interpretasi di atas = jumlah hari yang jatuh di rentang 43–103. Tulis unit test untuk LOS 42, 43, 103, 104, 180 dan cek ulang ke PDF hal. 84.
 
 ### Selisih biaya naik kelas (hal. 26–27)

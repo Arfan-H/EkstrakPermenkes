@@ -159,6 +159,19 @@ def test_topup_subakut_kronis():
     assert h["topup_kronis"] == round(0.25 * (20 / 60) * 879_103 * 7)
     with pytest.raises(ValueError):
         R.topup_subakut_kronis(50)
+    # WHODAS 2.0: 12 variabel x skala 1 sampai 5 = 12 sampai 60 (PMK 26/2021 hal. 21)
+    with pytest.raises(ValueError):
+        R.topup_subakut_kronis(50, adl_subakut=11)
+    R.topup_subakut_kronis(50, adl_subakut=12)
+
+
+def test_subakut_hanya_psikiatri_kusta(eng):
+    bukan = eng.hitung(ri(kode_cbg="F-4-10-I", los=60, adl_subakut=30))
+    assert bukan.topup_subakut_kronis is None
+    assert any("psikiatri dan kusta" in p for p in bukan.peringatan)
+    ya = eng.hitung(ri(kode_cbg="F-4-10-I", los=60, adl_subakut=30, kasus_psikiatri_kusta=True))
+    assert ya.topup_subakut_kronis["topup_subakut"] == R._bulat(0.375 * 0.5 * 879_103 * 18)
+    assert ya.total_klaim_inacbg == bukan.total_klaim_inacbg + ya.topup_subakut_kronis["topup_subakut"]
 
 
 def test_rs_khusus_di_luar_kekhususan_turun_kelas(eng):
