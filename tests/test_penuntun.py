@@ -68,3 +68,27 @@ def test_semua_kandidat_ada_di_lampiran_iii(eng, trig):
             h = P.tebak(eng.cbg, trig, icd10_utama=dx, jenis_rawat=jr, maks=10_000)
             for k in h["kandidat"]:
                 assert all(c in eng.cbg for c in k["kode"].values())
+
+
+@pytest.fixture
+def tebak(eng, trig):
+    def f(dx, jr="RI"):
+        kat = "kebidanan" if dx.startswith("O") else "umum"
+        return P.tebak(eng.cbg, trig, icd10_utama=dx, jenis_rawat=jr, kategori=kat)
+    return f
+
+
+@pytest.mark.parametrize("dx,jr,kunci", [
+    ("D63.0", "RI", "kode asterisk"), ("H28.0", "RJ", "kode asterisk"),
+    ("O80.9", "RI", "cara persalinan"), ("O84.0", "RI", "cara persalinan"),
+    ("R50.9", "RI", "gejala/tanda"),
+])
+def test_peringatan_aturan_koding_pmk26(tebak, dx, jr, kunci):
+    h = tebak(dx, jr=jr)
+    assert any(kunci in p for p in h["peringatan"]), h["peringatan"]
+
+
+def test_tanpa_peringatan_koding_untuk_kasus_biasa(tebak):
+    for dx, jr in (("R50.9", "RJ"), ("I21.0", "RI"), ("O42.9", "RI"), ("E11.3", "RI")):
+        h = tebak(dx, jr=jr)
+        assert not any("PMK 26/2021 hal." in p for p in h["peringatan"]), (dx, h["peringatan"])

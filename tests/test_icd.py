@@ -54,7 +54,8 @@ def test_kode_2010_ditandai():
 def test_js_sama_dengan_python(tmp_path):
     qs = ["tifoid", "typhoid", "dbd", "a01", "A01.0", "fracture femur", "stroke", "Kanker  payudara", "maag",
           "guillain", "barré", "bell's", "pasang ring", "36.0", "appendectomy", "sesar", "x", "1", "j0", "o8",
-          "luka bakar", "patah tulang", "ISPA", "", "  ", "z51", "hip", "knee replacement", "katarak", "cuci darah"]
+          "luka bakar", "patah tulang", "ISPA", "", "  ", "z51", "hip", "knee replacement", "katarak", "cuci darah",
+          "S72.7", "s72.71", "D63", "patah tulang paha tertutup", "gegar otak dengan luka terbuka", "classified elsewhere"]
     cases = [{"q": q, "tipe": t, "maks": m} for q in qs for t in ("ICD10", "ICD9CM") for m in (5, 1000)]
     ref = [icd.cari(c["q"], c["tipe"], c["maks"]) for c in cases]
     src = open(os.path.join(ROOT, "web", "index.html"), encoding="utf-8").read()
@@ -71,3 +72,17 @@ fs.writeFileSync('./out.json', JSON.stringify(cases.map(c => (c.tipe === 'ICD10'
     got = json.loads((tmp_path / "out.json").read_text(encoding="utf-8"))
     for c, a, b in zip(cases, ref, got):
         assert a == b, c
+
+
+def test_karakter_ke5_pmk26_hal31():
+    """Kode contoh PMK 26/2021 hal. 31 (fraktur tertutup/terbuka) harus ada."""
+    for kode in ("S72.71", "S72.31", "S72.41", "T02.40", "S42.30", "S52.30", "S06.00", "S36.01"):
+        e = icd.indeks("ICD10").judul(kode)
+        assert e is not None and e["tanda"] == 3, kode
+    assert icd.cari("patah tulang paha terbuka", "ICD10", 1)["hasil"][0]["kode"] == "S72.91"
+
+
+def test_asterisk():
+    assert icd.cari("D63.0", "ICD10", 1)["hasil"][0]["asterisk"] is True
+    assert icd.cari("H28.0", "ICD10", 1)["hasil"][0]["asterisk"] is True
+    assert icd.cari("E11.3", "ICD10", 1)["hasil"][0]["asterisk"] is False

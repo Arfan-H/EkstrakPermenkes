@@ -15,3 +15,5 @@
 
 Catatan versi: E-Klaim memakai ICD-10 2010 dan ICD-9-CM 2010. Pembaruan WHO 2016 sampai 2019 mengubah beberapa kode (mis. dengue A90/A91 menjadi A97, hemoroid I84 menjadi K64, fibrilasi atrium I48 dipecah, apendisitis K35.9 menjadi K35.8). Kode 2010 yang terdampak ditambahkan di `scripts/bangun_icd.py` (`KODE_2010`) dan kode penggantinya ditandai. ICD-9-CM v32 (2014) hampir sama dengan versi 2010; perbedaannya tidak ditandai.
 
+Tambahan yang tidak ada di berkas WHO 2019: subdivisi karakter ke-5 opsional WHO (Volume 1, catatan awal Bab XIX) untuk fraktur (S02, S12, S22, S32, S42, S52, S62, S72, S82, S92, T02, T14.2) dan cedera rongga (S06, S26, S27, S36, S37), karena dipakai INA-CBG (contoh PMK 26/2021 hal. 31); serta tanda 82 kategori asterisk (*) dari daftar kategori asterisk WHO, divalidasi dengan judul resminya.
+

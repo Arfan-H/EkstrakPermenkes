@@ -102,7 +102,8 @@ def main():
     penuntun = {"icd10": [list(b) for b in PN.ICD10_KE_CMG], "icd10_awalan": [list(b) for b in PN.ICD10_AWALAN],
                 "icd9": [list(b) for b in PN.ICD9_KE_CMG], "icd9_awalan": [list(b) for b in PN.ICD9_AWALAN],
                 "case_group": {str(k): v for k, v in PN.CASE_GROUP.items()}, "severity": PN.SEVERITY,
-                "disclaimer": PN.DISCLAIMER_PENUNTUN}
+                "disclaimer": PN.DISCLAIMER_PENUNTUN, "asterisk": list(PN.KATEGORI_ASTERISK),
+                "peringatan_koding": PN.PERINGATAN_KODING}
     data = {"penuntun": penuntun, "grup": GRUP, "halaman_awal": {"RI": awal_ri, "RJ": awal_rj}, "cbg": out_cbg,
             "topup": list(tp.values()), "special": sp, "trigger": list(trig.values())}
     os.makedirs(os.path.dirname(OUT), exist_ok=True)

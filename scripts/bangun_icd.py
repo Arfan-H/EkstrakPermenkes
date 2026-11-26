@@ -12,19 +12,23 @@ Kode 2010 itu ditambahkan dari KODE_2010 agar tetap bisa dicari.
 Keluaran:
   data/processed/icd10.csv, data/processed/icd9cm.csv  (kode, judul, versi)
   web/data/icd.json  {icd10: [[kode, judul, tanda?]], icd9: [[kode, judul]], istilah10/istilah9: {kode: [istilah]}}
-                     tanda 1 = kode ICD-10 2010 (tidak ada di 2019), 2 = kode 2019 yang belum ada di 2010
+                     tanda 1 = kode ICD-10 2010 (tidak ada di 2019), 2 = kode 2019 yang belum ada di 2010,
+                     3 = subdivisi karakter ke-5 WHO (fraktur tertutup/terbuka, cedera rongga dengan/tanpa luka terbuka)
 
 Pemakaian: python scripts/bangun_icd.py
 """
 import csv
 import json
 import os
+import sys
 import xml.etree.ElementTree as ET
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SUMBER = os.path.join(ROOT, "sumber", "icd")
 OUT = os.path.join(ROOT, "data", "processed")
 WEB = os.path.join(ROOT, "web", "data", "icd.json")
+sys.path.insert(0, os.path.join(ROOT, "src"))
+from inacbg import penuntun as PN  # noqa: E402  (daftar kategori asterisk)
 
 # kode ICD-10 versi 2010 yang tidak ada (lagi) sebagai kode akhir di versi 2019
 KODE_2010 = {
@@ -50,6 +54,29 @@ KODE_2010 = {
 }
 # kode 2019 yang diketahui belum ada di ICD-10 2010 (pengganti kode di atas); ditandai di keluaran
 BARU_SETELAH_2010 = ("A97", "K64", "I48.", "K35.2", "K35.3", "K35.8", "K58.1", "K58.2", "K58.3", "K58.8", "B18.1", "U0")
+
+
+# Subdivisi karakter ke-5 opsional ICD-10 WHO (Volume 1, catatan awal Bab XIX), dipakai INA-CBG
+# (contoh PMK 26/2021 hal. 31: S72.71, S72.31, S72.41, T02.40, S42.30, S52.30).
+FRAKTUR = ("S02", "S12", "S22", "S32", "S42", "S52", "S62", "S72", "S82", "S92", "T02", "T14.2")
+RONGGA = {"S06": "intracranial wound", "S26": "wound into thoracic cavity", "S27": "wound into thoracic cavity",
+          "S36": "wound into abdominal cavity", "S37": "wound into cavity"}
+
+
+def karakter5(i10, istilah10):
+    """Tambahkan kode 5 karakter (x0/x1) di bawah subkategori 4 karakter yang berlaku. Mengembalikan {kode: (judul, [istilah])}."""
+    out = {}
+    for k, judul in i10.items():
+        if len(k) != 5:  # hanya subkategori A00.0
+            continue
+        ist = istilah10.get(k, [])
+        if k[:3] in FRAKTUR or k in FRAKTUR:
+            out[k + "0"] = (judul + ", closed", [x + " tertutup" for x in ist])
+            out[k + "1"] = (judul + ", open", [x + " terbuka" for x in ist])
+        elif k[:3] in RONGGA:
+            out[k + "0"] = (judul + ", without open " + RONGGA[k[:3]], [x + " tanpa luka terbuka" for x in ist])
+            out[k + "1"] = (judul + ", with open " + RONGGA[k[:3]], [x + " dengan luka terbuka" for x in ist])
+    return out
 
 
 def icd10_2019():
@@ -99,6 +126,12 @@ def main():
         versi[k] = "2010"
     i9 = icd9cm()
     ist = istilah()
+    k5 = karakter5(i10, ist["ICD10"])
+    for k, (judul, istk) in k5.items():
+        i10[k] = judul
+        versi[k] = "karakter ke-5 WHO"
+        if istk and k not in ist["ICD10"]:
+            ist["ICD10"][k] = istk
     salah = [("ICD10", k) for k in ist["ICD10"] if k not in i10] + [("ICD9CM", k) for k in ist["ICD9CM"] if k not in i9]
     if salah:
         raise SystemExit("Kode istilah tidak ditemukan di daftar resmi: " + ", ".join(f"{t} {k}" for t, k in salah))
@@ -106,22 +139,23 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, "icd10.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["kode", "judul", "versi", "istilah"])
+        w.writerow(["kode", "judul", "versi", "asterisk", "istilah"])
         for k in sorted(i10):
-            w.writerow([k, i10[k], versi[k], "|".join(ist["ICD10"].get(k, []))])
+            w.writerow([k, i10[k], versi[k], "ya" if k[:3] in PN.KATEGORI_ASTERISK else "",
+                        "|".join(ist["ICD10"].get(k, []))])
     with open(os.path.join(OUT, "icd9cm.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["kode", "judul", "versi", "istilah"])
         for k in sorted(i9):
             w.writerow([k, i9[k], "32", "|".join(ist["ICD9CM"].get(k, []))])
 
-    tanda = {"2010/2019": 0, "2010": 1, "2019 (setelah 2010)": 2}
+    tanda = {"2010/2019": 0, "2010": 1, "2019 (setelah 2010)": 2, "karakter ke-5 WHO": 3}
     data = {"icd10": [[k, i10[k]] + ([tanda[versi[k]]] if tanda[versi[k]] else []) for k in sorted(i10)], "icd9": [[k, i9[k]] for k in sorted(i9)],
-            "istilah10": ist["ICD10"], "istilah9": ist["ICD9CM"]}
+            "istilah10": ist["ICD10"], "istilah9": ist["ICD9CM"], "asterisk": list(PN.KATEGORI_ASTERISK)}
     os.makedirs(os.path.dirname(WEB), exist_ok=True)
     with open(WEB, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
-    print(f"ICD-10: {len(i10)} kode ({len(KODE_2010)} dari versi 2010), ICD-9-CM: {len(i9)} kode, "
+    print(f"ICD-10: {len(i10)} kode ({len(KODE_2010)} dari versi 2010, {len(k5)} karakter ke-5), ICD-9-CM: {len(i9)} kode, "
           f"istilah: {len(ist['ICD10'])} diagnosis + {len(ist['ICD9CM'])} prosedur; {WEB}: {os.path.getsize(WEB) / 1024:.0f} KB")
 
 
