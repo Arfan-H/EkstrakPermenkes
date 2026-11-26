@@ -787,7 +787,13 @@ var INACBG = (function () {
         var b = baris10(dx);
         if (!b) pr.push("Kode ICD-10 '" + dx + "' tidak dikenali; format yang benar mis. I21.0 atau K35.");
         else if (b[2] === "") pr.push(dx + ": " + b[3] + ". Pilih diagnosis penyakit sebagai diagnosis utama.");
-        else tambah(b[2], "diagnosis utama " + dx + ": " + b[3]);
+        else {
+          tambah(b[2], "diagnosis utama " + dx + ": " + b[3]);
+          var k3 = dx.slice(0, 3);
+          if (PN.asterisk.indexOf(k3) >= 0) pr.push(PN.peringatan_koding.asterisk.split("{dx}").join(dx));
+          if (k3 >= "O80" && k3 <= "O84") pr.push(PN.peringatan_koding.persalinan.split("{dx}").join(dx));
+          if (dx[0] === "R" && ri) pr.push(PN.peringatan_koding.gejala.split("{dx}").join(dx));
+        }
       }
       if (adaProsedur) icd9.forEach(function (p) {
         var b9 = baris9(p);
@@ -843,12 +849,12 @@ var INACBG = (function () {
   function normIcd(s) {
     return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9.]+/g, " ").trim().split(/\s+/).join(" ");
   }
-  function indeksIcd(baris, istilah) {
+  function indeksIcd(baris, istilah, asterisk) {
     var entri = baris.map(function (b) {
       var ist = istilah[b[0]] || [];
       var wk = normIcd([b[0]].concat(ist).join(" ")).split(" ");
       var persis = {}; persis[normIcd(b[0])] = 1; ist.forEach(function (i) { persis[normIcd(i)] = 1; });
-      return { kode: b[0], judul: b[1], istilah: ist, tanda: b[2] || 0, wk: wk, semua: wk.concat(normIcd(b[1]).split(" ")), persis: persis };
+      return { kode: b[0], judul: b[1], istilah: ist, tanda: b[2] || 0, asterisk: !!asterisk && asterisk.indexOf(b[0].slice(0, 3)) >= 0, wk: wk, semua: wk.concat(normIcd(b[1]).split(" ")), persis: persis };
     });
     var perKode = {};
     entri.forEach(function (e) { perKode[e.kode] = e; });
@@ -864,11 +870,11 @@ var INACBG = (function () {
       });
       var semua = tk[0].map(function (e) { return [0, e]; }).concat(tk[1].map(function (e) { return [1, e]; }), tk[2].map(function (e) { return [2, e]; }));
       return { hasil: semua.slice(0, maks == null ? 30 : maks).map(function (x) {
-        var e = x[1]; return { kode: e.kode, judul: e.judul, istilah: e.istilah, tanda: e.tanda, tingkat: x[0] }; }), jumlah: semua.length };
+        var e = x[1]; return { kode: e.kode, judul: e.judul, istilah: e.istilah, tanda: e.tanda, asterisk: e.asterisk, tingkat: x[0] }; }), jumlah: semua.length };
     }
     return { cari: cari, entri: function (kode) { return perKode[kode] || null; } };
   }
-  function buatIcd(d) { return { icd10: indeksIcd(d.icd10, d.istilah10), icd9: indeksIcd(d.icd9, d.istilah9) }; }
+  function buatIcd(d) { return { icd10: indeksIcd(d.icd10, d.istilah10, d.asterisk), icd9: indeksIcd(d.icd9, d.istilah9, null) }; }
 
   return { buat: buat, buatIcd: buatIcd, normIcd: normIcd, REGIONAL: REGIONAL, losFase: losFase, ADL_MIN: ADL_MIN, ADL_MAX: ADL_MAX };
 })();
@@ -1200,7 +1206,10 @@ if (typeof module !== "undefined") module.exports = INACBG;
   dariHash();
 
   // ===== kotak pencarian ICD (diagnosis & tindakan) =====
-  var TANDA = { 1: "Kode ICD-10 versi 2010 yang dipakai E-Klaim.", 2: "Kode baru setelah ICD-10 2010; E-Klaim memakai versi 2010, cek kode penggantinya." };
+  var TANDA = { 1: "Kode ICD-10 versi 2010 yang dipakai E-Klaim.", 2: "Kode baru setelah ICD-10 2010; E-Klaim memakai versi 2010, cek kode penggantinya.",
+    3: "Karakter ke-5 WHO: 0 tertutup atau tanpa luka terbuka, 1 terbuka atau dengan luka terbuka (contoh PMK 26/2021 hal. 31)." };
+  var ASTERISK = "Kode asterisk (*): tidak boleh menjadi diagnosis utama. Pakai kode dagger penyakit dasarnya (PMK 26/2021 hal. 43).";
+  function figIcd(h) { return h.kode + (h.asterisk ? "*" : ""); }
   function namaIcd(h) { return h.istilah.length ? h.istilah[0] : h.judul; }
   function comboIcd(inp, lb, tipe, pilih) {
     var cocok = [], aktif = -1;
@@ -1219,7 +1228,7 @@ if (typeof module !== "undefined") module.exports = INACBG;
       if (!ix || !q) { tutup(); return; }
       var r = ix.cari(q, 40); cocok = r.hasil;
       lb.innerHTML = cocok.length ? cocok.map(function (h, i) {
-        return '<li class="opt" role="option" id="' + lb.id + "-" + i + '" data-i="' + i + '" aria-selected="false"><span class="fig">' + h.kode + '</span><span class="d">' + esc(namaIcd(h)) +
+        return '<li class="opt" role="option" id="' + lb.id + "-" + i + '" data-i="' + i + '" aria-selected="false"><span class="fig">' + figIcd(h) + '</span><span class="d">' + esc(namaIcd(h)) +
           (h.istilah.length ? '<span class="en">' + esc(h.judul) + "</span>" : "") + "</span></li>";
       }).join("") + (r.jumlah > cocok.length ? '<li class="opt-note" role="presentation">' + (r.jumlah - cocok.length) + " kode lain cocok. Ketik lebih spesifik.</li>" : "")
         : '<li class="opt-note" role="presentation">Tidak ditemukan. Coba nama lain, istilah Inggris (mis. fracture), atau kodenya.</li>';
@@ -1246,9 +1255,10 @@ if (typeof module !== "undefined") module.exports = INACBG;
   function cxDxTampil() {
     var el = $("cx-dx-pilih");
     if (!cxDx) { el.innerHTML = icdIdx ? '<span class="hint">Pilih dari daftar yang muncul saat mengetik.</span>' : ""; return; }
-    el.innerHTML = "<strong><span class=\"fig\">" + cxDx.kode + "</span>" + esc(namaIcd(cxDx)) + "</strong>" +
+    el.innerHTML = "<strong><span class=\"fig\">" + figIcd(cxDx) + "</span>" + esc(namaIcd(cxDx)) + "</strong>" +
       (cxDx.istilah.length ? '<span class="en">' + esc(cxDx.judul) + "</span>" : "") +
-      (cxDx.tanda ? '<span class="note">' + TANDA[cxDx.tanda] + "</span>" : "");
+      (cxDx.tanda ? '<span class="note">' + TANDA[cxDx.tanda] + "</span>" : "") +
+      (cxDx.asterisk ? '<span class="err">' + ASTERISK + "</span>" : "");
   }
   function cxPrTampil() {
     $("cx-pr-pilih").innerHTML = cxPr.map(function (h, i) {

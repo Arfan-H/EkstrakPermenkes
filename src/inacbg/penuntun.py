@@ -186,6 +186,23 @@ def _baris_icd9(kode):
     return min(cocok, key=lambda b: b[1] - b[0]) if cocok else None
 
 
+# Kategori asterisk (*) ICD-10 WHO 2010 ("... in diseases classified elsewhere"). Kode asterisk tidak boleh
+# menjadi diagnosis utama; diagnosis utama memakai kode dagger (+) penyakit dasarnya (PMK 26/2021 hal. 43-44).
+KATEGORI_ASTERISK = tuple("""D63 D77 E35 E90 F00 F02 G01 G02 G05 G07 G13 G22 G26 G32 G46 G53 G55 G59 G63 G73 G94
+G99 H03 H06 H13 H19 H22 H28 H32 H36 H42 H45 H48 H58 H62 H67 H75 H82 H94 I32 I39 I41 I43 I52 I68 I79 I98 J17 J91
+J99 K23 K67 K77 K87 K93 L14 L45 L54 L62 L86 L99 M01 M03 M07 M09 M14 M36 M49 M63 M68 M73 M82 M90 N08 N16 N22 N29
+N33 N37 N51 N74 N77""".split())
+
+PERINGATAN_KODING = {
+    "asterisk": "{dx} adalah kode asterisk (*): tidak boleh menjadi diagnosis utama. Diagnosis utama memakai kode "
+                "dagger penyakit dasarnya, kode asterisk menjadi diagnosis sekunder (PMK 26/2021 hal. 43 sampai 44).",
+    "persalinan": "{dx} adalah kode cara persalinan (O80 sampai O84): menjadi diagnosis utama hanya bila tidak ada "
+                  "penyulit; bila ada penyulit, penyulit itu diagnosis utama dan {dx} diagnosis sekunder (PMK 26/2021 hal. 39).",
+    "gejala": "{dx} adalah kode gejala/tanda (Bab XVIII): untuk rawat inap dipakai sebagai diagnosis utama hanya bila "
+              "sampai akhir perawatan tidak ada diagnosis yang lebih spesifik (PMK 26/2021 hal. 23 dan 29).",
+}
+
+
 def tebak(cbg, trigger, icd10_utama=None, icd9=(), jenis_rawat="RI", kategori="umum",
           ada_prosedur=None, severity=None, maks=60):
     """Kandidat kode CBG.
@@ -219,6 +236,12 @@ def tebak(cbg, trigger, icd10_utama=None, icd9=(), jenis_rawat="RI", kategori="u
             peringatan.append(f"{dx}: {b[3]}. Pilih diagnosis penyakit sebagai diagnosis utama.")
         else:
             tambah(b[2], f"diagnosis utama {dx}: {b[3]}")
+            if dx[:3] in KATEGORI_ASTERISK:
+                peringatan.append(PERINGATAN_KODING["asterisk"].format(dx=dx))
+            if "O80" <= dx[:3] <= "O84":
+                peringatan.append(PERINGATAN_KODING["persalinan"].format(dx=dx))
+            if dx[0] == "R" and jr == "RI":
+                peringatan.append(PERINGATAN_KODING["gejala"].format(dx=dx))
     if ada_prosedur:
         for p in icd9:
             b = _baris_icd9(p)

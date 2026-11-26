@@ -36,8 +36,9 @@ Fitur yang tersedia:
   - **CMG** (digit 1) ditebak dari bab ICD-10 diagnosis utama dan blok ICD-9-CM prosedur. Tabel pemetaannya disusun sendiri dari struktur bab ICD dan nama CMG, **bukan tabel resmi**.
   - Kombinasi diagnosis/prosedur yang tercantum di Lampiran I.A PMK 3/2023 dinaikkan ke urutan teratas sebagai petunjuk kuat.
   - **Severity** (I/II/III) dipilih pengguna, karena daftar komplikasi/komorbiditas (CC/MCC) grouper tidak dipublikasikan.
+  - Peringatan aturan koding PMK 26/2021: kode asterisk sebagai diagnosis utama (hal. 43), O80 sampai O84 sebagai diagnosis utama (hal. 39), kode gejala R sebagai diagnosis utama rawat inap (hal. 23, 29).
   - Keluarannya daftar grup kandidat yang memang ada di Lampiran III, bukan satu kode pasti, urut kode (bukan peringkat kemungkinan). Kode final tetap dari grouper E-Klaim.
-- **Cari kode ICD dari nama** (`src/inacbg/icd.py`, `inacbg icd`): diagnosis dan tindakan bisa dicari dengan nama Indonesia/awam (tifus, DBD, usus buntu, sesar, pasang ring), istilah Inggris (typhoid, appendectomy), atau kode. Daftar ICD-10 WHO 2019 (ditambah kode 2010 yang berubah) dan ICD-9-CM v32 dibangun oleh `scripts/bangun_icd.py`; istilah Indonesia di `data/manual/istilah_icd.csv` disusun sendiri, bukan terjemahan resmi. Sumber dan lisensi di `sumber/SUMBER.md`.
+- **Cari kode ICD dari nama** (`src/inacbg/icd.py`, `inacbg icd`): diagnosis dan tindakan bisa dicari dengan nama Indonesia/awam (tifus, DBD, usus buntu, sesar, pasang ring), istilah Inggris (typhoid, appendectomy), atau kode. Daftar ICD-10 WHO 2019 (ditambah kode 2010 yang berubah, dan subdivisi karakter ke-5 WHO untuk fraktur dan cedera rongga seperti S72.71 di contoh PMK 26/2021 hal. 31) dan ICD-9-CM v32 dibangun oleh `scripts/bangun_icd.py`; kode asterisk (*) ditandai; istilah Indonesia di `data/manual/istilah_icd.csv` disusun sendiri, bukan terjemahan resmi. Sumber dan lisensi di `sumber/SUMBER.md`.
 
 Belum tersedia: tarif Non INA-CBG.
 
@@ -58,6 +59,7 @@ Pengaturan awal cukup dilakukan sekali: buka **Settings → Pages → Build and 
 | `Permenkes Nomor 26 Tahun 2021.pdf` | Pedoman INA-CBG dari JDIH Kemenkes (asal-usul dan SHA-256 di `sumber/SUMBER.md`) |
 | `data/processed/cmg.csv`, `case_group.csv` | Tabel CMG dan Case Group resmi (PMK 26/2021 hal. 11 sampai 12), dibuat `scripts/ekstrak_pmk26.py` |
 | `output/banding_special_cmg_pmk26_vs_pmk3.txt` | Perbandingan Special CMG PMK 26/2021 dengan PMK 3/2023 |
+| `output/audit_pmk26_2021.md` | Audit 56 halaman PMK 26/2021 terhadap data dan program: sesuai, diterapkan, ambigu, atau di luar cakupan |
 | `Permenkes_3_2023_hal40-akhir.pdf` | PDF asli, halaman 40 sampai akhir |
 | `output/Tarif_INA-CBG_Permenkes_3_2023.xlsx` | Hasil ekstraksi dengan sheet `Top Up`, `Tarif INA-CBG`, dan `Gabungan` |
 | `output/laporan_verifikasi_independen.txt` | Hasil cek ulang setiap sel dengan metode kedua (`scripts/verifikasi.py`): 0 beda |

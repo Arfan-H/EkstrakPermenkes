@@ -15,14 +15,17 @@ import os
 import re
 import unicodedata
 
+from .penuntun import KATEGORI_ASTERISK
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 P = os.path.join(ROOT, "data", "processed")
 
-_DIAKRITIK = re.compile("[̀-ͯ]")
+_DIAKRITIK = re.compile(r"[\u0300-\u036f]")
 _BUKAN = re.compile(r"[^a-z0-9.]+")
-TANDA = {"2010/2019": 0, "2010": 1, "2019 (setelah 2010)": 2}
+TANDA = {"2010/2019": 0, "2010": 1, "2019 (setelah 2010)": 2, "karakter ke-5 WHO": 3}
 CATATAN_TANDA = {1: "kode ICD-10 2010 (dipakai E-Klaim), tidak ada lagi di versi 2019",
-                 2: "kode baru di ICD-10 WHO setelah 2010, mungkin belum diterima E-Klaim"}
+                 2: "kode baru di ICD-10 WHO setelah 2010, mungkin belum diterima E-Klaim",
+                 3: "subdivisi karakter ke-5 WHO (dipakai di contoh PMK 26/2021 hal. 31)"}
 
 
 def norm(s):
@@ -38,6 +41,7 @@ class IndeksICD:
             wk = norm(" ".join([kode] + istilah)).split(" ")
             wj = norm(judul).split(" ")
             self.entri.append({"kode": kode, "judul": judul, "istilah": istilah, "tanda": tanda,
+                               "asterisk": kode[:3] in KATEGORI_ASTERISK and not kode[0].isdigit(),
                                "wk": wk, "semua": wk + wj,
                                "persis": {norm(kode)} | {norm(i) for i in istilah}})
 
@@ -59,7 +63,7 @@ class IndeksICD:
             hasil.append((tingkat, e))
         hasil.sort(key=lambda x: x[0])  # stabil: urutan kode tetap di dalam tingkat
         return {"hasil": [{"kode": e["kode"], "judul": e["judul"], "istilah": e["istilah"], "tanda": e["tanda"],
-                           "tingkat": t} for t, e in hasil[:maks]], "jumlah": len(hasil)}
+                           "asterisk": e["asterisk"], "tingkat": t} for t, e in hasil[:maks]], "jumlah": len(hasil)}
 
     def judul(self, kode):
         for e in self.entri:
